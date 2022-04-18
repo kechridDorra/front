@@ -1,0 +1,21 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;200;300;400;500;700;900&display=swap");
+@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css");
+ 
+ /* Nav */
+  #templatemo_nav_top { min-height: 20px;}
+  #templatemo_nav_top * { font-size: 13px !important;}
+  #templatemo_main_nav a { color: #212934;}
+  #templatemo_main_nav a:hover { color: #69bb7e;}
+  #templatemo_main_nav .navbar .nav-icon { margin-right: 25px;}
+  #templatemo_main_nav * { font-size: 17px !important;}
+  #templatemo_main_nav .navbar .navbar-nav { margin-right: 35px;}
+   /* Nav */
+ 
+     /* Extra large devices (large desktops, 1200px and up)*/
+  @media (min-width: 992px) {
+    #templatemo_main_nav .navbar-nav {max-width: 800px; }}
+    /*// Medium devices (tablets, 768px and up)*/
+  @media (min-width: 780px) {
+   #templatemo_main_nav .navbar-nav {max-width: 790px;}
+  }
+ 
