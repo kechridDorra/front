@@ -1,29 +1,25 @@
 
-
-import React, { Component } from "react";
-import './ListUser.css';
+import React, { Component, useEffect } from "react";
+import './Users.css';
 import bootstrap from "bootstrap";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import axios from 'axios';
+import {getAll} from'../../../services/userService';
 
-class ListUser extends Component {
-    constructor() {
-        super();
-        this.state = { users: [], loading: true};
+export default class Users extends React.Component {
+    state = {
+      users: []
     }
-    
+  
     componentDidMount() {
-        this.getUsers();
+        
+     const users = getAll().then((res)=>{
+        console.log(res.data);
+    });
+    this.setState({ users })
     }
-    
-    getUsers() {
-       axios.get(`http://localhost:8000/api/users`).then(users => {
-           this.setState({ users: users.data, loading: false})
-       })
-    }
-
+   
     render() {
-        const loading = this.state.loading;
+       
         return (
             <div class="container mt-4">               
                         
@@ -40,7 +36,7 @@ class ListUser extends Component {
                  
                     
                     <table class="table table-hover table-responsive mb-0">
-                    {loading ? (
+                   
                         <thead>
                             <tr>
                                 <th scope="row">#</th>
@@ -50,21 +46,23 @@ class ListUser extends Component {
                                 <th>Email</th>
                                 <th>Genre</th>
                                 <th>Détails</th>
-                                <th class="text-center">Action</th>
+                                <th class="text-center">Actions</th>
 						
                             </tr>
                         </thead>
-                       ) : (
+                     
                         <tbody> 
-                             {this.state.users.map(user =>
-                            <tr key={user.id}>
-                                <th scope="row" src = {user.id}> </th>
-                                
-                                <td> src = {user.nom} </td>
-                                <td>Dorra</td>
-                                <td>54627363</td>
-                                <td>Kechrid.dorra13@gmail.com</td>
-                                <td>femme</td>
+                            
+                            <tr>
+                               
+                                <th scope="row"> </th>
+                               { this.state.users.map(user => <td>{user.nom}</td>)}
+                               
+                                <td> </td>
+                                <td> </td>
+                                <td> </td>
+                                <td> </td>
+                                <td> </td>
                                 <td><p className="lien"><a href="#">Voir</a></p></td>
                                 <td class="text-center">
                                  <a class='btn btn-info btn-xl' href="#">
@@ -75,9 +73,9 @@ class ListUser extends Component {
                                         
                             </tr>
                             
-                             )}
+                             
                          </tbody>
-                       )}
+                       
                     </table> 
                           
                     <div class="d-flex justify-content-center">
@@ -120,4 +118,3 @@ class ListUser extends Component {
 
 
         )}}
-    export default ListUser;

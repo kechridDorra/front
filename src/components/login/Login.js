@@ -1,10 +1,15 @@
 import './Login.css';
-import React, { Component } from "react";
+import React, { useState, Component } from "react";
 //Bootstrap
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.min.js';
-export default class Login extends Component {
-  render() {
+const Login = () => {
+    const [isSubmitted, setIsSubmitted] = useState(false);
+  
+    function submitForm() {
+      setIsSubmitted(true);
+    }
+  
     return (
   
 <div class="wrapper bg-white">
@@ -28,4 +33,4 @@ export default class Login extends Component {
 
    </div> 
      );}
-    }
+export default Login;

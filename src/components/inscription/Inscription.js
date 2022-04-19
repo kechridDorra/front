@@ -3,9 +3,14 @@ import './Inscription.css';
 import bootstrap from "bootstrap";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from 'axios';
-export default class Inscription extends Component {
- 
-  render() {
+
+const Inscription = () => {
+    const [isSubmitted, setIsSubmitted] = useState(false);
+  
+    function submitForm() {
+      setIsSubmitted(true);
+    }
+  
         return (
 <div className="form-container">
   <center>
@@ -128,4 +133,4 @@ export default class Inscription extends Component {
 
         );
     }
-}
+export default Inscription;

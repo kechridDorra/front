@@ -6,7 +6,7 @@ import Footer from './components/Footer';
 import Inscription from './components/inscription/Inscription';
 import Login from './components/login/Login'
 import Profil from './components/user/profil/Profil';
-import ListUser from './components/user/list/ListUser';
+import Users from './components/user/list/Users';
 
 //Bootstrap
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -23,7 +23,7 @@ export default function App() {
         <Route path="/inscription" element={<Inscription/>} />
         <Route path="/login" element={<Login/>} />
         <Route path="/profil" element={<Profil/>} />
-        <Route path="/listUser" element={<ListUser/>} />
+        <Route path="/users" element={<Users/>} />
       </Routes>
     </BrowserRouter>
 <Footer/>
