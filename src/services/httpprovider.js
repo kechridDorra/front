@@ -1,11 +1,13 @@
 import axios from 'axios';
-
+const cors = require ('cors');
 const axiosInterceptor = axios.create({
     baseURL: `http://127.0.0.1:8000/api/`
 })
 
 axiosInterceptor.interceptors.request.use((config)=>{
-    const token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE2NTAzNDIwNTcsImV4cCI6MTY1MDM0NTY1Nywicm9sZXMiOlsiUk9MRV9VU0VSIl0sInVzZXJuYW1lIjoia2VjaHJpZC5kb3JyYTEzQGdtYWlsLmNvbSJ9.fLMlsz_pncjvF8OLFk-VF6noJ8abbLWORA3dCriAjrfpSQ2Bnf8S4iO1brKv6c-y0WSk0QhreN3jZ36cUzcAK0xDU3f-EPWBDaYrNVhyWSUfaEXSrLR7KwdyOStKsubGTgyg_vNnfgq2p5IrnepjrCfz0ZWRCXI5Ubph6dX-z7bHJG0EtcR1mxzj-j4Cj5D3fvO5QrAqVMkqQuAmSlReyVrcoQoSwjYllIciTAKjcHPyeLWAu0Hjn-iVc6Fp8zK_PJygqUj9Iv6vo1tQgi_mzrYqCt0GiKtX4DvJSlSu-3D4PKW_9MtoM7NQ9V3MyN8EoISuPzYCHD079uO6V5ACUA';
+    const cors = require ('cors');
+    config.use(cors());
+    const token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE2NTA1NDI2NTAsImV4cCI6MTY1MDU0NjI1MCwicm9sZXMiOlsiUk9MRV9VU0VSIl0sInVzZXJuYW1lIjoia2VjaHJpZC5kb3JyYTEzQGdtYWlsLmNvbSJ9.Pv-TQN7db_SrAhXWz7vtYUPKZS8Vlbljx334Gx9y-9xMYJqcsRKM0YXEoUwBun-VWbrTNNmW-4uk4q_3FeoPKEIOIBj-ckAaTOXc58CbGmcqfGCxn2UJwz12wtiYufKaT5KKGG22PMKfUnG-WoeoVYlXMmHzVjDUyB35R6fJm_ueUKxODUOB6Vpjm9jQxy2vxviG3kyAyzNPe2Db-dxfmHmPAzDel6R1fNQ1BWFI_iQkVrbvwphkqbreL8YBvkJ34iggSxBNm_6H_x0Uul4rbKHAaZd7F9fB3int3qHtZvpShyGWvtjlbu2jpzkFVJsQcqkAVWN1TZYETq61fXiUKQ';
     //localStorage.get('token'); //
     config.headers.Authorization = 'Bearer '+token;
     return config;

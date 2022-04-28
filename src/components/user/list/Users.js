@@ -56,7 +56,7 @@ export default class Users extends React.Component {
                             <tr>
                                
                                 <th scope="row"> </th>
-                               { this.state.users.map(user => <td>{user.nom}</td>)}
+                            <td></td>
                                
                                 <td> </td>
                                 <td> </td>
