@@ -4,15 +4,14 @@ import Accueil from './components/Accueil';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Inscription from './components/inscription/Inscription';
-import Login from './components/login/Login'
+import Login from './components/login/Login';
 import Profil from './components/user/profil/Profil';
-import Users from './components/user/list/Users';
 
+import Users from './components/user/list/Users';
 //Bootstrap
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.min.js';
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-
 export default function App() {
   return (
   <>
@@ -25,9 +24,7 @@ export default function App() {
         <Route path="/profil" element={<Profil/>} />
         <Route path="/users" element={<Users/>} />
       </Routes>
-    </BrowserRouter>
+   </BrowserRouter>
 <Footer/>
 </>
-  );
- 
-}
+  );}
