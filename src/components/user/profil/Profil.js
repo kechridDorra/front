@@ -3,6 +3,10 @@ import './Profil.css';
 import bootstrap from "bootstrap";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from 'axios';
+import Api from "../../../services/Api";
+
+
+
 class Profil extends Component {
   constructor(props) {
       super(props);
