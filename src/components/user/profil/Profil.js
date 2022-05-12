@@ -4,42 +4,23 @@ import bootstrap from "bootstrap";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from 'axios';
 import Api from "../../../services/Api";
-
-
-
+import { getProfil } from "../../../services/userService";
 class Profil extends Component {
-  constructor(props) {
-      super(props);
-      this.state = {
-        user: null,
-        isLoading: null
-      };
-      this.getUser = this.getUser.bind(this);
-  }
-  componentWillMount() {
-      this.getUser();
-  }
-  getUser() {
-    const token = localStorage.getItem("token");
-          axios.get('http://localhost:8000/api/user/{id}', {
-                  headers: {'authorization': `Bearer ${token}`}
-              }
-          ).then(res => { this.setState({user: res.data, isLoading: false}); })
-      }
-  
 
   render() {
+   
         return (
 <div className="form-container">
   <center>
     <div className="container ">
       <div className="col-lg-6"><br/>
         <div className="h2 text-center">Profil</div>
+        
           <div className="h4 text-muted text-center pt-2">Consultez vos coordonées</div>
             <div className="row g-3">
               <div className="col-md-6 mb-4">
                 <label className="form-label" for="typeText">Nom</label>
-                <input type="text" id="nom" className="form-control  " placeholder="" />
+                <input type="text" id="nom" className="form-control " placeholder="" />
               </div>
               <div className="col-md-6 mb-4">
                 <label className="form-label" for="typeText">Prenom</label>

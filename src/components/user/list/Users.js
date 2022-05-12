@@ -6,8 +6,44 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import {getAll} from'../../../services/userService';
 import React, {Component} from 'react';
 import axios from 'axios';
+import {useState, useEffect} from "react";
+import Api from '../../../services/Api';
+
+/*
+const Users=() =>{
+   const [ users, setUsers ] =useState();
+   useEffect(()=>{
+      let imMounted = true;
+      const controller = new AbortController();
+
+      const getUsers = async =>{
+          try {
+             const response = await axios.get('/users', {
+                 signal : controller.signal
+             });
+             console.log
+          }
+          catch (err)
+      }
+
+   },[])
+
+   return (
+       <article>
+           <h2> Liste des utilisateurs</h2>
+           {users?.length
+             ?(
+                 <ul>
+                     {users.map((user,i)=> <li key={i}>{user?.nom}</li>)}
+                 </ul>
+             ): <p> Aucun utilisateur </p>
+           }
 
 
+       </article>
+   );
+};
+*/
 class Users extends Component {
     constructor() {
         super();
@@ -16,15 +52,24 @@ class Users extends Component {
     componentDidMount() {
         this.getUsers();
     }
-    getUsers() {
-       axios.get(`https://127.0.0.1:8000/users`).then(users => {
-           this.setState({ users: users.data, loading: false})
-       })
-    }
-    render() {                      
+  async  getUsers() {
+        try {
+            
+        const users =await   Api.get(`/users`)
+        // const users =await   axios.get(`https://127.0.0.1:8000/users`)
+        this.setState({ users: users.data, loading: false})
+            console.log(
+                'userss',users
+            )
+        } catch (error) {
+            // alert("test")
+        }
+
+     }
+    render() {
             const loading = this.state.loading;
             return(
-                <div class="container mt-4">               
+                <div class="container mt-4">
                    <div class="card">
                       <div class="card-body">
                          <div class="row">
@@ -32,10 +77,10 @@ class Users extends Component {
                                 <h2 class="py-3 text-center font-bold font-up blue-text">Liste des utilisateurs</h2>
                             </div>
                          </div>
-              
-                
+
+
                             {loading ? (
-                               
+
                                <thead>
                                  <tr>
                                      <th scope="row">#</th>
@@ -46,17 +91,17 @@ class Users extends Component {
                                      <th>Genre</th>
                                      <th>Détails</th>
                                      <th class="text-center">Actions</th>
-                             
+
                                  </tr>
                              </thead>
                             ) : (
 
-                                
+
                                 <div className={'row'}>
                                     { this.state.users.map(user =>
-                                        <div className="col-md-10 offset-md-1 row-block" key={user.id}>                                                                                               
+                                        <div className="col-md-10 offset-md-1 row-block" key={user.id}>
                                                         <table>
-                                                   <tbody>  
+                                                   <tbody>
                                                        <tr>
                                                             <th scope="row"> {user.id}</th>
                                                             <td>{user.nom}</td>
@@ -71,53 +116,53 @@ class Users extends Component {
                                  <a href="#" class="btn btn-danger btn-xl">
                                      <span class="glyphicon glyphicon-remove"></span> Supprimer</a>
                                         </td>
-                                        
+
                             </tr></tbody>  </table>
-                                                      
-                                                    
-                                                
+
+
+
                                         </div>
                                     )}
                                 </div>
                             )}
                         </div>
                         <div class="d-flex justify-content-center">
-                      
+
                       <nav class="my-4 pt-2">
                           <ul class="pagination pagination-circle pg-blue mb-0">
-                             
+
                               <li class="page-item disabled clearfix d-none d-md-block"><a class="page-link">Premier</a></li>
-                              
+
                               <li class="page-item disabled">
                                   <a class="page-link" aria-label="Previous">
                                           <span aria-hidden="true">&laquo;</span>
                                           <span class="sr-only">Précedent</span>
                                       </a>
                               </li>
-                             
+
                               <li class="page-item active"><a class="page-link">1</a></li>
                               <li class="page-item"><a class="page-link">2</a></li>
                               <li class="page-item"><a class="page-link">3</a></li>
                               <li class="page-item"><a class="page-link">4</a></li>
                               <li class="page-item"><a class="page-link">5</a></li>
-                             
+
                               <li class="page-item">
                                   <a class="page-link" aria-label="Next">
                                           <span aria-hidden="true">&raquo;</span>
                                           <span class="sr-only">Suivant</span>
                                       </a>
                               </li>
-                          
+
                               <li class="page-item clearfix d-none d-md-block"><a class="page-link">Dernier</a></li>
                           </ul>
                       </nav>
-                      
+
                   </div>
                         </div></div>
-                   
+
             )
         }
     }
-     
-        
+
+
 export default Users;
