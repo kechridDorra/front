@@ -6,16 +6,16 @@
   #templatemo_nav_top * { font-size: 13px !important;}
   #templatemo_main_nav a { color: #212934;}
   #templatemo_main_nav a:hover { color: #69bb7e;}
-  #templatemo_main_nav .navbar .nav-icon { margin-right: 25px;}
-  #templatemo_main_nav * { font-size: 17px !important;}
-  #templatemo_main_nav .navbar .navbar-nav { margin-right: 44px;}
+  #templatemo_main_nav .navbar .nav-icon { margin-right: 55px;}
+  #templatemo_main_nav * { font-size: 16px !important;}
+  #templatemo_main_nav .navbar .navbar-nav { margin-right: 24px;}
    /* Nav */
  
      /* Extra large devices (large desktops, 1200px and up)*/
   @media (min-width: 992px) {
-    #templatemo_main_nav .navbar-nav {max-width: 800px; }}
+    #templatemo_main_nav .navbar-nav {max-width: 900px; }}
     /*// Medium devices (tablets, 768px and up)*/
-  @media (min-width: 780px) {
-   #templatemo_main_nav .navbar-nav {max-width: 890px;}
+  @media (min-width: 980px) {
+   #templatemo_main_nav .navbar-nav {max-width: 990px;}
   }
  

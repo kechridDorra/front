@@ -1,40 +1,32 @@
-
 import React, { useEffect, useState } from 'react';
-import './Navbar.css';
+import './NavbarUser.css';
 import { Link } from 'react-router-dom';
-import Login from './login/Login';
 import jwtDecode from "jwt-decode";
-import axios from 'axios';
-import { getUserById } from '../services/Api';
-
-function Navbar(props)
-{const token = localStorage.getItem('token')
-const id = localStorage.getItem('id')
-const [userData,setUserData]=useState([])
- useEffect(()=>{
-     
-         (async()=>{
-
-            const res = await getUserById(id)
-            if (id){
-                setUserData(res)
-            }
-         })();
-    
- },[id])
+import axios from 'axios'
+import { Navbar, Nav, NavDropdown } from 'react-bootstrap';
+import { useNavigate } from "react-router-dom";
+function NavbarUser(props)
+{
+    const navigate = useNavigate();
+    let user = JSON.parse(localStorage.getItem('user-info'))
+    function logOut() {
+        localStorage.clear();
+        navigate('/login');
+    }
     return( 
         <>
-        {props.name}
+      
          <nav class="navbar navbar-expand-lg bg-dark navbar-light d-none d-lg-block" id="templatemo_nav_top">
           <div class="container text-light">
               <div class="w-100 d-flex justify-content-between">
                   <div>
                       <i class="fa fa-envelope mx-2"></i>
-                   { id ?  <a class="navbar-sm-brand text-light text-decoration-none" href="#">{userData.email}</a>
-                  : <a class="navbar-sm-brand text-light text-decoration-none" href="#">dorra@gmail.com</a> 
-                }
-                      <i class="fa fa-phone mx-2"></i>
-                      <a class="navbar-sm-brand text-light text-decoration-none" href="#">010-000-0000</a>
+                    <a class="navbar-sm-brand text-light text-decoration-none" href="#"></a>
+                    {localStorage.getItem('user-info')?
+                   <a class="navbar-sm-brand text-light text-decoration-none" href="#">{user.token.username}</a> 
+                : null}
+                   {/*}   <i class="fa fa-phone mx-2"></i>
+                      <a class="navbar-sm-brand text-light text-decoration-none" href="#">010-000-0000</a> */}
                   </div>
                   <div>
                       <a class="text-light" href="#" target="_blank" rel="sponsored"><i class="fab fa-facebook-f fa-sm fa-fw me-2"></i></a>
@@ -73,16 +65,18 @@ const [userData,setUserData]=useState([])
                               <a class="nav-link" href="#">Enchere terminées</a>
                           </li>
                           <li class="nav-item">
-                              <a class="nav-link" href="#">Contact</a>
+                              <a class="nav-link" href="#">Profil Vendeur</a>
                           </li>
                           <li class="nav-item">
-                              <a class="nav-link" href="/inscription">Inscription</a>
+                              <a class="nav-link" href="#">Appel d'offre</a>
                             
                           </li>
                           <li class="nav-item">
-                              <a class="nav-link" href="/login">Connexion</a>
+                              <a class="nav-link" href="#" onClick={logOut}>Déconnexion</a>
                             
                           </li>
+                    
+
                       </ul>
                   </div>
                   <div class="navbar align-self-center d-flex">
@@ -113,4 +107,4 @@ const [userData,setUserData]=useState([])
        </>
     )
 }
-export default Navbar;
+export default NavbarUser;

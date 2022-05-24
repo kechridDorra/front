@@ -1,89 +1,137 @@
-import React, { Component, useState } from "react";
+import React, {  useState } from "react";
 import './Inscription.css';
 import bootstrap from "bootstrap";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import axios from 'axios';
-
+import Navbar from "../Navbar";
+import Footer from "../Footer";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { Form } from "react-bootstrap";
 const Inscription = () => {
-    const [isSubmitted, setIsSubmitted] = useState(false);
+  const [state1, setstate1] = useState({
+    nom: "",
+    prenom: "",
+    email: "",
+    password: "",
+    telephone: "",
+    adresse:"",
+    ville:"",
+    codePostal:"",
+    numeroCarte:"",
+    codeSecurite:"",
+    moisExp:"",
+    anneeExp:"",
+    confirmPassword: ""
+  });
+  const navigate = useNavigate();
+  function handleForm(e) {
+    e.preventDefault();
   
-    function submitForm() {
-      setIsSubmitted(true);
-    }
-  
-        return (
+    console.log("form", state1)
+    axios
+      .post("https://127.0.0.1:8000/inscription", state1)
+   
+      .then((res) => {
+        console.log(res);
+        navigate('/login')
+      })
+
+  }
+  function handleInput(e) {
+    const newdata1 = { ...state1 };
+    newdata1[e.target.id] = e.target.value;
+    setstate1(newdata1);
+    console.log(newdata1);
+  }
+
+        return (<>
+        <Navbar/>
+    
 <div className="form-container">
   <center>
-    <div class="container ">
+    <div class="container">
+    <form class="form-horizontal" method="post" action="#" onSubmit={(e) => handleForm(e)}>
       <div class="col-lg-6"><br/>
         <div class="h2 text-center">Inscription</div>
           <div class="h4 text-muted text-center pt-2">Entrez vos coordonées</div>
             <div class="row g-3">
               <div class="col-md-6 mb-4">
                 <label class="form-label" for="typeText">Nom</label>
-                <input type="text" id="nom" class="form-control  " placeholder="Nom" />
+                <input type="text"  
+                required     onChange={(e) => handleInput(e)}
+                id="nom" class="form-control " placeholder="Nom" />
               </div>
               <div class="col-md-6 mb-4">
                 <label class="form-label" for="typeText">Prenom</label>
-                <input type="text" id="prenom" class="form-control" placeholder="Prenom"  />
+                <input type="text" 
+                required     onChange={(e) => handleInput(e)}
+                id="prenom" class="form-control" placeholder="Prenom"  />
               </div>
             </div>
           <div class="row g-3">
             <div class="col-md-6 mb-4">        
               <label class="form-label" for="typeText">Email</label>
-              <input type="email" id="email" class="form-control  " placeholder="Email" />
+              <input type="email" 
+                required     onChange={(e) => handleInput(e)}
+              id="email" class="form-control  " placeholder="Email" />
             </div>
             <div class="col-md-6 mb-4">
               <label class="form-label" for="typeText">Mot de passe</label>
-              <input type="text" id="password" class="form-control" placeholder="Mot de passe"  />         
+              <input type="password"  
+                required     onChange={(e) => handleInput(e)}
+              id="password" class="form-control" placeholder="Mot de passe"  />         
             </div>
           </div>
           <div class="row g-3">
             <div class="col-md-6 mb-4">
                 <label class="form-label" for="typeText">Télephone</label>
-                <input type="text" id="telephone" class="form-control  " placeholder="Télephone" />
+                <input type="text" 
+                required     onChange={(e) => handleInput(e)}
+                 id="telephone" class="form-control  " placeholder="Télephone" />
             </div>
             <div class="col-md-6 mb-4">
-                <label class="form-label" for="typeText" >Genre</label>  <br/> 
-                <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="genre" value="option1"></input>
-                  <label class="form-check-label" for="inlineRadio1">Homme</label>
-                </div>
-                <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="genre" value="option2"></input>
-                  <label class="form-check-label" for="inlineRadio2">Femme</label>
-                </div>
+              <label class="form-label" for="typeText">Adresse</label>
+              <input type="text" 
+                required     onChange={(e) => handleInput(e)}
+                id="adresse" class="form-control" placeholder="Adresse" />
             </div>
           </div>
           <div class="row g-3">
-            <div class="col-md-6 mb-4">
-              <label class="form-label" for="typeText">Adresse</label>
-              <input type="text" id="adresse" class="form-control" placeholder="Adresse" />
-            </div>
-            <div class="col-md-3 mb-6">
+            
+          <div class="col-md-6 mb-4">
               <label class="form-label" for="typeText">Ville</label>
-              <input type="text" id="ville" class="form-control " placeholder="Ville" />      
+              <input type="text"
+                required     onChange={(e) => handleInput(e)}
+              id="ville" class="form-control " placeholder="Ville" />      
             </div>
-            <div class="col-md-3 mb-4">
+            <div class="col-md-6 mb-4">
               <label class="form-label" for="typeText">Code Postal</label>
-              <input type="text" id="codePostal" class="form-control  " placeholder="Code postal" />
+              <input type="text"
+                required     onChange={(e) => handleInput(e)}
+               id="codePostal" class="form-control  " placeholder="Code postal" />
             </div>
           </div>             
           <div class="row g-3 ">
             <div class="col-md-4 mb-4">
               <label class="form-label" for="typeText">N° Carte Bancaire</label>
-              <input type="text" id="numeroCarte" class="form-control " placeholder="N° carte bancaire" />
+              <input type="text" 
+                required     onChange={(e) => handleInput(e)}
+              id="numeroCarte" class="form-control " placeholder="N° carte bancaire" />
             </div>
             <div class="col-md-2 mb-3">
-              <label class="form-label" for="typeText">Id internet</label>
-              <input type="text" id="codeSecurite" class="form-control " placeholder="Code sécurité" />
+            <label class="form-label" for="typeText">Id internet</label>
+              <input type="text"  
+                required     onChange={(e) => handleInput(e)}
+              id="codeSecurite" class="form-control " placeholder="Id internet" />
             </div>   
             <div class="col-md-6 mb-4">
               <div class="row ">             
               <label class="form-label" for="typeText">Expire </label>
                 <div class="col-12 col-md-6 mb-4">
                   <div class="input-group mb-3" >
-                    <select class="form-select" id="moisExp" >
+                    <select class="form-select" 
+                  
+                    required     onChange={(e) => handleInput(e)}id="moisExp" >
                       <option selected disabled>Mois</option>
                       <option value="1">1 - Janvier</option>
                       <option value="2">2 - Février</option>
@@ -102,7 +150,8 @@ const Inscription = () => {
                 </div>
                 <div class="col-12 col-md-6 mb-4">
                   <div class="input-group mb-3" >
-                    <select class="form-select" id="anneeExp" >
+                    <select class="form-select" id="anneeExp"             
+                    required    onChange={(e) => handleInput(e)}>
                       <option selected disabled>Année</option>
                       <option value="1">2022</option>
                       <option value="2">2023</option>
@@ -119,18 +168,19 @@ const Inscription = () => {
           <div class="row">
             <center>
               <div class="col-12 col-md-4 mb-3">
-              <button type="submit" className="btn btn-dark btn-lg btn-block">Register</button>
-              <p>déja inscrit <a href="#">Connectez</a> </p>
+              <button  className="btn btn-dark btn-lg btn-block">Enregistrer </button>
+              <p>déja inscrit <a href="/login">Connectez</a> </p>
               </div>
             </center>
           </div> 
         </div>
+    </form>
       </div>
    </center>
   </div>
+<Footer/>
 
-
-
+  </>
         );
     }
 export default Inscription;

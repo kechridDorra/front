@@ -1,8 +1,8 @@
 import React from 'react';
-import './Body.css';  
+import './BodyUser.css';  
 
 
-function Body()
+function BodyUser()
 { return (
     <>     
         <div class="modal fade bg-white" id="templatemo_search" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -228,4 +228,4 @@ function Body()
 
 </>
 );}
-export default Body;
+export default BodyUser;

@@ -3,47 +3,10 @@
 import './Users.css';
 import bootstrap from "bootstrap";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import {getAll} from'../../../services/userService';
 import React, {Component} from 'react';
 import axios from 'axios';
 import {useState, useEffect} from "react";
 import Api from '../../../services/Api';
-
-/*
-const Users=() =>{
-   const [ users, setUsers ] =useState();
-   useEffect(()=>{
-      let imMounted = true;
-      const controller = new AbortController();
-
-      const getUsers = async =>{
-          try {
-             const response = await axios.get('/users', {
-                 signal : controller.signal
-             });
-             console.log
-          }
-          catch (err)
-      }
-
-   },[])
-
-   return (
-       <article>
-           <h2> Liste des utilisateurs</h2>
-           {users?.length
-             ?(
-                 <ul>
-                     {users.map((user,i)=> <li key={i}>{user?.nom}</li>)}
-                 </ul>
-             ): <p> Aucun utilisateur </p>
-           }
-
-
-       </article>
-   );
-};
-*/
 class Users extends Component {
     constructor() {
         super();

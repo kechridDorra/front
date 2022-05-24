@@ -1,17 +1,19 @@
-import React, { Component } from "react";
 import './Profil.css';
 import bootstrap from "bootstrap";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import axios from 'axios';
 import Api from "../../../services/Api";
-import { getProfil } from "../../../services/userService";
-class Profil extends Component {
-
-  render() {
-   
+import Login from "../../login/Login";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import jwtDecode from "jwt-decode";
+import React from 'react';
+import axios from 'axios';
+import { NavDropdown } from "react-bootstrap";
+const Profil = () =>  {
         return (
-<div className="form-container">
-  <center>
+          <div className="form-container">
+        
+<center>
     <div className="container ">
       <div className="col-lg-6"><br/>
         <div className="h2 text-center">Profil</div>
@@ -94,7 +96,7 @@ class Profil extends Component {
       </div>
    </center>
   </div>
-        );
+     );
     }
-}
+
 export default Profil;

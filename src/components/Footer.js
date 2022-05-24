@@ -11,7 +11,7 @@ function Footer()
             <div class="row">
 
                 <div class="col-md-4 pt-5">
-                    <h2 class="h2 text-success border-bottom pb-3 border-light logo">Enchere</h2>
+                    <h2 class="h2 text-success border-bottom pb-3 border-light logo">TunEnchere</h2>
                     <ul class="list-unstyled text-light footer-link-list">
                         <li>
                             <i class="fas fa-map-marker-alt fa-fw"></i>
@@ -23,7 +23,7 @@ function Footer()
                         </li>
                         <li>
                             <i class="fa fa-envelope fa-fw"></i>
-                            <a class="text-decoration-none" href="#">info@company.com</a>
+                            <a class="text-decoration-none" href="#">enchere4@gmail.com</a>
                         </li>
                     </ul>
                 </div>

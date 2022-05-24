@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+export const baseURL=`https://127.0.0.1:8000/`
 // ==================================
 let Api = () => {
   const api = axios.create({
@@ -36,6 +37,17 @@ let Api = () => {
 
   return api;
 };
+
+
 // ==============================
 
 export default Api();
+
+export async function getUserById(id) {
+ let resultat;
+  await axios.get(baseURL+'api/user/'+id).then((res)=>{
+    console.log(res)
+   resultat=res.data
+ })
+
+}
