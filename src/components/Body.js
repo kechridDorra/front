@@ -40,12 +40,10 @@ function Body()
                         </div>
                         <div class="col-lg-6 mb-0 d-flex align-items-center">
                             <div class="text-align-left align-self-center">
-                                <h1 class="h1 text-success"><b>Jassa</b> eCommerce</h1>
-                                <h3 class="h2">Lorem Ipsum Lorem Ipsum</h3>
+                                <h1 class="h1 text-success"><b>Tun</b>Enchere</h1>
+                                <h3 class="h2">Marketplace des encheres</h3>
                                 <p>
-                                  Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                                  Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
-                                  when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+                                Le site n°1 des ventes aux enchères en Tunis
                                 </p>
                             </div>
                         </div>

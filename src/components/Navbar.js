@@ -6,6 +6,9 @@ import Login from './login/Login';
 import jwtDecode from "jwt-decode";
 import axios from 'axios';
 import { getUserById } from '../services/Api';
+import { MDBCol, MDBInput } from "mdbreact";
+import { NavDropdown } from 'react-bootstrap';
+
 
 function Navbar(props)
 {const token = localStorage.getItem('token')
@@ -31,7 +34,7 @@ const [userData,setUserData]=useState([])
                   <div>
                       <i class="fa fa-envelope mx-2"></i>
                    { id ?  <a class="navbar-sm-brand text-light text-decoration-none" href="#">{userData.email}</a>
-                  : <a class="navbar-sm-brand text-light text-decoration-none" href="#">dorra@gmail.com</a> 
+                  : <a class="navbar-sm-brand text-light text-decoration-none" href="#">enchere4@gmail.com</a> 
                 }
                       <i class="fa fa-phone mx-2"></i>
                       <a class="navbar-sm-brand text-light text-decoration-none" href="#">010-000-0000</a>
@@ -50,7 +53,7 @@ const [userData,setUserData]=useState([])
           <div class="container d-flex justify-content-between align-items-center">
 
               <a class="navbar-brand text-success logo h1 align-self-center" href="/">
-                  Enchere
+               
               </a>
 
               <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#templatemo_main_nav" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -64,25 +67,34 @@ const [userData,setUserData]=useState([])
                           <a class="nav-link" href="/">Accueil</a>
                           </li>
                           <li class="nav-item">
-                              <a class="nav-link" href="#">Enchere en cours</a>
+                          <a class="nav-link" href="/encheres">Nos encheres</a>
                           </li>
                           <li class="nav-item">
-                              <a class="nav-link" href="#">Enchere planifiées</a>
+                          <NavDropdown title="Catégories" >
+                                    <NavDropdown.Item>Arts et Décoration</NavDropdown.Item>
+                                    <NavDropdown.Item>Mode et Bijoux</NavDropdown.Item>
+                                    <NavDropdown.Item>Informatique et Téléphones</NavDropdown.Item>  
+                                    <NavDropdown.Item>Véhicules</NavDropdown.Item> 
+                                    <NavDropdown.Item>Horlogerie</NavDropdown.Item>
+                                    <NavDropdown.Item>Eléctromenager</NavDropdown.Item>
+                                    <NavDropdown.Item>Ameublement</NavDropdown.Item>
+                                    <NavDropdown.Item>Immeubles et Maisons</NavDropdown.Item>
+                                    <NavDropdown.Item> Autres</NavDropdown.Item>
+                                </NavDropdown>
+        
+          
+          
                           </li>
                           <li class="nav-item">
-                              <a class="nav-link" href="#">Enchere terminées</a>
+                              <a class="nav-link" href="#">Comment ça marche ?</a>
                           </li>
                           <li class="nav-item">
-                              <a class="nav-link" href="#">Contact</a>
+                              <a class="nav-link" href="/inscription">Inscription</a>  
                           </li>
                           <li class="nav-item">
-                              <a class="nav-link" href="/inscription">Inscription</a>
-                            
+                              <a class="nav-link" href="/login">Connexion</a>  
                           </li>
-                          <li class="nav-item">
-                              <a class="nav-link" href="/login">Connexion</a>
-                            
-                          </li>
+                    
                       </ul>
                   </div>
                   <div class="navbar align-self-center d-flex">

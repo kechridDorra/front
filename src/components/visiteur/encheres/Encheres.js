@@ -1,0 +1,102 @@
+import './Encheres.css';
+import bootstrap from "bootstrap";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import React, {Component} from 'react';
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import Footer from "../../Footer";
+import Navbar from "../../Navbar";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import {useState, useEffect} from "react";
+import Api from '../../../services/Api';
+
+class Encheres extends Component {
+    constructor() {
+        super();
+        this.state = {encheres: [], loading: true};
+    }
+    componentDidMount() {
+        this.getEncheres();
+    }
+    async  getEncheres() {
+        try {
+            
+        const  encheres =await Api.get(`/encheres`)
+        // const users =await   axios.get(`https://127.0.0.1:8000/users`)
+        this.setState({ encheres: encheres.data, loading: false})
+            console.log(
+                'encheress', encheres
+            )
+        } catch (error) {
+            // alert("test")
+        }
+
+        
+    
+          }
+        render  () {
+            const {loading,encheres}= this.state  
+            const pathImg = "http://localhost/pfe_backend/public/uploads/"
+        return(<>
+            <Navbar/>
+            <section class="bg-light">
+        <div class="container py-5" enctype="multipart/form-data">
+        <div class="col-lg-6 m-auto">
+                     
+                 </div>
+        {loading ? (
+            <div class="row text-center py-3">
+               
+            </div>
+             ) : (
+  
+    <div class={'row'}>
+   { this.state.encheres.map(enchere =>
+                <div class="col-12 col-md-4 mb-4" key={encheres.id}>
+        <div class="card h-100">
+            <a href="/detailEnch">
+            <img src= { pathImg + `${enchere.articles.map(el=>el.images[0].url)}`  }
+             class="card-img-top" alt="..." />
+            </a>
+            <div class="card-body">
+                <ul class="list-unstyled d-flex justify-content-between">
+                    <li>
+                        <i class="text-warning fa fa-star"></i>
+                        <i class="text-warning fa fa-star"></i>
+                        <i class="text-warning fa fa-star"></i>
+                        <i class="text-muted fa fa-star"></i>
+                        <i class="text-muted fa fa-star"></i>
+                    </li>
+                    <li class="text-muted text-right">{enchere.articles.map(el=>el.prix_initial)} TND</li>
+                </ul>
+                <a href="#" class="h2 text-decoration-none text-dark">{enchere.articles.map(el=>el.titre)}</a>
+                <p class="card-text">
+                {enchere.description_ench}
+                </p>
+                <p class="text-muted">Date debut :&nbsp;
+                    {enchere.date_debut.substring(0, 10)} 
+                </p>
+                <p class="text-muted">Heure debut :&nbsp; 
+                {enchere.date_debut.substring(11, 19)}
+                </p>
+                <p class="text-muted">Date fin :&nbsp;
+                {enchere.date_fin.substring(0, 10)} 
+                </p>
+                <p class="text-muted">Heure fin :&nbsp; 
+                    {enchere.date_fin.substring(11, 19)} 
+                </p>
+                
+            </div>
+        </div>
+        </div>
+   )}
+   </div>
+      
+      
+      )}</div></section>
+      <Footer/>
+      </>
+      
+      )
+}}
+export default Encheres;

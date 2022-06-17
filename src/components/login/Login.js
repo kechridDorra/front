@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import jwtDecode from "jwt-decode";
 import Navbar from '../Navbar';
 import Footer from '../Footer';
-
+import setAuthHeader from '../../services/setAuthHeader';
 //Bootstrap
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.min.js';
@@ -19,21 +19,19 @@ const Login = () => {
     });
     const navigate = useNavigate();
     function handleForm(e) {
-        e.preventDefault();
-      
+        e.preventDefault();     
         console.log("form", state1)
         axios
             .post(" https://127.0.0.1:8000/api/login_check", state1)
-         
-
             .then((res) => 
             {
-                const decode = jwtDecode(res.data.token);
-                console.log(decode);
+                const tkn = res.data.token;
+                console.log(tkn);
                 localStorage.setItem('user-info', JSON.stringify({
                     login: true,
-                    token: decode,
+                    token: tkn,
                 }))
+                setAuthHeader(res.data.token);
             console.log(localStorage)
             navigate('/accueil')
             })

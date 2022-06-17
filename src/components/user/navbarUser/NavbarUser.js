@@ -21,12 +21,10 @@ function NavbarUser(props)
               <div class="w-100 d-flex justify-content-between">
                   <div>
                       <i class="fa fa-envelope mx-2"></i>
-                    <a class="navbar-sm-brand text-light text-decoration-none" href="#"></a>
-                    {localStorage.getItem('user-info')?
-                   <a class="navbar-sm-brand text-light text-decoration-none" href="#">{user.token.username}</a> 
-                : null}
-                   {/*}   <i class="fa fa-phone mx-2"></i>
-                      <a class="navbar-sm-brand text-light text-decoration-none" href="#">010-000-0000</a> */}
+                    <a class="navbar-sm-brand text-light text-decoration-none" href="#">enchere4@gmail.com</a>
+                  
+                      <i class="fa fa-phone mx-2"></i>
+                      <a class="navbar-sm-brand text-light text-decoration-none" href="#">010-000-0000</a> 
                   </div>
                   <div>
                       <a class="text-light" href="#" target="_blank" rel="sponsored"><i class="fab fa-facebook-f fa-sm fa-fw me-2"></i></a>
@@ -59,21 +57,28 @@ function NavbarUser(props)
                               <a class="nav-link" href="#">Enchere en cours</a>
                           </li>
                           <li class="nav-item">
-                              <a class="nav-link" href="#">Enchere planifiées</a>
+                              <a class="nav-link" href="/enchereP">Enchere planifiées</a>
                           </li>
                           <li class="nav-item">
                               <a class="nav-link" href="#">Enchere terminées</a>
                           </li>
                           <li class="nav-item">
-                              <a class="nav-link" href="#">Profil Vendeur</a>
+                              <a class="nav-link" href="/">Profil Vendeur</a>
                           </li>
                           <li class="nav-item">
                               <a class="nav-link" href="#">Appel d'offre</a>
                             
                           </li>
                           <li class="nav-item">
-                              <a class="nav-link" href="#" onClick={logOut}>Déconnexion</a>
-                            
+                        
+                              {localStorage.getItem('user-info')?
+                                 <NavDropdown title={user.token.username}>
+    <NavDropdown.Item onClick={logOut}>Profil</NavDropdown.Item>
+    <NavDropdown.Item onClick={logOut}>Déconnexion</NavDropdown.Item>
+
+                                </NavDropdown>
+
+                              : null}
                           </li>
                     
 

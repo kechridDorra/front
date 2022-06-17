@@ -5,7 +5,7 @@ import React, { Component }  from 'react';
 //Bootstrap
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.min.js';
-const Enchere = () => {
+const Article = () => {
     function AjoutImage(props) {
         return <div> <input type="file"
         id="avatar" name="avatar"
@@ -42,4 +42,4 @@ const Enchere = () => {
        
 </div></div>);
 }
-export default Enchere;
+export default Article;

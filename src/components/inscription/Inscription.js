@@ -24,9 +24,9 @@ const Inscription = () => {
     confirmPassword: ""
   });
   const navigate = useNavigate();
-  function handleForm(e) {
+  function handleForm(e)
+  {
     e.preventDefault();
-  
     console.log("form", state1)
     axios
       .post("https://127.0.0.1:8000/inscription", state1)
@@ -35,7 +35,6 @@ const Inscription = () => {
         console.log(res);
         navigate('/login')
       })
-
   }
   function handleInput(e) {
     const newdata1 = { ...state1 };
@@ -43,7 +42,6 @@ const Inscription = () => {
     setstate1(newdata1);
     console.log(newdata1);
   }
-
         return (<>
         <Navbar/>
     

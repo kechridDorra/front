@@ -18,7 +18,7 @@ class Users extends Component {
   async  getUsers() {
         try {
             
-        const users =await   Api.get(`/users`)
+        const users =await Api.get(`/users`)
         // const users =await   axios.get(`https://127.0.0.1:8000/users`)
         this.setState({ users: users.data, loading: false})
             console.log(
@@ -30,7 +30,8 @@ class Users extends Component {
 
      }
     render() {
-            const loading = this.state.loading;
+        const {loading,users}= this.state
+         
             return(
                 <div class="container mt-4">
                    <div class="card">
