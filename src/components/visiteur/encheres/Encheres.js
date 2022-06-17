@@ -51,11 +51,12 @@ class Encheres extends Component {
              ) : (
   
     <div class={'row'}>
+        
    { this.state.encheres.map(enchere =>
-                <div class="col-12 col-md-4 mb-4" key={encheres.id}>
+                <div class="col-10 col-md-4 mb-4" key={encheres.id}>
         <div class="card h-100">
             <a href="/detailEnch">
-            <img src= { pathImg + `${enchere.articles.map(el=>el.images[0].url)}`  }
+             <center></center><img src= { pathImg + `${enchere.articles.map(el=>el.images[0].url)}`  }
              class="card-img-top" alt="..." />
             </a>
             <div class="card-body">
@@ -67,23 +68,19 @@ class Encheres extends Component {
                         <i class="text-muted fa fa-star"></i>
                         <i class="text-muted fa fa-star"></i>
                     </li>
-                    <li class="text-muted text-right">{enchere.articles.map(el=>el.prix_initial)} TND</li>
+                    <li class="card-text-prix"> <strong> {enchere.articles.map(el=>el.prix_initial)}</strong> TND  </li>
                 </ul>
                 <a href="#" class="h2 text-decoration-none text-dark">{enchere.articles.map(el=>el.titre)}</a>
-                <p class="card-text">
-                {enchere.description_ench}
+                <p class="card-text-description">
+               <strong> {enchere.description_ench}</strong>
                 </p>
-                <p class="text-muted">Date debut :&nbsp;
-                    {enchere.date_debut.substring(0, 10)} 
+                <p class="card-text-date-debut">Commence le&nbsp;  
+                <strong> {enchere.date_debut.substring(0, 10)}</strong> 
+                &nbsp;à&nbsp;<strong>{enchere.date_debut.substring(11, 19)}</strong>
                 </p>
-                <p class="text-muted">Heure debut :&nbsp; 
-                {enchere.date_debut.substring(11, 19)}
-                </p>
-                <p class="text-muted">Date fin :&nbsp;
-                {enchere.date_fin.substring(0, 10)} 
-                </p>
-                <p class="text-muted">Heure fin :&nbsp; 
-                    {enchere.date_fin.substring(11, 19)} 
+                <p class="card-text-date-fin">Termine le&nbsp;
+                <strong> {enchere.date_fin.substring(0, 10)}</strong>
+                &nbsp;à&nbsp;<strong>{enchere.date_fin.substring(11, 19)} </strong>
                 </p>
                 
             </div>

@@ -10,6 +10,7 @@ import { MDBCol, MDBInput } from "mdbreact";
 import { NavDropdown } from 'react-bootstrap';
 
 
+
 function Navbar(props)
 {const token = localStorage.getItem('token')
 const id = localStorage.getItem('id')
@@ -71,15 +72,15 @@ const [userData,setUserData]=useState([])
                           </li>
                           <li class="nav-item">
                           <NavDropdown title="Catégories" >
-                                    <NavDropdown.Item>Arts et Décoration</NavDropdown.Item>
-                                    <NavDropdown.Item>Mode et Bijoux</NavDropdown.Item>
-                                    <NavDropdown.Item>Informatique et Téléphones</NavDropdown.Item>  
-                                    <NavDropdown.Item>Véhicules</NavDropdown.Item> 
-                                    <NavDropdown.Item>Horlogerie</NavDropdown.Item>
-                                    <NavDropdown.Item>Eléctromenager</NavDropdown.Item>
-                                    <NavDropdown.Item>Ameublement</NavDropdown.Item>
-                                    <NavDropdown.Item>Immeubles et Maisons</NavDropdown.Item>
-                                    <NavDropdown.Item> Autres</NavDropdown.Item>
+                                    <NavDropdown.Item href='/categorie1'> Arts et Décoration</NavDropdown.Item>
+                                    <NavDropdown.Item href='/categorie2'>Mode et Bijoux</NavDropdown.Item>
+                                    <NavDropdown.Item href='/categorie3'>Informatique et Téléphones</NavDropdown.Item>  
+                                    <NavDropdown.Item href='/categorie4'>Véhicules</NavDropdown.Item> 
+                                    <NavDropdown.Item href='/categorie5'>Horlogerie</NavDropdown.Item>
+                                    <NavDropdown.Item href='/categorie6'>Eléctromenager</NavDropdown.Item>
+                                    <NavDropdown.Item href='/categorie7'>Ameublement</NavDropdown.Item>
+                                    <NavDropdown.Item href='/categorie8'>Immeubles et Maisons</NavDropdown.Item>
+                                    <NavDropdown.Item href='/categorie9'> Autres</NavDropdown.Item>
                                 </NavDropdown>
         
           
