@@ -1,9 +1,30 @@
-import React from 'react';
+
 import './Body.css';  
+import Api from '../services/Api';
+import React, {Component} from 'react';
+class Body extends Component 
+{  constructor() {
+    super();
+    this.state = {encheresT: [], loading: true};
+}
+componentDidMount() {
+    this.getEncheresT();
+}
+async  getEncheresT() {
+    try {    
+    const  encheresT =await Api.get(`/encheresPlanifiees`)
+    // const users =await   axios.get(`https://127.0.0.1:8000/users`)
+    this.setState({ encheresT: encheresT.data, loading: false})
+    
+    } catch (error) {
+       console.log(error)
+    }
 
-
-function Body()
-{ return (
+      }
+    render  () {
+        const {loading,encheresT}= this.state  
+        const pathImg = "http://localhost/pfe_backend/public/uploads/"
+    {return (
     <>     
         <div class="modal fade bg-white" id="templatemo_search" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
@@ -103,11 +124,7 @@ function Body()
         <div class="row text-center pt-3">
             <div class="col-lg-6 m-auto">
                 <h1 class="h1">Categories de la semaine</h1>
-                <p>
-                  Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                  Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
-                  when an unknown printer took a galley of type and scrambled it to make a type specimen book.
-                </p>
+               
             </div>
         </div>
         <div class="row">
@@ -134,96 +151,59 @@ function Body()
             </div>
         </div>
       </section>
-      
       <section class="bg-light">
         <div class="container py-5">
+                <div class="col-lg-8 m-auto" href="/encheresTerminees">
+                    <h1 class="h1">Les dernieres enchéres terminées</h1>
+                </div>
+            <br></br>
+            {loading ? (
             <div class="row text-center py-3">
-                <div class="col-lg-6 m-auto">
-                    <h1 class="h1">Featured Product</h1>
-                    <p>
-                      Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                      Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
-                      when an unknown printer took a galley of type and scrambled it to make a type specimen book.
-                    </p>
-                </div>
+               
             </div>
-            <div class="row">
-                <div class="col-12 col-md-4 mb-4">
+             ) : (
+            <div class={'row'}>
+                 { this.state.encheresT.map(enchere =>
+                <div class="col-12 col-md-4 mb-4" key={encheresT.id}>
                     <div class="card h-100">
                         <a href="#">
-                            <img src="https://therichpost.com/wp-content/uploads/2021/05/feature_prod_01.jpg" class="card-img-top" alt="..." />
+                            <img src={ pathImg + `${enchere.articles.map(el=>el.images[0].url)}`  } class="card-img-top" alt="..." />
                         </a>
                         <div class="card-body">
-                            <ul class="list-unstyled d-flex justify-content-between">
-                                <li>
-                                    <i class="text-warning fa fa-star"></i>
-                                    <i class="text-warning fa fa-star"></i>
-                                    <i class="text-warning fa fa-star"></i>
-                                    <i class="text-muted fa fa-star"></i>
-                                    <i class="text-muted fa fa-star"></i>
-                                </li>
-                                <li class="text-muted text-right">$240.00</li>
-                            </ul>
-                            <a href="#" class="h2 text-decoration-none text-dark">Lorem Ipsum</a>
-                            <p class="card-text">
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt in culpa qui officia deserunt.
-                            </p>
-                            <p class="text-muted">Reviews (24)</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12 col-md-4 mb-4">
-                    <div class="card h-100">
-                        <a href="#">
-                            <img src="https://therichpost.com/wp-content/uploads/2021/05/feature_prod_02.jpg" class="card-img-top" alt="..." />
-                        </a>
-                        <div class="card-body">
-                            <ul class="list-unstyled d-flex justify-content-between">
-                                <li>
-                                    <i class="text-warning fa fa-star"></i>
-                                    <i class="text-warning fa fa-star"></i>
-                                    <i class="text-warning fa fa-star"></i>
-                                    <i class="text-muted fa fa-star"></i>
-                                    <i class="text-muted fa fa-star"></i>
-                                </li>
-                                <li class="text-muted text-right">$480.00</li>
-                            </ul>
-                            <a href="#" class="h2 text-decoration-none text-dark">Lorem Ipsum</a>
-                            <p class="card-text">
-                              Lorem Ipsum Lorem Ipsum Lorem IpsumLorem Ipsum
-                            </p>
-                            <p class="text-muted">Reviews (48)</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12 col-md-4 mb-4">
-                    <div class="card h-100">
-                        <a href="#">
-                            <img src="https://therichpost.com/wp-content/uploads/2021/05/feature_prod_03.jpg" class="card-img-top" alt="..." />
-                        </a>
-                        <div class="card-body">
-                            <ul class="list-unstyled d-flex justify-content-between">
-                                <li>
-                                    <i class="text-warning fa fa-star"></i>
-                                    <i class="text-warning fa fa-star"></i>
-                                    <i class="text-warning fa fa-star"></i>
-                                    <i class="text-warning fa fa-star"></i>
-                                    <i class="text-warning fa fa-star"></i>
-                                </li>
-                                <li class="text-muted text-right">$360.00</li>
-                            </ul>
-                            <a href="#" class="h2 text-decoration-none text-dark">Lorem Ipsum</a>
-                            <p class="card-text">
-                              Lorem Ipsum Lorem Ipsum Lorem IpsumLorem Ipsum Lorem Ipsum Lorem Ipsum.
-                            </p>
-                            <p class="text-muted">Reviews (74)</p>
-                        </div>
-                    </div>
-                </div>
+                <ul class="list-unstyled d-flex justify-content-between">
+                    <li>
+                        <i class="text-warning fa fa-star"></i>
+                        <i class="text-warning fa fa-star"></i>
+                        <i class="text-warning fa fa-star"></i>
+                        <i class="text-muted fa fa-star"></i>
+                        <i class="text-muted fa fa-star"></i>
+                    </li>
+                    <li class="card-text-prix"> <strong> {enchere.articles.map(el=>el.prix_depart)}</strong> TND  </li>
+                </ul>
+                <a href="#" class="h2 text-decoration-none text-dark">{enchere.articles.map(el=>el.titre)}</a>
+                <p class="card-text-description">
+               <strong> {enchere.description_ench}</strong>
+                </p>
+                <p class="card-text-date-debut">Commence le&nbsp;  
+                <strong> {enchere.date_debut.substring(0, 10)}</strong> 
+                &nbsp;à&nbsp;<strong>{enchere.date_debut.substring(11, 19)}</strong>
+                </p>
+                <p class="card-text-date-fin">Termine le &nbsp;
+                <strong>{enchere.date_fin.substring(0, 10)}</strong>
+                &nbsp;à&nbsp;<strong>{enchere.date_fin.substring(11, 19)} </strong>
+                </p>
             </div>
-        </div>
+            
+                    </div>
+                </div>)}
+              
+                     </div>
+                        
+      )}   <div><button type="button" href="/encheresT" class="btn btn-link mb-2">Aficher plus </button>
+      </div></div>
+      
       </section>
 
 </>
-);}
+);}}}
 export default Body;

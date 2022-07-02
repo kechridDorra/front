@@ -1,17 +1,20 @@
 import './Article.css';
 import axios from "axios";
 import React, { Component }  from 'react';
-
 //Bootstrap
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.min.js';
+import NavbarUser from '../user/navbarUser/NavbarUser';
+import Footer from '../Footer';
 const Article = () => {
+  let user = JSON.parse(localStorage.getItem('user-info'));
     function AjoutImage(props) {
         return <div> <input type="file"
         id="avatar" name="avatar"
         accept="image/png, image/jpeg"/></div>;
       }
-    return (
+    return (<>
+      <NavbarUser/>
   <div>
         <div class="wrapper bg-white">
             <div class="h2 text-center">Ajout article</div>
@@ -40,6 +43,8 @@ const Article = () => {
                </div>
         </div>
        
-</div></div>);
+</div></div>
+<Footer/></>);
 }
 export default Article;
+

@@ -1,4 +1,4 @@
-import './Encheres.css';
+import './EncheresPlanifiees.css';
 import bootstrap from "bootstrap";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import React, {Component} from 'react';
@@ -9,17 +9,19 @@ import Navbar from "../../Navbar";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {useState, useEffect} from "react";
 import Api from '../../../services/Api';
-class Encheres extends Component {
+import NavbarUser from '../../user/navbarUser/NavbarUser';
+class EncheresPlanifiees extends Component {
     constructor() {
         super();
         this.state = {encheres: [], loading: true};
     }
+    
     componentDidMount() {
         this.getEncheres();
     }
     async  getEncheres() {
         try {    
-        const  encheres =await Api.get(`/encheres`)
+        const  encheres =await Api.get(`/encheresPlanifiees`)
         // const users =await   axios.get(`https://127.0.0.1:8000/users`)
         this.setState({ encheres: encheres.data, loading: false})
         
@@ -32,13 +34,13 @@ class Encheres extends Component {
             const {loading,encheres}= this.state  
             const pathImg = "http://localhost/pfe_backend/public/uploads/"
         return(<>
-            <Navbar/>
+            <NavbarUser/>
             <section class="bg-light">
         <div class="container py-5" enctype="multipart/form-data">
         <nav aria-label="breadcrumb">
                    <ol class="breadcrumb bg-transparent pl-0 mb-0">
                      <li class="breadcrumb-item"><a href="/"> <strong>TunEnchere </strong></a></li>
-                     <li class="breadcrumb-item"><a href="/encheres"><strong>Nos encheres </strong></a></li>
+                     <li class="breadcrumb-item"><a href="/encheres"><strong>Les enchéres Planifiées </strong></a></li>
                   </ol>
                  </nav> 
                  <br></br>    
@@ -83,6 +85,7 @@ class Encheres extends Component {
                 <strong>{enchere.date_fin.substring(0, 10)}</strong>
                 &nbsp;à&nbsp;<strong>{enchere.date_fin.substring(11, 19)} </strong>
                 </p>
+                <p class="text-center"><a class="btn btn-success">Rejoindre</a></p>
                 
             </div>
         </div>
@@ -97,4 +100,4 @@ class Encheres extends Component {
       
       )
 }}
-export default Encheres;
+export default EncheresPlanifiees;

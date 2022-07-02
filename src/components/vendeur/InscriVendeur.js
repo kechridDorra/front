@@ -1,4 +1,4 @@
-import {  useState } from "react";
+ import {  useState } from "react";
 import './InscriVendeur.css';
 import bootstrap from "bootstrap";
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -8,8 +8,13 @@ import Footer from "../Footer";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { Form } from "react-bootstrap";
+import Api from "../../services/Api";
 
 const InscriVendeur = () => {
+  let user=
+  JSON.parse(localStorage.getItem('user-info'));
+  console.log(user);
+
   const [state1, setstate1] = useState({
     activite: "",
     nomEntreprise: "",
@@ -20,10 +25,10 @@ const InscriVendeur = () => {
   {
     e.preventDefault();
     console.log("form", state1)
-    axios
-      .post("https://127.0.0.1:8000/profilVendeur", state1)
-   
-      .then((res) => {
+   Api
+      .post("api/profilVendeur", state1)
+      .then((res) => {     
+       
         console.log(res);
         navigate('/accueil')
       })

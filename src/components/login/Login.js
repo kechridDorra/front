@@ -3,6 +3,7 @@ import axios from "axios";
 import React, { Component }  from 'react';
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import Api from '../../services/Api';
 import jwtDecode from "jwt-decode";
 import Navbar from '../Navbar';
 import Footer from '../Footer';
@@ -21,15 +22,14 @@ const Login = () => {
     function handleForm(e) {
         e.preventDefault();     
         console.log("form", state1)
-        axios
-            .post(" https://127.0.0.1:8000/api/login_check", state1)
+       Api.post(`/api/login_check`, state1)
             .then((res) => 
             {
                 const tkn = res.data.token;
-                console.log(tkn);
+                const email = state1.username;
                 localStorage.setItem('user-info', JSON.stringify({
                     login: true,
-                    token: tkn,
+                    token: tkn, email                  
                 }))
                 setAuthHeader(res.data.token);
             console.log(localStorage)
@@ -38,8 +38,8 @@ const Login = () => {
             .catch(
             console.log("ERREUR")
             )
-
     }
+    
     function handleInput(e) {
         const newdata1 = { ...state1 };
         newdata1[e.target.id] = e.target.value;

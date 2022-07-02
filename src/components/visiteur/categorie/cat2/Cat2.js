@@ -72,7 +72,7 @@ class Cat2 extends Component {
                         <i class="text-muted fa fa-star"></i>
                         <i class="text-muted fa fa-star"></i>
                     </li>
-                    <li class="card-text-prix"> <strong> {articles.prix_initial} </strong> TND  </li>
+                    <li class="card-text-prix"> <strong> {articles.prix_depart} </strong> TND  </li>
                 </ul>
                 <a href="#" class="h2 text-decoration-none text-dark">{articles.titre}</a>
                 <p class="card-text-description">

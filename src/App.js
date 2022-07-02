@@ -25,26 +25,36 @@ import Cat6 from './components/visiteur/categorie/cat6/Cat6';
 import Cat7 from './components/visiteur/categorie/cat7/Cat7';
 import Cat8 from './components/visiteur/categorie/cat8/Cat8';
 import Cat9 from './components/visiteur/categorie/cat9/Cat9';
+import EX from './components/visiteur/EX';
+import EncheresPlanifiees from './components/enchere/encheresPlanifiees/EncheresPlanifiees';
+import EncheresTerminees from './components/enchere/encheresTerminees/EncheresTerminees';
+import EncheresEnCours from './components/enchere/enchereEnCours/EncheresEnCours';
+import CreerEnchere from './components/vendeur/creerEnchere/CreerEnchere';
+import AjoutArticle from './components/vendeur/ajoutArticle/AjoutArticle';
+import EncheresT from './components/visiteur/encheresT/EncheresT';
 export default function App() {
-  // let t;
-  // const id=localStorage.getItem(id)
-  // useEffect(async()=>{
-  //  t='oui'
-  // },[id])
   return (
-  <>
-    
+  <>  
    <BrowserRouter>
       <Routes>
-
-        <Route exact path="/" element={<Accueil/>} />
         <Route path="/inscription" element={<Inscription/>} />
         <Route path="/login" element={<Login/>} />
-        <Route path="/article" element={<Article/>}/>
+
+        <Route path="/users" element={<Users/>} />
+        <Route path="/ex" element={<EX/>} />
+      
+        //user
         <Route exact path="/accueil" element={<AccueilUser/>} />
         <Route path="/profil" element={<Profil/>} />
-        <Route path="/users" element={<Users/>} />
+        <Route path="/encheresPlanifiees" element={<EncheresPlanifiees/>} />
+        <Route path="/encheresTerminees" element={<EncheresTerminees/>} />
+        <Route path="/encheresEnCours" element={<EncheresEnCours/>} />
+        //vendeur
         <Route path="/inscriVendeur" element={<InscriVendeur/>} />
+        <Route path="/creerEnchere" element={<CreerEnchere/>} />
+        <Route path="/ajoutArticle" element={<AjoutArticle/>} />
+        //visiteur
+        <Route exact path="/" element={<Accueil/>} />
         <Route path="/encheres" element={<Encheres/>} />
         <Route path="/detailEnch/:id" element={<DetailEnch/>} />
         <Route path="/categorie1" element={<Cat1/>} />
@@ -56,6 +66,7 @@ export default function App() {
         <Route path="/categorie7" element={<Cat7/>} />
         <Route path="/categorie8" element={<Cat8/>} />
         <Route path="/categorie9" element={<Cat9/>} />
+        <Route path="/encheresT" element={<EncheresT/>} />
       </Routes>
    </BrowserRouter>
 

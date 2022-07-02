@@ -14,7 +14,7 @@ import { NavDropdown } from 'react-bootstrap';
 function Navbar(props)
 {const token = localStorage.getItem('token')
 const id = localStorage.getItem('id')
-const [userData,setUserData]=useState([])
+/*const [userData,setUserData]=useState([])
  useEffect(()=>{
      
          (async()=>{
@@ -25,7 +25,7 @@ const [userData,setUserData]=useState([])
             }
          })();
     
- },[id])
+ },[id])*/
     return( 
         <>
         {props.name}
@@ -34,9 +34,9 @@ const [userData,setUserData]=useState([])
               <div class="w-100 d-flex justify-content-between">
                   <div>
                       <i class="fa fa-envelope mx-2"></i>
-                   { id ?  <a class="navbar-sm-brand text-light text-decoration-none" href="#">{userData.email}</a>
+                  <a class="navbar-sm-brand text-light text-decoration-none" href="#"></a>
                   : <a class="navbar-sm-brand text-light text-decoration-none" href="#">enchere4@gmail.com</a> 
-                }
+                
                       <i class="fa fa-phone mx-2"></i>
                       <a class="navbar-sm-brand text-light text-decoration-none" href="#">010-000-0000</a>
                   </div>

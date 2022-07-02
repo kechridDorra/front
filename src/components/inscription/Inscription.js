@@ -7,6 +7,7 @@ import Footer from "../Footer";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { Form } from "react-bootstrap";
+import Api from "../../services/Api";
 const Inscription = () => {
   const [state1, setstate1] = useState({
     nom: "",
@@ -28,9 +29,7 @@ const Inscription = () => {
   {
     e.preventDefault();
     console.log("form", state1)
-    axios
-      .post("https://127.0.0.1:8000/inscription", state1)
-   
+      Api.post(`/inscription`, state1)
       .then((res) => {
         console.log(res);
         navigate('/login')

@@ -12,6 +12,7 @@ function NavbarUser(props)
     function logOut() {
         localStorage.clear();
         navigate('/login');
+ 
     }
     return( 
         <>
@@ -54,16 +55,21 @@ function NavbarUser(props)
                           <a class="nav-link" href="/">Accueil</a>
                           </li>
                           <li class="nav-item">
-                              <a class="nav-link" href="#">Enchere en cours</a>
-                          </li>
-                          <li class="nav-item">
-                              <a class="nav-link" href="/enchereP">Enchere planifiées</a>
-                          </li>
-                          <li class="nav-item">
-                              <a class="nav-link" href="#">Enchere terminées</a>
-                          </li>
-                          <li class="nav-item">
-                              <a class="nav-link" href="/">Profil Vendeur</a>
+                          <NavDropdown title="Les encheres" >
+                                    <NavDropdown.Item href='/encheresEnCours'> Enchere en cours</NavDropdown.Item>
+                                    <NavDropdown.Item href='/encheresPlanifiees"'>Enchere planifiées</NavDropdown.Item>
+                                    <NavDropdown.Item href='/encheresTerminees'>Enchere terminées</NavDropdown.Item>  
+                                    
+                                </NavDropdown>
+                           </li>
+                           <li class="nav-item">
+                              
+                              <NavDropdown title="Espace Vendeur" >
+                                    <NavDropdown.Item href='/InscriVendeur'>Inscription vendeur</NavDropdown.Item>
+                                    <NavDropdown.Item href='/creerEnchere"'>Creation Enchére</NavDropdown.Item>
+                                    <NavDropdown.Item href='/'>Liste des encheres</NavDropdown.Item>  
+                                    
+                                </NavDropdown>
                           </li>
                           <li class="nav-item">
                               <a class="nav-link" href="#">Appel d'offre</a>
@@ -72,13 +78,14 @@ function NavbarUser(props)
                           <li class="nav-item">
                         
                               {localStorage.getItem('user-info')?
-                                 <NavDropdown title={user.token.username}>
+                                 <NavDropdown title={user.email}>
     <NavDropdown.Item onClick={logOut}>Profil</NavDropdown.Item>
     <NavDropdown.Item onClick={logOut}>Déconnexion</NavDropdown.Item>
 
                                 </NavDropdown>
 
                               : null}
+                              
                           </li>
                     
 

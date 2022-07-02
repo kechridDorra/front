@@ -9,8 +9,15 @@ let Api = () => {
   api.interceptors.request.use((request) => { 
     return request;
   });
+  axios.interceptors.request.use
+        (async (config) =>
+    { const token = await localStorage.getItem('token').session.token; 
+    if (token) {
+      config.headers.Authorization = 'Bearer  ' + token;
+    }; return config; });
 
-  api.interceptors.request.use(
+/*  Source: https://prograide.com/pregunta/42959/Attacher-len-tete-dautorisation-pour-toutes-les-demandes-axios
+  /*api.interceptors.request.use(
     async (config) => {
       const token = await localStorage.getItem('token');
       if (token) {
@@ -21,7 +28,7 @@ let Api = () => {
     (error) => {
       return Promise.reject(error);
     }
-  );
+  );*/
   /*api.interceptors.request.use(
     async (config) => {
       const {token,login} = await JSON.parse(localStorage.getItem('user-info'));
@@ -35,7 +42,9 @@ let Api = () => {
       return Promise.reject(error);
     }
   );*/
+ 
 
+  Source: https://prograide.com/pregunta/42959/Attacher-len-tete-dautorisation-pour-toutes-les-demandes-axios
   api.interceptors.response.use(
     (response) => {
        console.log("Response Interceptor", response);
@@ -56,7 +65,7 @@ let Api = () => {
 // ==============================
 
 export default Api();
-
+/*
 export async function getUserById(id) {
  let resultat;
   await axios.get(baseURL+'api/user/'+id).then((res)=>{
@@ -64,4 +73,4 @@ export async function getUserById(id) {
    resultat=res.data
  })
 
-}
+}*/
