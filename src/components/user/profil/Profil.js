@@ -9,8 +9,33 @@ import jwtDecode from "jwt-decode";
 import React from 'react';
 import axios from 'axios';
 import { NavDropdown } from "react-bootstrap";
+import NavbarUser from '../navbarUser/NavbarUser';
+import Footer from '../../Footer';
 const Profil = () =>  {
+
+    const [user, SetUser] = useState({});
+    let info=
+    JSON.parse(localStorage.getItem('user-info'));
+    console.log(info);
+  
+   
+    useEffect(() => {
+      const fetch = async () => {
+        try {
+          const { data } = await Api.get(`/api/userInfo`);
+          SetUser(data);
+          console.log(data)
+        
+        } catch (err) {
+          console.error(err);
+        }
+      };
+      fetch();
+    }, []);
+    
         return (
+        <>
+  <NavbarUser/>
           <div className="form-container">
         
 <center>
@@ -96,7 +121,7 @@ const Profil = () =>  {
       </div>
    </center>
   </div>
-     );
+  <Footer/></>    );
     }
 
 export default Profil;

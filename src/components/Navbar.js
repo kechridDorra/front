@@ -35,7 +35,7 @@ const id = localStorage.getItem('id')
                   <div>
                       <i class="fa fa-envelope mx-2"></i>
                   <a class="navbar-sm-brand text-light text-decoration-none" href="#"></a>
-                  : <a class="navbar-sm-brand text-light text-decoration-none" href="#">enchere4@gmail.com</a> 
+                  <a class="navbar-sm-brand text-light text-decoration-none" href="#">enchere4@gmail.com</a> 
                 
                       <i class="fa fa-phone mx-2"></i>
                       <a class="navbar-sm-brand text-light text-decoration-none" href="#">010-000-0000</a>
@@ -54,7 +54,7 @@ const id = localStorage.getItem('id')
           <div class="container d-flex justify-content-between align-items-center">
 
               <a class="navbar-brand text-success logo h1 align-self-center" href="/">
-               
+               TunEnchere
               </a>
 
               <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#templatemo_main_nav" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -68,9 +68,9 @@ const id = localStorage.getItem('id')
                           <a class="nav-link" href="/">Accueil</a>
                           </li>
                           <li class="nav-item">
-                          <a class="nav-link" href="/encheres">Nos encheres</a>
+                          <a class="nav-link" href="/encheres">Enchères</a>
                           </li>
-                          <li class="nav-item">
+                         {/*} <li class="nav-item">
                           <NavDropdown title="Catégories" >
                                     <NavDropdown.Item href='/categorie1'> Arts et Décoration</NavDropdown.Item>
                                     <NavDropdown.Item href='/categorie2'>Mode et Bijoux</NavDropdown.Item>
@@ -82,9 +82,9 @@ const id = localStorage.getItem('id')
                                     <NavDropdown.Item href='/categorie8'>Immeubles et Maisons</NavDropdown.Item>
                                     <NavDropdown.Item href='/categorie9'> Autres</NavDropdown.Item>
                                 </NavDropdown>
-        
-          
-          
+    </li>*/}
+                          <li class="nav-item">
+                          <a class="nav-link" href="/appelOffres">Appel d'offres</a>
                           </li>
                           <li class="nav-item">
                               <a class="nav-link" href="#">Comment ça marche ?</a>

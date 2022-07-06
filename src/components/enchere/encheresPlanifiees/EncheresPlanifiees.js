@@ -18,10 +18,14 @@ class EncheresPlanifiees extends Component {
     
     componentDidMount() {
         this.getEncheres();
+        let user=
+    JSON.parse(localStorage.getItem('user-info'));
+    console.log(user);
+  
     }
     async  getEncheres() {
         try {    
-        const  encheres =await Api.get(`/encheresPlanifiees`)
+        const  encheres =await Api.get(`/api/encheresPlanifiees`)
         // const users =await   axios.get(`https://127.0.0.1:8000/users`)
         this.setState({ encheres: encheres.data, loading: false})
         

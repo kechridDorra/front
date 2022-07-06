@@ -9,9 +9,10 @@ let Api = () => {
   api.interceptors.request.use((request) => { 
     return request;
   });
+
   axios.interceptors.request.use
         (async (config) =>
-    { const token = await localStorage.getItem('token').session.token; 
+    { const token = await Api.localStorage.getItem('token').session.token; 
     if (token) {
       config.headers.Authorization = 'Bearer  ' + token;
     }; return config; });

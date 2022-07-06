@@ -57,7 +57,7 @@ function NavbarUser(props)
                           <li class="nav-item">
                           <NavDropdown title="Les encheres" >
                                     <NavDropdown.Item href='/encheresEnCours'> Enchere en cours</NavDropdown.Item>
-                                    <NavDropdown.Item href='/encheresPlanifiees"'>Enchere planifiées</NavDropdown.Item>
+                                    <NavDropdown.Item href='/encheresPlanifiees'>Enchere planifiées</NavDropdown.Item>
                                     <NavDropdown.Item href='/encheresTerminees'>Enchere terminées</NavDropdown.Item>  
                                     
                                 </NavDropdown>
@@ -66,7 +66,7 @@ function NavbarUser(props)
                               
                               <NavDropdown title="Espace Vendeur" >
                                     <NavDropdown.Item href='/InscriVendeur'>Inscription vendeur</NavDropdown.Item>
-                                    <NavDropdown.Item href='/creerEnchere"'>Creation Enchére</NavDropdown.Item>
+                                    <NavDropdown.Item href='/creerEnchere'>Creation Enchére</NavDropdown.Item>
                                     <NavDropdown.Item href='/'>Liste des encheres</NavDropdown.Item>  
                                     
                                 </NavDropdown>
@@ -79,7 +79,7 @@ function NavbarUser(props)
                         
                               {localStorage.getItem('user-info')?
                                  <NavDropdown title={user.email}>
-    <NavDropdown.Item onClick={logOut}>Profil</NavDropdown.Item>
+    <NavDropdown.Item href="/profil">Profil</NavDropdown.Item>
     <NavDropdown.Item onClick={logOut}>Déconnexion</NavDropdown.Item>
 
                                 </NavDropdown>
