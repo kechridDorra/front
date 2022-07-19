@@ -22,7 +22,7 @@ body, ul, li, p, a, label, input, div {
   /* General */
   .logo { font-weight: 500 !important;}
   .text-warning {  color: #ede861 !important;}
-  .text-muted { color: #bcbcbc !important;}
+  .text-muted { color: #a4a2a2 !important;}
   .text-success { color: #59ab6e !important;}
   .text-light { color: #cfd6e1 !important;}
   .bg-dark { background-color: #212934 !important;}
@@ -40,8 +40,7 @@ body, ul, li, p, a, label, input, div {
   }
 
   /* Hero Carousel */
-  #template-mo-jassa-hero-carousel { background: #efefef!important;}
-
+  #template-mo-jassa-hero-carousel { background: #efefef !important;}
   /* Accordion */
   .templatemo-accordion a { color: #000;}
   .templatemo-accordion a:hover { color: #333d4a;}
@@ -114,6 +113,9 @@ body, ul, li, p, a, label, input, div {
   .product-wap .product-color-dot {
     width: 6px;
     height: 6px;
+  }
+  .prixInitial{
+    color:#f71515;
   }
   
   @media (min-width: 576px) {

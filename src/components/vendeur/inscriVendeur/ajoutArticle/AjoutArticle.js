@@ -4,8 +4,8 @@ import React, { Component }  from 'react';
 //Bootstrap
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.min.js';
-import NavbarUser from '../../user/navbarUser/NavbarUser';
-import Footer from '../../Footer';
+import NavbarUser from '../../../user/navbarUser/NavbarUser';
+import Footer from '../../../Footer';
 const AjoutArticle = () => {
   let user = JSON.parse(localStorage.getItem('user-info'));
     function AjoutImage(props) {

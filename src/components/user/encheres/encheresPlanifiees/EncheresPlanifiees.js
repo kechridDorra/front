@@ -4,12 +4,11 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import React, {Component} from 'react';
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import Footer from "../../Footer";
-import Navbar from "../../Navbar";
+import Footer from '../../../Footer';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {useState, useEffect} from "react";
-import Api from '../../../services/Api';
-import NavbarUser from '../../user/navbarUser/NavbarUser';
+import Api from '../../../../services/Api';
+import NavbarUser from '../../navbarUser/NavbarUser';
 class EncheresPlanifiees extends Component {
     constructor() {
         super();
@@ -25,7 +24,7 @@ class EncheresPlanifiees extends Component {
     }
     async  getEncheres() {
         try {    
-        const  encheres =await Api.get(`/api/encheresPlanifiees`)
+        const  encheres =await Api.get(`/encheresPlanifiees`)
         // const users =await   axios.get(`https://127.0.0.1:8000/users`)
         this.setState({ encheres: encheres.data, loading: false})
         
@@ -67,20 +66,28 @@ class EncheresPlanifiees extends Component {
              class="card-img-top" alt="..." />
             </a>
             <div class="card-body">
-                <ul class="list-unstyled d-flex justify-content-between">
-                    <li>
-                        <i class="text-warning fa fa-star"></i>
-                        <i class="text-warning fa fa-star"></i>
-                        <i class="text-warning fa fa-star"></i>
-                        <i class="text-muted fa fa-star"></i>
-                        <i class="text-muted fa fa-star"></i>
-                    </li>
-                    <li class="card-text-prix"> <strong> {enchere.articles.map(el=>el.prix_depart)}</strong> TND  </li>
-                </ul>
-                <a href="#" class="h2 text-decoration-none text-dark">{enchere.articles.map(el=>el.titre)}</a>
-                <p class="card-text-description">
-               <strong> {enchere.description_ench}</strong>
-                </p>
+                        <ul class="list-unstyled d-flex justify-content-between">
+                          <li className="prixInitial">
+                            <strong>
+                              {" "}
+                             
+                                {" "}
+                                {enchere.articles.map(
+                                  (el) => el.prix_initial
+                                )}{" "}
+                                TND{" "}
+                              
+                            </strong>{" "}
+                          </li>
+                          
+                        </ul>  
+                        <p class="h3 text-decoration-none text-dark">
+                        <strong>{enchere.articles.map((el) => el.titre)}</strong>
+                      </p>
+                      <p class="card-text-description">
+                         {enchere.description_ench} :
+                        </p>
+                      {enchere.articles.map((el) => el.description)}
                 <p class="card-text-date-debut">Commence le&nbsp;  
                 <strong> {enchere.date_debut.substring(0, 10)}</strong> 
                 &nbsp;à&nbsp;<strong>{enchere.date_debut.substring(11, 19)}</strong>

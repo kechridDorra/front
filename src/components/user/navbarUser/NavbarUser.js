@@ -5,6 +5,7 @@ import jwtDecode from "jwt-decode";
 import axios from 'axios'
 import { Navbar, Nav, NavDropdown } from 'react-bootstrap';
 import { useNavigate } from "react-router-dom";
+import { get } from "../../../services/http";
 function NavbarUser(props)
 {
     const navigate = useNavigate();
@@ -14,6 +15,23 @@ function NavbarUser(props)
         navigate('/login');
  
     }
+    const userInfo = localStorage.getItem("user-info");
+
+    async function getUserDetails() {
+      try {
+        const parsedUser = JSON.parse(userInfo);
+        const userApiUrl = `user/mail/${parsedUser.email}`;
+        const res = await get(userApiUrl);
+        console.log("user",res);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  
+    useEffect(() => {
+      getUserDetails();
+    }, [userInfo]);
+  
     return( 
         <>
       
@@ -41,7 +59,7 @@ function NavbarUser(props)
           <div class="container d-flex justify-content-between align-items-center">
 
               <a class="navbar-brand text-success logo h1 align-self-center" href="/">
-                  Enchere
+                  TunEnchere
               </a>
 
               <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#templatemo_main_nav" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -51,11 +69,11 @@ function NavbarUser(props)
               <div class="align-self-center collapse navbar-collapse flex-fill  d-lg-flex justify-content-lg-between" id="templatemo_main_nav">
                   <div class="flex-fill">
                       <ul class="nav navbar-nav d-flex justify-content-between mx-lg-auto">
-                          <li class="nav-item">
-                          <a class="nav-link" href="/">Accueil</a>
+                         <li class="nav-item">
+                          <a class="nav-link" href="/accueil">Accueil</a>
                           </li>
                           <li class="nav-item">
-                          <NavDropdown title="Les encheres" >
+                          <NavDropdown title="Encheres" >
                                     <NavDropdown.Item href='/encheresEnCours'> Enchere en cours</NavDropdown.Item>
                                     <NavDropdown.Item href='/encheresPlanifiees'>Enchere planifiées</NavDropdown.Item>
                                     <NavDropdown.Item href='/encheresTerminees'>Enchere terminées</NavDropdown.Item>  
@@ -67,12 +85,21 @@ function NavbarUser(props)
                               <NavDropdown title="Espace Vendeur" >
                                     <NavDropdown.Item href='/InscriVendeur'>Inscription vendeur</NavDropdown.Item>
                                     <NavDropdown.Item href='/creerEnchere'>Creation Enchére</NavDropdown.Item>
-                                    <NavDropdown.Item href='/'>Liste des encheres</NavDropdown.Item>  
+                                    <NavDropdown.Item href='/'>Mes Enchères</NavDropdown.Item>  
+                                    <NavDropdown.Item href='/reponseAppel'>Répondre aux appels Offres</NavDropdown.Item>  
                                     
                                 </NavDropdown>
                           </li>
                           <li class="nav-item">
-                              <a class="nav-link" href="#">Appel d'offre</a>
+                          <NavDropdown title="Appel Offre" >
+                                    <NavDropdown.Item href='/appelOffresDispo'>Appels d'offre Disponibles</NavDropdown.Item> 
+                                    <NavDropdown.Item href='/appelOffresExp'>Appels d'offre Expirés</NavDropdown.Item> 
+                                    <NavDropdown.Item href='/ajoutAppelOffre'>Ajout Appel ffre</NavDropdown.Item>
+                                    <NavDropdown.Item href='/mesAppelOffres'>Mes Appels d'offre</NavDropdown.Item>
+                                    
+                                    
+                                </NavDropdown>
+                        
                             
                           </li>
                           <li class="nav-item">

@@ -44,7 +44,7 @@ class Cat9 extends Component {
                  <nav aria-label="breadcrumb">
                    <ol class="breadcrumb bg-transparent pl-0 mb-0">
                      <li class="breadcrumb-item"><a href="/"> <strong>TunEnchere </strong></a></li>
-                     <li class="breadcrumb-item"><a href="/categorie1">Catégorie :  <strong> {categorie9.nom}</strong></a></li>
+                     <li class="breadcrumb-item"><a href="/categorie1">Catégorie : <strong> {categorie9.nom}</strong></a></li>
                   </ol>
                  </nav> 
                  <br></br>    

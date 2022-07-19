@@ -22,7 +22,6 @@ const Inscription = () => {
     codeSecurite:"",
     moisExp:"",
     anneeExp:"",
-    confirmPassword: ""
   });
   const navigate = useNavigate();
   function handleForm(e)

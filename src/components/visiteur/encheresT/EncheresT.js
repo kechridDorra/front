@@ -1,4 +1,4 @@
-import '../../enchere/encheresTerminees/EncheresTerminees.css';
+import './EnchereT.css';
 import bootstrap from "bootstrap";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import React, {Component} from 'react';
