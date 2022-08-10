@@ -19,7 +19,6 @@ const InscriVendeur = () => {
       console.log("form", state1)
       const userApiUrl = `/profilVendeur`;
       const res = await post(userApiUrl,state1);
-      
           console.log(res);
           navigate('/accueil')
        
@@ -81,7 +80,7 @@ const InscriVendeur = () => {
                     Entreprise
                   </label>
                   <input type="text"
-                    required
+                  
                     id="nomEntreprise"
                     class="form-control "
                     placeholder="Entrez votre entreprise"

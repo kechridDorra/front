@@ -114,9 +114,6 @@ body, ul, li, p, a, label, input, div {
     width: 6px;
     height: 6px;
   }
-  .prixInitial{
-    color:#f71515;
-  }
   
   @media (min-width: 576px) {
     .tempaltemo-carousel .h1 { font-size: 1em !important;}
@@ -136,3 +133,12 @@ body, ul, li, p, a, label, input, div {
   
   /* Extra large devices (large desktops, 1200px and up)*/
   @media (min-width: 1200px) {}
+  .prixDepart{
+    color:#f71515;
+  }
+  .prixDepart{
+    color:#f71515;
+  }
+  .prixVente{
+    color:#56ae6c;
+  }

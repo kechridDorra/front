@@ -60,21 +60,12 @@ class Cat4 extends Component {
                 <div class="col-12 col-md-4 mb-4" key={articles.id}>
     
         <div class="card h-100">
-        <a href="/detailEnch">
+        <a href="/login">
              <center></center><img src= { pathImg + `${articles.images.map(el=>el.url)}`  }
              class="card-img-top" alt="..." />
             </a>
             <div class="card-body">
-                <ul class="list-unstyled d-flex justify-content-between">
-                    <li>
-                        <i class="text-warning fa fa-star"></i>
-                        <i class="text-warning fa fa-star"></i>
-                        <i class="text-warning fa fa-star"></i>
-                        <i class="text-muted fa fa-star"></i>
-                        <i class="text-muted fa fa-star"></i>
-                    </li>
-                    <li class="card-text-prix"> <strong> {articles.prix_depart} </strong> TND  </li>
-                </ul>
+         
                 <a href="#" class="h2 text-decoration-none text-dark">{articles.titre}</a>
                 <p class="card-text-description">
                <strong>{articles.description} </strong>

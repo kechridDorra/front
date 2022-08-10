@@ -2,30 +2,31 @@ import Footer from "../../Footer";
 import Navbar from "../../Navbar";
 import Api from "../../../services/Api";
 import React, { Component } from "react";
-class AppelOffres extends Component {
+import AppelOffres from "../../user/appelOffre/appelOffres/AppelOffres";
+class Appels extends Component {
   constructor() {
     super();
-    this.state = { appelOffres: [], loading: true };
+    this.state = { appels: [], loading: true };
   }
   componentDidMount() {
-    this.getAppelsOffres();
+    this.getAppels();
   }
-  async getAppelsOffres() {
+  async getAppels() {
     try {
-      const appelOffres = await Api.get(`/appelOffres`);
+      const appels = await Api.get(`/appelsOffres`);
 
-      this.setState({ appelOffres: appelOffres.data, loading: false });
+      this.setState({ appels: appels.data, loading: false });
     } catch (error) {
       console.log(error);
     }
   }
   render() {
-    const { loading, appelOffres } = this.state;
+    const { loading, appels } = this.state;
     const pathImg = "http://localhost/pfe_backend/public/uploads/";
     return (
       <>
         <Navbar />
-       <section class="bg-light">
+        <section class="bg-light">
           <div class="container py-5">
             <nav aria-label="breadcrumb">
               <ol class="breadcrumb bg-transparent pl-0 mb-0">
@@ -48,33 +49,51 @@ class AppelOffres extends Component {
               <div class="row text-center py-3"></div>
             ) : (
               <div class={"row"}>
-                {this.state.appelOffres.map((appelOffre) => (
-                  <div class="row" key={appelOffres.id}>
+                {this.state.appels.map((appel) => (
+                  <div class="col-10 col-md-4 mb-4" key={appels.id}>
                     <ul class="list-unstyled">
                       <li>
-                        <div class="card">
-                          <div class="card-header d-flex justify-content-between P-1">
+                        <div class="card h-100">
+                          <center></center>
+                          <img
+                            src={pathImg + `${appel.image}`}
+                            class="card-img-top"
+                            alt="..."
+                          />
+                          
+                             <div class="card-header d-flex justify-content-between P-1">
                             <p class="fw-bold mb-0">
-                              {appelOffre.user.nom} {appelOffre.user.prenom}
+                           {" "}  {" "}
                             </p>
                             <p>
-                              <i class="fa fa-phone"></i> {}
-                              {appelOffre.user.telephone} {}
-                              <i class="fa fa-envelope"> </i> {}
-                              {}
-                              {appelOffre.user.email}
+                              <i class="fa fa-phone"></i> 
+                              {""} {appel.user.telephone}{" "}
+                              <i class="fa fa-envelope"> </i> 
+                              {""} {appel.user.email} {" "}
                             </p>
                           </div>
+                          
                           <div class="card-body">
-                            <p class="mb-0">
-                              <strong> Constexte: </strong>
-                              {appelOffre.contexte}{" "}
+                          <p class="mb-0">
+                              <strong> Nom Demandeur: </strong>
+                              {appel.user.nom}{" "}
                             </p>
-                          </div>
-                          <div class="card-body">
+                          <p class="mb-0">
+                              <strong> Prénom Demandeur: </strong>
+                              {appel.user.prenom}{" "}
+                            </p>
+                          <p class="mb-0">
+                              <strong> Titre: </strong>
+                              {appel.titre}{" "}
+                            </p>
+
                             <p class="mb-0">
-                              <strong> date d'expiration </strong>
-                              {appelOffre.date_exp.substring(0, 10)}{" "}
+                              <strong> Descirption: </strong>
+                              {appel.description}{" "}
+                            </p>
+                            <p class="mb-0">
+                              <strong> Prix: </strong>
+                              {appel.prix}{" "}
                             </p>
                           </div>
                         </div>
@@ -84,7 +103,7 @@ class AppelOffres extends Component {
                           <div class="card-body">
                             <p class="mb-0">
                               <strong>Réponse: </strong>
-                              {appelOffre.propositions.map((el) => el.reponse)}
+                              {appel.propositions.map((el) => el.reponse)}
                             </p>
                           </div>
                         </div>
@@ -95,10 +114,10 @@ class AppelOffres extends Component {
               </div>
             )}
           </div>
-                </section>
+        </section>
         <Footer />
       </>
     );
   }
 }
-export default AppelOffres;
+export default Appels;

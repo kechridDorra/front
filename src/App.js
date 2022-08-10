@@ -21,24 +21,33 @@ import Cat6 from './components/visiteur/categorie/cat6/Cat6';
 import Cat7 from './components/visiteur/categorie/cat7/Cat7';
 import Cat8 from './components/visiteur/categorie/cat8/Cat8';
 import Cat9 from './components/visiteur/categorie/cat9/Cat9';
+import Appels from './components/visiteur/appels/Appels';
 //user
 import Profil from './components/user/profil/Profil';
 import ModifierProfil from './components/user/profil/modifierProfil/ModifierProfil';
 import Accueil from './components/Accueil';
 import EncheresPlanifiees from './components/user/encheres/encheresPlanifiees/EncheresPlanifiees';
+import ParticipantsPlanifiees from './components/user/encheres/encheresPlanifiees/participantsPlanifiees/ParticpationsPlanifiees';
 import EncheresEnCours from './components/user/encheres/encheresEnCours/EncheresEnCours';
+import ParticipantsEnCours from './components/user/encheres/encheresEnCours/participantsEnCours/ParticipantsEnCours';
 import EncheresTerminees from './components/user/encheres/encheresTerminees/EncheresTerminees';
-import CreerEnchere from './components/vendeur/creerEnchere/CreerEnchere';
+import ParticipantsTerminees from './components/user/encheres/encheresTerminees/participantsTerminees/ParticipantsTerminees';
+import AppelOffres from './components/user/appelOffre/appelOffres/AppelOffres';
+import RejointEnchereEC from './components/user/encheres/rejointEnchereEC/RejointEnchereEC';
+
 //import AjoutArticle from './components/vendeur/ajoutArticle/AjoutArticle';
 import EncheresT from './components/visiteur/encheresT/EncheresT';
-import AppelOffres from './components/visiteur/appelOffres/AppelOffres';
-import AppelOffresDispo from './components/user/appelOffre/appelOffresDispo/AppelOffresDispo';
-import AppelOffresExp from './components/user/appelOffre/appelOffresExp/AppelOffresExp';
 import MesAppelOffres from './components/user/appelOffre/mesAppelOffres/MesAppelOffres';
 import AjoutAppelOffre from './components/user/appelOffre/ajoutAppelOffre/AjoutAppelOffre';
 //vendeur
 import InscriVendeur from './components/vendeur/inscriVendeur/InscriVendeur';
+import AjoutArticle from './components/vendeur/ajoutArticle/AjoutArticle';
 import ReponseAppel from './components/vendeur/reponseAppel/ReponseVendeur';
+import CreerEnchere from './components/vendeur/creerEnchere/CreerEnchere';
+import MesEncheres from './components/vendeur/mesEncheres/MesEncheres';
+import MesParticipants from './components/vendeur/mesEncheres/mesParticipants/MesParticipants';
+
+
 export default function App() {
   return (
   <>  
@@ -62,25 +71,31 @@ export default function App() {
         <Route path="/categorie8" element={<Cat8/>} />
         <Route path="/categorie9" element={<Cat9/>} />
         <Route path="/encheresT" element={<EncheresT/>} />
-        <Route path="/appelOffres" element={<AppelOffres/>}/>
+        <Route path="/appels" element={<Appels/>}/>
   
         //user
         <Route exact path="/accueil" element={<AccueilUser/>} />
         <Route path="/profil" element={<Profil/>} />
         <Route path="/modifierProfil/:id" element={<ModifierProfil/>} />
         <Route path="/encheresPlanifiees" element={<EncheresPlanifiees/>} />
+        <Route path="/participantsPlanifiees/:enchere" element={<ParticipantsPlanifiees/>} />
         <Route path="/encheresTerminees" element={<EncheresTerminees/>} />
+        <Route path="/participantsTerminees/:enchere" element={<ParticipantsTerminees/>} />
         <Route path="/encheresEnCours" element={<EncheresEnCours/>} />
-        <Route path="/appelOffresDispo" element={<AppelOffresDispo/>}/>
-        <Route path="/appelOffresExp" element={<AppelOffresExp/>}/>
+        <Route path="/participantsEnCours/:enchere" element={<ParticipantsEnCours/>} />
+        <Route path="/appelOffres" element={<AppelOffres/>}/>
         <Route path="/mesAppelOffres" element={<MesAppelOffres/>}/>
         <Route path="/ajoutAppelOffre" element={<AjoutAppelOffre/>}/>
+        <Route path="/rejointEnchereEC/:enchere" element={<RejointEnchereEC/>}/>
 
         //vendeur
         <Route path="/inscriVendeur" element={<InscriVendeur/>} />
-        <Route path="/creerEnchere" element={<CreerEnchere/>} />
+        <Route path="/creerEnchere/:profil_vendeur" element={<CreerEnchere/>} />
+        <Route path="/ajoutArticle" element={<AjoutArticle/>} />
         <Route path="/reponseAppel" element={<ReponseAppel/>} />
-       /{/* <Route path="/ajoutArticle" element={<AjoutArticle/>} />*/}
+        <Route path="/ajoutArticle/:enchere" element={<AjoutArticle/>} />
+        <Route path="/mesEncheres" element={<MesEncheres/>} />
+        <Route path="/MesParticipants/:enchere" element={<MesParticipants/>} />
         //visiteur
         
       </Routes>

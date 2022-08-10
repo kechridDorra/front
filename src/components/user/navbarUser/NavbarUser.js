@@ -15,6 +15,7 @@ function NavbarUser(props)
         navigate('/login');
  
     }
+    const [vendeur,setVendeur] = useState();
     const userInfo = localStorage.getItem("user-info");
 
     async function getUserDetails() {
@@ -23,15 +24,23 @@ function NavbarUser(props)
         const userApiUrl = `user/mail/${parsedUser.email}`;
         const res = await get(userApiUrl);
         console.log("user",res);
+        setVendeur(res.data[0].profil_vendeur);
       } catch (error) {
         console.log(error);
       }
     }
-  
+
     useEffect(() => {
       getUserDetails();
     }, [userInfo]);
-  
+
+    function vendeurId(profil_vendeur) {
+        navigate(`/creerEnchere/${profil_vendeur}`, {
+          state: {
+            id: profil_vendeur,
+          },
+        });
+      }
     return( 
         <>
       
@@ -84,8 +93,10 @@ function NavbarUser(props)
                               
                               <NavDropdown title="Espace Vendeur" >
                                     <NavDropdown.Item href='/InscriVendeur'>Inscription vendeur</NavDropdown.Item>
-                                    <NavDropdown.Item href='/creerEnchere'>Creation Enchére</NavDropdown.Item>
-                                    <NavDropdown.Item href='/'>Mes Enchères</NavDropdown.Item>  
+                                    <NavDropdown.Item  onClick={() => {
+                      vendeurId(vendeur.id);
+                    }}>Creation Enchére</NavDropdown.Item>
+                                    <NavDropdown.Item href='/mesEncheres'>Mes Enchères</NavDropdown.Item>  
                                     <NavDropdown.Item href='/reponseAppel'>Répondre aux appels Offres</NavDropdown.Item>  
                                     
                                 </NavDropdown>
@@ -94,7 +105,7 @@ function NavbarUser(props)
                           <NavDropdown title="Appel Offre" >
                                     <NavDropdown.Item href='/appelOffresDispo'>Appels d'offre Disponibles</NavDropdown.Item> 
                                     <NavDropdown.Item href='/appelOffresExp'>Appels d'offre Expirés</NavDropdown.Item> 
-                                    <NavDropdown.Item href='/ajoutAppelOffre'>Ajout Appel ffre</NavDropdown.Item>
+                                    <NavDropdown.Item href='/ajoutAppelOffre'>Ajout Appel offre</NavDropdown.Item>
                                     <NavDropdown.Item href='/mesAppelOffres'>Mes Appels d'offre</NavDropdown.Item>
                                     
                                     

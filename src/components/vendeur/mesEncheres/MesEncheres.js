@@ -1,50 +1,52 @@
-import "./EncheresPlanifiees.css";
+import "./MesEncheres.css";
 import bootstrap from "bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import React, { Component } from "react";
 import axios from "axios";
-import { useNavigate , useParams} from "react-router-dom";
-import Footer from "../../../Footer";
+import { useNavigate } from "react-router-dom";
+import Footer from "../../Footer";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useState, useEffect } from "react";
-import { get } from "../../../../services/http";
-import { post } from "../../../../services/http";
-import NavbarUser from "../../navbarUser/NavbarUser";
-const EncheresPlanifiees= () => {
-  const { enchere } = useParams();
+import { get } from "../../../services/http";
+import {remove} from "../../../services/http";
+import NavbarUser from "../../user/navbarUser/NavbarUser";
+const MesEncheres= () => {
   const userInfo = localStorage.getItem("user-info");
-  const [encheres, setEncheres] = useState({});
-  const [rejoindre, setRejoindre] = useState({});
+  const [enchere, setEnchere] = useState({});
   const navigate = useNavigate();
-  async function  EncheresPlanifiees() {
+  async function MesEncheres() {
     try {
-      const userApiUrl = `/encheresPlanifiees`;
+      const userApiUrl = `/mesEncheres`;
       const res = await get(userApiUrl);
-      console.log("planifiees" ,res);
-      setEncheres(res.data);
+      console.log("mesEncheres", res);
+      setEnchere(res.data);
     } catch (error) {
       console.log(error);
     }
   }
+
+  const removeEnchere = async (enchere) => {
+    try {
+        const encheredelete =(`/enchere/${enchere}`)
+      const res = await remove (encheredelete);
+      console.log('Item successfully deleted.')
+    } catch (error) {
+      alert(error)
+    }
+  }
   useEffect(() => {
-    EncheresPlanifiees();
+    MesEncheres();
   }, [userInfo]);
-  function ParticipantsPlanifiees(enchereId) {
-    navigate(`/participantsPlanifiees/${enchereId}`, {
+
+  function MesParticipants(enchereId) {
+    navigate(`/mesParticipants/${enchereId}`, {
       state: {
         id: enchereId,
       },
     });
   }
-   function Rejoindre(enchereId)
-   {
-      const userApiUrl = `/rejoindre/${enchereId}`;
-      const res =post(userApiUrl,rejoindre);
-          console.log("ggg",res);
-          setRejoindre(enchere.id);
-        navigate(`/ParticipantsPlanifiees/${enchereId}`)
-    }
-   
+
+  
   const pathImg = "http://localhost/pfe_backend/public/uploads/";
 
     return (
@@ -62,16 +64,16 @@ const EncheresPlanifiees= () => {
               </li>
               <li class="breadcrumb-item">
                 <a href="/encheres">
-                  <strong>Les encheres Planifiées </strong>
+                  <strong>Mes enchéres</strong>
                 </a>
               </li>
             </ol>
           </nav>
           <br></br>
           <div class="col-lg-6 m-auto"></div>
-          {encheres && encheres.length > 0 ?  (
+          {enchere && enchere.length > 0 ?  (
             <div class={"row"}>
-              {encheres.map((ench) => (
+              {enchere.map((ench) => (
                 <div class="col-10 col-md-4 mb-4" key={ench.id}>
                   <div class="card h-100">
                     <center></center>
@@ -102,12 +104,10 @@ const EncheresPlanifiees= () => {
                         <p class="h3 text-decoration-none text-dark">
                           <strong>
                             {ench.articles.map((el) => el.titre)}
-                        
                           </strong>
                         </p>
-                       
                         <p class="card-text-description">
-                        {ench.description_ench} :
+                          {ench.description_ench} :
                         </p>
                         {ench.articles.map((el) => el.description)}
                         <p class="card-text-date-debut">
@@ -128,22 +128,32 @@ const EncheresPlanifiees= () => {
                           <strong>{ench.date_fin.substring(11, 19)} </strong>
                         </p>
                         <p class="text-center">
-                        <a class="btn btn-success"
-                         onClick={() => {
-                          Rejoindre(ench.id);
-                        }}
-                        >Rejoindre </a>{" "}
-                       
-                       <a
+                        <p className="gagnant ">
+                          
+                           Le gagnant est: 
+
+                          <strong> dorra </strong>
+                        </p>
+                          <div class="text-center pt-3 text-muted">
+                          <a
                           class="btn btn-secondary"
                           onClick={() => {
-                            ParticipantsPlanifiees(ench.id);
+                            MesParticipants(ench.id);
                           }}
                         >
                           Liste des Participants
                         </a>
-                        
-                      </p>
+                          </div>
+                        </p>
+                       <center>
+                            <p> 
+                            <button type="button" class="btn btn-warning">Modifier</button>
+                            {" "}
+                            <button type="button" class="btn btn-danger"
+                            onClick={() => removeEnchere(ench.id)}>
+                            Supprimer</button>
+                             </p>
+                      </center>
                       </div>
                   </div>
                 </div>
@@ -157,4 +167,4 @@ const EncheresPlanifiees= () => {
     </>
   );
 }
-export default EncheresPlanifiees;
+export default MesEncheres;

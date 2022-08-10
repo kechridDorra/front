@@ -11,22 +11,14 @@ import { useState, useEffect } from "react";
 import Api from "../../../services/Api";
 function Encheres() {
   const [encheres, setEncheres] = useState();
-
   const navigate = useNavigate();
-
-  function showDetails(encherId) {
-    navigate(`/detailEnch/${encherId}`, {
-      state: {
-        id: encherId,
-      },
-    });
-  }
+ 
 
   const pathImg = "http://localhost/pfe_backend/public/uploads/";
 
   async function getEncheres() {
     try {
-      const encheres = await Api.get(`/encheres`);
+      const encheres = await Api.get(`/encheresT`);
       // const users =await   axios.get(`https://127.0.0.1:8000/users`)
       setEncheres(encheres.data);
     } catch (error) {
@@ -64,39 +56,45 @@ function Encheres() {
             <div class={"row"}>
               {encheres.map((enchere) => (
                 <div class="col-10 col-md-4 mb-4" key={enchere.id}>
-                  <div
-                    class="card h-100"
-                    onClick={() => {
-                      showDetails(enchere.id);
-                    }}
-                  >
+                 <div class="card h-100">
+        <a href="/login">
                     <center></center>
                     <img
                       src={
                         pathImg +
-                        `${enchere.articles.map((el) => el.images[0].url)}`
+                        `${enchere.articles.map((el) => el.image)}`
                       }
                       class="card-img-top"
                       alt="..."
-                    />
+                    /></a>
                     <div class="card-body">
-                      <ul class="list-unstyled d-flex justify-content-between">
-                        <li>
-                          <i class="text-warning fa fa-star"></i>
-                          <i class="text-warning fa fa-star"></i>
-                          <i class="text-warning fa fa-star"></i>
-                          <i class="text-muted fa fa-star"></i>
-                          <i class="text-muted fa fa-star"></i>
-                        </li>
-                        <li class="card-text-prix">
-                          {" "}
-                          <strong>
-                            {" "}
-                            <del>{enchere.articles.map((el) => el.prix_initial)}</del>
-                          </strong>{" "}
-                          TND{" "}
-                        </li>
-                      </ul>
+                    <ul class="list-unstyled d-flex justify-content-between">
+                          <li className="prix_depart">
+                            <strong>
+                              {" "}
+                              <del>
+                              <dl>
+                               
+                                {" "}
+                                {enchere.prix_depart
+                                }{" "}
+                               <sup> DT{" "}</sup>
+                               </dl></del>
+                               
+                            </strong>{" "}
+                      
+                          </li>
+                          <li className="prix_vente">
+                            <strong>
+                              {" "}
+                              <dl>
+                                {" "}
+                                {enchere.prix_vente
+                                }{" "}
+                               <sup> DT{" "}</sup>
+                               </dl>
+                            </strong>{" "}</li>
+                        </ul>
                       
                       <p class="h3 text-decoration-none text-dark">
                         <strong>{enchere.articles.map((el) => el.titre)}</strong>

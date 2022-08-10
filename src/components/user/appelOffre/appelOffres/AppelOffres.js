@@ -1,6 +1,5 @@
 import bootstrap from "bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
-
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import jwtDecode from "jwt-decode";
@@ -10,12 +9,12 @@ import NavbarUser from "../../navbarUser/NavbarUser";
 import Footer from "../../../Footer";
 import { get } from "../../../../services/http";
 
-const AppelOffresDispo = () => {
+const AppelOffres = () => {
   const userInfo = localStorage.getItem("user-info");
   const [appel, setAppel] = useState({});
   async function AppelOffresDispo() {
     try {
-      const userApiUrl = `/appelOffresDispo`;
+      const userApiUrl = `/appelOffres`;
       const res = await get(userApiUrl);
       console.log("dispo", res);
       setAppel(res.data);
@@ -82,15 +81,17 @@ const AppelOffresDispo = () => {
                       </li>
                       <li class="d-flex justify-content-between mb-4">
                         <div class="card w-100">
-                        <div class="card-body">
-                          <input
-                            type="text"
-                            required
-                            id="nom"
-                            class="form-control "
-                            placeholder="Répondre à cette appel d'offre"
-                          />
-                        </div>
+                          <div class="card-body">
+                            <p class="mb-0">
+                              <strong>Réponse: </strong>
+                              <p>{dispo.propositions.map( (el) => el.reponse)}{" "}</p>
+                          
+                            </p>
+                           
+                            
+                            
+                         
+                         </div>
                         </div>
                       </li>
                     </ul>
@@ -106,4 +107,4 @@ const AppelOffresDispo = () => {
   )
 };
 
-export default AppelOffresDispo;
+export default AppelOffres;

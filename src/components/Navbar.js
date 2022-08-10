@@ -142,7 +142,7 @@ function Navbar(props) {
                   </NavDropdown>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="/appelOffres">
+                  <a class="nav-link" href="/appels">
                     Appel d'offres
                   </a>
                 </li>
