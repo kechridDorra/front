@@ -12,29 +12,30 @@ import Encheres from "../encheres/Encheres";
 import e from "cors";
 import { get } from "../../../services/http";
 const DetailEnch = () => {
-  const { id } = useParams();
-  const [enchere, SetEnchere] = useState({});
-  const [articles, setArticles] = useState([]);
-  const [image, setImage] = useState();
+  const { enchere } = useParams();
+  const [detail, SetDetail] = useState({});
+
+  //const [image, setImage] = useState();
 
   const pathImg = "http://localhost/pfe_backend/public/uploads/";
 
-  async function getDetailsEncher() {
+  async function getDetailEnchere() {
     try {
-      const details = await Api.get(`/enchere/${id}`);
-      console.log(details);
-      SetEnchere(details.data);
-      setArticles(details.data.articles);
-      setImage(details.data.articles[0].images[0])
+      const res = await Api.get(`/enchere/${enchere}`);
+
+      SetDetail(res.data);
+      console.log("hh", detail);
+
+  
     } catch (error) {
       console.error(error);
     }
   }
 
   useEffect(() => {
-    console.log(id);
-    getDetailsEncher();
-  }, [id]);
+    console.log(detail.id);
+    getDetailEnchere();
+  }, [enchere]);
 
   return (
     <>
@@ -43,17 +44,14 @@ const DetailEnch = () => {
         <div class="container py-5" enctype="multipart/form-data">
           <div class="row">
             <div class="col-md-6 position-relative mb-3 mb-md-0">
-              <div class="border p-2 gallery-item"></div>
+            
 
               <a
-                href="http://localhost/pfe_backend/public/uploads/22f497e4784e8c9ada53bdeaa060a395.jpeg"
+                href={pathImg +`${detail.image}`}
                 data-effect="mfp-zoom-in"
                 title=""
               >
-                <img
-                  src={image ? `${pathImg}${image.url}`:"" }
-                  class="img-fluid"
-                />
+                <img src={pathImg + `${detail.image}`} class="img-fluid" />
               </a>
             </div>
 
@@ -81,16 +79,16 @@ const DetailEnch = () => {
                   </ol>
                 </nav>
               </div>
-              <h1> {articles[0].titre} </h1>
+              <h1> {detail.nom_article} </h1>
               <span class="ml-2 text-danger font-weight-bold h4 mt-2">
                 {" "}
-                <del> {articles[0].prix_initial} TND</del>
+                <del> {detail.prix_depart} TND</del>
               </span>
               <p>
                 {" "}
-                <strong>{enchere.description_ench} : </strong>
+                <strong>{detail.description_ench} : </strong>
                 <br></br>
-                {articles.map((el) => el.description)}
+                {detail.description_article}
               </p>
               <div class="alert alert-warning mb-2 text-center h5 font-weight-bold">
                 {" "}
@@ -98,14 +96,17 @@ const DetailEnch = () => {
                   class="fa fa-clock-o fa-2x align-middle mr-1"
                   aria-hidden="true"
                 ></i>
-                Enchère debut le {enchere.date_debut}
+                Enchère debut le {detail.date_debut.substring(0, 10)}{""}
+                à {""}{detail.date_debut.substring(11, 19)}
               </div>
               <div class="alert alert-danger font-weight-bold rounded text-center mb-2">
                 <i
                   class="fa fa-clock-o fa-2x align-middle mr-1"
                   aria-hidden="true"
                 ></i>
-                Enchère termine le {enchere.date_fin}
+                Enchère termine le {detail.date_fin.substring(0, 10)}{" "}
+                à {""}
+                {detail.date_debut.substring(11, 19)}
               </div>
               <div class="alert alert-success font-weight-bold rounded text-center mb-2">
                 <i
@@ -113,12 +114,13 @@ const DetailEnch = () => {
                   aria-hidden="true"
                 ></i>
                 &nbsp; Prix de vente
-                <span>&nbsp;{articles.map((el) => el.prix_vente)} TND</span>
+                <span>&nbsp;{detail.prix_vente} <sup> DT{" "}</sup></span>
               </div>
             </div>
           </div>
         </div>
       </section>
+   
       <Footer />
     </>
   );

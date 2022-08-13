@@ -15,10 +15,10 @@ const AjoutArticle = () => {
   const navigate=useNavigate();
   const { enchere} = useParams();
   const [article,setArticle]=useState({
-    titre: "",
+    nom: "",
     description: "",
     categorie:"",
-  images:""})
+    image:""})
     async function handleForm(e)
    {
       e.preventDefault();
@@ -48,7 +48,7 @@ const AjoutArticle = () => {
                 <div class="col-md-12 mb-6">
                   <label class="form-label" for="typeText">Nom de l'article</label>
                   <input type="text"  required 
-                  id="titre" class="form-control " placeholder="Nom"
+                  id="nom" class="form-control " placeholder="Nom"
                   onChange={(e) => handleInput(e)} />
                 </div>
               
@@ -85,7 +85,7 @@ const AjoutArticle = () => {
                    
             </div>
             <div class="row ">           
-              <input type="file"id="images" accept="image/png, image/jpeg"
+              <input type="file" id="image" accept="image/png, image/jpeg"
                onChange={(e) => handleInput(e)} required/>
               </div>
               <div class="row">             

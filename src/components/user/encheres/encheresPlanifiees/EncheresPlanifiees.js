@@ -20,7 +20,7 @@ const EncheresPlanifiees= () => {
     try {
       const userApiUrl = `/encheresPlanifiees`;
       const res = await get(userApiUrl);
-      console.log("planifiees" ,res);
+      console.log("planifiees", res);
       setEncheres(res.data);
     } catch (error) {
       console.log(error);
@@ -29,20 +29,21 @@ const EncheresPlanifiees= () => {
   useEffect(() => {
     EncheresPlanifiees();
   }, [userInfo]);
-  function ParticipantsPlanifiees(enchereId) {
-    navigate(`/participantsPlanifiees/${enchereId}`, {
+
+  function ParticipantsTerminees(enchereId) {
+    navigate(`/participantsTerminees/${enchereId}`, {
       state: {
         id: enchereId,
       },
     });
   }
-   function Rejoindre(enchereId)
+  async function Rejoindre(e)
    {
-      const userApiUrl = `/rejoindre/${enchereId}`;
-      const res =post(userApiUrl,rejoindre);
+      const userApiUrl = `/rejoindre/${res.data.id}`;
+      const res = await post(userApiUrl,rejoindre);
           console.log("ggg",res);
-          setRejoindre(enchere.id);
-        navigate(`/ParticipantsPlanifiees/${enchereId}`)
+          setRejoindre(enchere);
+        navigate(`/ListeParticipants/${enchere}`)
     }
    
   const pathImg = "http://localhost/pfe_backend/public/uploads/";
@@ -62,7 +63,7 @@ const EncheresPlanifiees= () => {
               </li>
               <li class="breadcrumb-item">
                 <a href="/encheres">
-                  <strong>Les encheres Planifiées </strong>
+                  <strong>Les encheres Planifiees </strong>
                 </a>
               </li>
             </ol>
@@ -71,74 +72,84 @@ const EncheresPlanifiees= () => {
           <div class="col-lg-6 m-auto"></div>
           {encheres && encheres.length > 0 ?  (
             <div class={"row"}>
-              {encheres.map((ench) => (
-                <div class="col-10 col-md-4 mb-4" key={ench.id}>
-                  <div class="card h-100">
+              {encheres.map((enchere) => (
+                <div class="col-10 col-md-4 mb-4" key={enchere.id}>
+                 <div class="card h-100">
+        <a href="/login">
+       { /*{"/detailEnch/" + `${enchere.id}`}*/}
                     <center></center>
                     <img
                       src={
                         pathImg +
-                        `${ench.articles.map((el) => el.images[0].url)}`
+                        `${enchere.image}`
                       }
                       class="card-img-top"
                       alt="..."
-                    />
+                    /></a>
                     <div class="card-body">
                     <ul class="list-unstyled d-flex justify-content-between">
-                          <li className="prixDepart">
-                         
+                          <li className="prix_depart">
+                            <strong>
+                              {" "}
+                              <del>
+                              <dl>
+                               
+                                {" "}
+                                {enchere.prix_depart
+                                }{" "}
+                               <sup> DT{" "}</sup>
+                               </dl></del>
+                               
+                            </strong>{" "}
+                      
+                          </li>
+                          <li className="prix_vente">
                             <strong>
                               {" "}
                               <dl>
                                 {" "}
-                                {ench.prix_depart
+                                {enchere.prix_vente
                                 }{" "}
                                <sup> DT{" "}</sup>
                                </dl>
-                            </strong>{" "}
-                          </li>
-                         
+                            </strong>{" "}</li>
                         </ul>
                         <p class="h3 text-decoration-none text-dark">
                           <strong>
-                            {ench.articles.map((el) => el.titre)}
+                            {enchere.nom_article}
                         
                           </strong>
                         </p>
                        
                         <p class="card-text-description">
-                        {ench.description_ench} :
+                        {enchere.description_ench} :
                         </p>
-                        {ench.articles.map((el) => el.description)}
+                        {enchere.description_article}
                         <p class="card-text-date-debut">
                           Commence le&nbsp;
                           <strong>
                             {" "}
-                            {ench.date_debut.substring(0, 10)}
+                            {enchere.date_debut.substring(0, 10)}
                           </strong>
                           &nbsp;à&nbsp;
                           <strong>
-                            {ench.date_debut.substring(11, 19)}
+                            {enchere.date_debut.substring(11, 19)}
                           </strong>
                         </p>
                         <p class="card-text-date-fin">
                           a termine le &nbsp;
-                          <strong>{ench.date_fin.substring(0, 10)}</strong>
+                          <strong>{enchere.date_fin.substring(0, 10)}</strong>
                           &nbsp;à&nbsp;
-                          <strong>{ench.date_fin.substring(11, 19)} </strong>
+                          <strong>{enchere.date_fin.substring(11, 19)} </strong>
                         </p>
                         <p class="text-center">
                         <a class="btn btn-success"
-                         onClick={() => {
-                          Rejoindre(ench.id);
-                        }}
+                       
                         >Rejoindre </a>{" "}
                        
-                       <a
+                          <a
                           class="btn btn-secondary"
-                          onClick={() => {
-                            ParticipantsPlanifiees(ench.id);
-                          }}
+                        
                         >
                           Liste des Participants
                         </a>

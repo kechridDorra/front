@@ -103,8 +103,8 @@ function NavbarUser(props)
                           </li>
                           <li class="nav-item">
                           <NavDropdown title="Appel Offre" >
-                                    <NavDropdown.Item href='/appelOffresDispo'>Appels d'offre Disponibles</NavDropdown.Item> 
-                                    <NavDropdown.Item href='/appelOffresExp'>Appels d'offre Expirés</NavDropdown.Item> 
+                                  
+                                    <NavDropdown.Item href='/appelOffres'>Appels d'offre </NavDropdown.Item> 
                                     <NavDropdown.Item href='/ajoutAppelOffre'>Ajout Appel offre</NavDropdown.Item>
                                     <NavDropdown.Item href='/mesAppelOffres'>Mes Appels d'offre</NavDropdown.Item>
                                     

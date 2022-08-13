@@ -1,4 +1,5 @@
 import "./EncheresEnCours.css";
+import bootstrap from "bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import React, { Component } from "react";
 import { useNavigate , useParams} from "react-router-dom";
@@ -6,19 +7,18 @@ import Footer from "../../../Footer";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useState, useEffect } from "react";
 import { get } from "../../../../services/http";
+import { post } from "../../../../services/http";
 import NavbarUser from "../../navbarUser/NavbarUser";
-import ParticipantsEnCours from "./participantsEnCours/ParticipantsEnCours";
-
 const EncheresEnCours= () => {
   const { enchere } = useParams();
   const userInfo = localStorage.getItem("user-info");
   const [encheres, setEncheres] = useState({});
   const navigate = useNavigate();
-  async function EncheresEnCours() {
+  async function  EncheresEnCours() {
     try {
       const userApiUrl = `/encheresEnCours`;
       const res = await get(userApiUrl);
-      console.log("enCours", res);
+      console.log("ec" ,encheres);
       setEncheres(res.data);
     } catch (error) {
       console.log(error);
@@ -27,20 +27,14 @@ const EncheresEnCours= () => {
   useEffect(() => {
     EncheresEnCours();
   }, [userInfo]);
-
-  function ParticipantsEnCours(enchereId) {
-    navigate(`/participantsEnCours/${enchereId}`, {
-      state: {
-        id: enchereId,
-      },
-    });
-  }
-   const pathImg = "http://localhost/pfe_backend/public/uploads/";
+ 
+   
+  const pathImg = "http://localhost/pfe_backend/public/uploads/";
 
     return (
       <>
-         <NavbarUser />
-        <section class="bg-light">
+      <NavbarUser />
+      <section class="bg-light">
         <div class="container py-5" enctype="multipart/form-data">
           <nav aria-label="breadcrumb">
             <ol class="breadcrumb bg-transparent pl-0 mb-0">
@@ -51,8 +45,8 @@ const EncheresEnCours= () => {
                 </a>
               </li>
               <li class="breadcrumb-item">
-                <a href="/encheres">
-                  <strong>Les encheres En Cours </strong>
+                <a href="/encheresT">
+                  <strong>Les encheres En Cours</strong>
                 </a>
               </li>
             </ol>
@@ -61,18 +55,20 @@ const EncheresEnCours= () => {
           <div class="col-lg-6 m-auto"></div>
           {encheres && encheres.length > 0 ?  (
             <div class={"row"}>
-              {encheres.map((ench) => (
-                <div class="col-10 col-md-4 mb-4" key={ench.id}>
-                  <div class="card h-100">
+              {encheres.map((enchere) => (
+                <div class="col-10 col-md-4 mb-4" key={enchere.id}>
+                 <div class="card h-100">
+        <a href="/login">
+       { /*{"/detailEnch/" + `${enchere.id}`}*/}
                     <center></center>
                     <img
                       src={
                         pathImg +
-                        `${ench.articles.map((el) => el.images[0].url)}`
+                        `${enchere.image}`
                       }
                       class="card-img-top"
                       alt="..."
-                    />
+                    /></a>
                     <div class="card-body">
                     <ul class="list-unstyled d-flex justify-content-between">
                           <li className="prix_depart">
@@ -82,7 +78,7 @@ const EncheresEnCours= () => {
                               <dl>
                                
                                 {" "}
-                                {ench.prix_depart
+                                {enchere.prix_depart
                                 }{" "}
                                <sup> DT{" "}</sup>
                                </dl></del>
@@ -95,56 +91,34 @@ const EncheresEnCours= () => {
                               {" "}
                               <dl>
                                 {" "}
-                                {ench.prix_vente
+                                {enchere.prix_vente
                                 }{" "}
                                <sup> DT{" "}</sup>
                                </dl>
                             </strong>{" "}</li>
                         </ul>
-                        <p class="h3 text-decoration-none text-dark">
-                          <strong>
-                            {ench.articles.map((el) => el.titre)}
-                        
-                          </strong>
-                        </p>
                        
-                        <p class="card-text-description">
-                        {ench.description_ench} :
-                        </p>
-                        {ench.articles.map((el) => el.description)}
-                        <p class="card-text-date-debut">
-                          Commence le&nbsp;
-                          <strong>
-                            {" "}
-                            {ench.date_debut.substring(0, 10)}
-                          </strong>
-                          &nbsp;à&nbsp;
-                          <strong>
-                            {ench.date_debut.substring(11, 19)}
-                          </strong>
-                        </p>
-                        <p class="card-text-date-fin">
-                          a termine le &nbsp;
-                          <strong>{ench.date_fin.substring(0, 10)}</strong>
-                          &nbsp;à&nbsp;
-                          <strong>{ench.date_fin.substring(11, 19)} </strong>
-                        </p>
-                        <p class="text-center">
-                        <a class="btn btn-success"
-                        
-                        >Rejoindre </a>{" "}
-                       
-                       <a
-                          class="btn btn-secondary"
-                          onClick={() => {
-                            ParticipantsEnCours(ench.id);
-                          }}
-                        >
-                          Liste des Participants
-                        </a>
-                        
+                      <p class="h3 text-decoration-none text-dark">
+                     
+                        <strong>{enchere.nom_article}</strong>
                       </p>
-                      </div>
+                      <p class="card-text-description">
+                         {enchere.description_ench} :
+                        </p>
+                      {enchere.description_article}
+                      <p class="card-text-date-debut">
+                        Commence le&nbsp;
+                        <strong> {enchere.date_debut.substring(0, 10)}</strong>
+                        &nbsp;à&nbsp;
+                        <strong>{enchere.date_debut.substring(11, 19)}</strong>
+                      </p>
+                      <p class="card-text-date-fin">
+                        Termine le &nbsp;
+                        <strong>{enchere.date_fin.substring(0, 10)}</strong>
+                        &nbsp;à&nbsp;
+                        <strong>{enchere.date_fin.substring(11, 19)} </strong>
+                      </p>
+                    </div>
                   </div>
                 </div>
               ))
@@ -154,7 +128,9 @@ const EncheresEnCours= () => {
         </div>
       </section>
       <Footer />
-      </>
+    </>
   );
 }
 export default EncheresEnCours;
+
+

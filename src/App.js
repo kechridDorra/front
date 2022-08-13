@@ -11,7 +11,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Inscription from './components/inscription/Inscription';
 import Login from './components/login/Login';
 import AccueilUser from './components/user/accueilUser/AccueilUser';
-import DetailEnch from './components/visiteur/detail/DetailEnch';
+
 import Cat1 from './components/visiteur/categorie/cat1/Cat1';
 import Cat2 from './components/visiteur/categorie/cat2/Cat2';
 import Cat3 from './components/visiteur/categorie/cat3/Cat3';
@@ -22,6 +22,7 @@ import Cat7 from './components/visiteur/categorie/cat7/Cat7';
 import Cat8 from './components/visiteur/categorie/cat8/Cat8';
 import Cat9 from './components/visiteur/categorie/cat9/Cat9';
 import Appels from './components/visiteur/appels/Appels';
+import DetailEnch from './components/visiteur/detail/DetailEnch';
 //user
 import Profil from './components/user/profil/Profil';
 import ModifierProfil from './components/user/profil/modifierProfil/ModifierProfil';
@@ -48,6 +49,7 @@ import MesEncheres from './components/vendeur/mesEncheres/MesEncheres';
 import MesParticipants from './components/vendeur/mesEncheres/mesParticipants/MesParticipants';
 
 
+
 export default function App() {
   return (
   <>  
@@ -60,7 +62,6 @@ export default function App() {
         <Route path="/users" element={<Users/>} />
         <Route exact path="/" element={<Accueil/>} />
         <Route path="/encheres" element={<Encheres/>} />
-        <Route path="/detailEnch/:id" element={<DetailEnch/>} />
         <Route path="/categorie1" element={<Cat1/>} />
         <Route path="/categorie2" element={<Cat2/>} />
         <Route path="/categorie3" element={<Cat3/>} />
@@ -72,6 +73,8 @@ export default function App() {
         <Route path="/categorie9" element={<Cat9/>} />
         <Route path="/encheresT" element={<EncheresT/>} />
         <Route path="/appels" element={<Appels/>}/>
+        <Route path= "/detailEnch/:enchere" element={<DetailEnch/>}/>
+        
   
         //user
         <Route exact path="/accueil" element={<AccueilUser/>} />

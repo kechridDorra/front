@@ -12,11 +12,10 @@ import { get } from "../../../../services/http";
 const AppelOffres = () => {
   const userInfo = localStorage.getItem("user-info");
   const [appel, setAppel] = useState({});
-  async function AppelOffresDispo() {
+  async function AppelOffres() {
     try {
       const userApiUrl = `/appelOffres`;
       const res = await get(userApiUrl);
-      console.log("dispo", res);
       setAppel(res.data);
     } catch (error) {
       console.log(error);
@@ -24,7 +23,7 @@ const AppelOffres = () => {
   }
 
   useEffect(() => {
-    AppelOffresDispo();
+    AppelOffres();
   }, [userInfo]);
  
   return (
@@ -40,8 +39,8 @@ const AppelOffres = () => {
                 </a>
               </li>
               <li class="breadcrumb-item">
-                <a href="/appelOffresDispo">
-                  <strong>Appels d'offres Disponibles </strong>
+                <a href="/appelOffres">
+                  <strong>Appels d'offres </strong>
                 </a>
               </li>
             </ol>
@@ -67,14 +66,20 @@ const AppelOffres = () => {
                           </div>
                           <div class="card-body">
                             <p class="mb-0">
-                              <strong> Constexte: </strong>
-                              {dispo.contexte}{" "}
+                              <strong>Titre: </strong>
+                              {dispo.titre}{" "}
                             </p>
                           </div>
                           <div class="card-body">
                             <p class="mb-0">
-                              <strong> date d'expiration: </strong>
-                            {dispo.date_exp.substring(0, 10)}{" "}
+                              <strong> Description: </strong>
+                            {dispo.description}{" "}
+                            </p>
+                          </div>
+                          <div class="card-body">
+                            <p class="mb-0">
+                              <strong> Prix: </strong>
+                              {dispo.prix ? `${dispo.prix}`:"0"} <sup>DT</sup>
                             </p>
                           </div>
                         </div>
@@ -85,6 +90,11 @@ const AppelOffres = () => {
                             <p class="mb-0">
                               <strong>Réponse: </strong>
                               <p>{dispo.propositions.map( (el) => el.reponse)}{" "}</p>
+                            </p>
+                            <p class="mb-0">
+                              <strong>Prix proposé: </strong>
+                              <p> 
+                               {dispo.propositions.map( (el) => el.prix)} <sup>DT</sup></p>
                           
                             </p>
                            

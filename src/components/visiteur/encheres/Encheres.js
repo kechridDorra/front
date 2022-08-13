@@ -18,7 +18,7 @@ function Encheres() {
 
   async function getEncheres() {
     try {
-      const encheres = await Api.get(`/encheresT`);
+      const encheres = await Api.get(`/encheres`);
       // const users =await   axios.get(`https://127.0.0.1:8000/users`)
       setEncheres(encheres.data);
     } catch (error) {
@@ -29,6 +29,8 @@ function Encheres() {
   useEffect(() => {
     getEncheres();
   }, []);
+
+  
 
   return (
     <>
@@ -58,11 +60,12 @@ function Encheres() {
                 <div class="col-10 col-md-4 mb-4" key={enchere.id}>
                  <div class="card h-100">
         <a href="/login">
+       { /*{"/detailEnch/" + `${enchere.id}`}*/}
                     <center></center>
                     <img
                       src={
                         pathImg +
-                        `${enchere.articles.map((el) => el.image)}`
+                        `${enchere.image}`
                       }
                       class="card-img-top"
                       alt="..."
@@ -95,14 +98,15 @@ function Encheres() {
                                </dl>
                             </strong>{" "}</li>
                         </ul>
-                      
+                       
                       <p class="h3 text-decoration-none text-dark">
-                        <strong>{enchere.articles.map((el) => el.titre)}</strong>
+                     
+                        <strong>{enchere.nom_article}</strong>
                       </p>
                       <p class="card-text-description">
                          {enchere.description_ench} :
                         </p>
-                      {enchere.articles.map((el) => el.description)}
+                      {enchere.description_article}
                       <p class="card-text-date-debut">
                         Commence le&nbsp;
                         <strong> {enchere.date_debut.substring(0, 10)}</strong>
