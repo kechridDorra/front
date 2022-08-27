@@ -2,7 +2,7 @@ import Footer from "../../Footer";
 import Navbar from "../../Navbar";
 import Api from "../../../services/Api";
 import React, { Component } from "react";
-import AppelOffres from "../../user/appelOffre/appelOffres/AppelOffres";
+
 class Appels extends Component {
   constructor() {
     super();
@@ -60,29 +60,27 @@ class Appels extends Component {
                             class="card-img-top"
                             alt="..."
                           />
-                          
-                             <div class="card-header d-flex justify-content-between P-1">
-                            <p class="fw-bold mb-0">
-                           {" "}  {" "}
-                            </p>
+
+                          <div class="card-header d-flex justify-content-between P-1">
+                            <p class="fw-bold mb-0"> </p>
                             <p>
-                              <i class="fa fa-phone"></i> 
+                              <i class="fa fa-phone"></i>
                               {""} {appel.user.telephone}{" "}
-                              <i class="fa fa-envelope"> </i> 
-                              {""} {appel.user.email} {" "}
+                              <i class="fa fa-envelope"> </i>
+                              {""} {appel.user.email}{" "}
                             </p>
                           </div>
-                          
+
                           <div class="card-body">
-                          <p class="mb-0">
+                            <p class="mb-0">
                               <strong> Nom Demandeur: </strong>
                               {appel.user.nom}{" "}
                             </p>
-                          <p class="mb-0">
+                            <p class="mb-0">
                               <strong> Prénom Demandeur: </strong>
                               {appel.user.prenom}{" "}
                             </p>
-                          <p class="mb-0">
+                            <p class="mb-0">
                               <strong> Titre: </strong>
                               {appel.titre}{" "}
                             </p>

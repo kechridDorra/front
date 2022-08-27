@@ -11,6 +11,7 @@ import NavbarUser from "../../navbarUser/NavbarUser";
 import Footer from "../../../Footer";
 import { get } from "../../../../services/http";
 const MesAppelOffres = () => {
+  const pathImg = "http://localhost/pfe_backend/public/uploads/";
   const userInfo = localStorage.getItem("user-info");
   const [appels, setAppels] = useState({});
   async function getUserDetails() {
@@ -33,20 +34,8 @@ const MesAppelOffres = () => {
   return (
     <>
       <NavbarUser />
-  
-        {/* {appels && appels.length > 0 ? (
-          <div class={"row"}>
-            {appels.map((mesAppels) => (
-              <div class="row" key={mesAppels.id}>
-                <h1>{mesAppels.id}</h1>
-              </div>
-            ))}
-          </div>
-        ) : (
-          <></>
-		)}*/}
 
-<section class="bg-light">
+      <section class="bg-light">
         <div class="container py-5">
           <nav aria-label="breadcrumb">
             <ol class="breadcrumb bg-transparent pl-0 mb-0">
@@ -56,61 +45,66 @@ const MesAppelOffres = () => {
                 </a>
               </li>
               <li class="breadcrumb-item">
-                <a href="/appelOffresDispo">
-                  <strong>Mes Appels d'offres </strong>
+                <a href="/appelOffres">
+                  <strong>Appels d'offres </strong>
                 </a>
               </li>
-              
             </ol>
-          </nav><br></br>
-        
-       
+          </nav>
+          <br></br>
+          <div class="col-lg-6 m-auto"></div>
           {appels && appels.length > 0 ? (
             <div class={"row"}>
-              {appels.map((mesAppels) => (
-              <div class="row" key={mesAppels.id}>
-                 <ul class="list-unstyled">
-                      <li>
-                        <div class="card">
-                          <div class="card-header d-flex justify-content-between P-1">
-                            <p> 
-                            <button type="button" class="btn btn-warning">Modifier</button>
-                            </p>
-                            <p>
-                            <button type="button" class="btn btn-danger">Supprimer</button>
-                             </p>
-                          </div>
-                          <div class="card-body">
-                            <p class="mb-0">
-                              <strong> Constexte: </strong>
-                              {mesAppels.contexte}{" "}
-                            </p>
-                          </div>
-                          <div class="card-body">
-                            <p class="mb-0">
-                              <strong> date d'expiration: </strong>
-                            {mesAppels.date_exp.substring(0, 10)}{" "}
-                            </p>
-                          </div>
+              {appels.map((apl) => (
+                <div class="col-10 col-md-4 mb-4" key={apl.id}>
+                  <ul class="list-unstyled">
+                    <li>
+                      <div class="card h-100">
+                        <center></center>
+                        <img
+                          src={pathImg + `${apl.image}`}
+                          class="card-img-top"
+                          alt="..."
+                        />
+
+                        <div class="card-body">
+                          <p class="mb-0">
+                            <strong>Titre: </strong>
+                            {apl.titre}{" "}
+                          </p>
                         </div>
-                      </li>
-                      <li class="d-flex justify-content-between mb-4">
+                        <div class="card-body">
+                          <p class="mb-0">
+                            <strong> Description: </strong>
+                            {apl.description}{" "}
+                          </p>
+                        </div>
+                        <div class="card-body">
+                          <p class="mb-0">
+                            <strong> Prix: </strong>
+                            {apl.prix ? `${apl.prix}` : "0"} <sup>DT</sup>
+                          </p>
+                        </div>
+                      </div>
+                    </li>
+                    <li class="d-flex justify-content-between mb-4">
                         <div class="card w-100">
                           <div class="card-body">
                             <p class="mb-0">
                               <strong>Réponse: </strong>
-                              {mesAppels.propositions.map((el) => el.reponse)}{" "}
+                              {apl.propositions.map((el) => el.reponse)}
                             </p>
                           </div>
                         </div>
                       </li>
-                    </ul>
+                  </ul>
                 </div>
-              ))
-              }
+              ))}
             </div>
-          ):<></>}
-          </div>
+          ) : (
+            <></>
+          )}
+        </div>
       </section>
       <Footer />
     </>

@@ -6,12 +6,12 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import React, { Component } from "react";
 import NavbarUser from "../../navbarUser/NavbarUser";
 import Footer from "../../../Footer";
-
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Form } from "react-bootstrap";
 const AjoutAppelOffre = () => {
   const userInfo = localStorage.getItem("user-info");
   const navigate = useNavigate();
+  const { user} = useParams();
   const [state1, setstate1] = useState({
     titre: "",
     description: "",
@@ -21,7 +21,7 @@ const AjoutAppelOffre = () => {
   async function handleForm(e) {
     e.preventDefault();
     console.log("form", state1);
-    const userApiUrl = `appelOffre`;
+    const userApiUrl = `appelOffre/${user}`;
     const res = await post(userApiUrl, state1);
 
     console.log(res);

@@ -77,7 +77,7 @@ function Navbar(props) {
             class="navbar-brand text-success logo h1 align-self-center"
             href="/"
           >
-            TunEnchere
+            TunEnchère
           </a>
 
           <button
@@ -123,7 +123,7 @@ function Navbar(props) {
                     <NavDropdown.Item href="/categorie4">
                       Véhicules
                     </NavDropdown.Item>
-                    <NavDropdown.Item href="/categorie5">
+                    <NavDropdown.Item href="/cat5">
                       Horlogerie
                     </NavDropdown.Item>
                     <NavDropdown.Item href="/categorie6">

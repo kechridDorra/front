@@ -12,15 +12,17 @@ import { post } from "../../../../services/http";
 import NavbarUser from "../../navbarUser/NavbarUser";
 const EncheresPlanifiees= () => {
   const { enchere } = useParams();
+  const { user } = useParams();
   const userInfo = localStorage.getItem("user-info");
   const [encheres, setEncheres] = useState({});
-  const [rejoindre, setRejoindre] = useState({});
+  const [proposition, setProposition] = useState({});
   const navigate = useNavigate();
-  async function  EncheresPlanifiees() {
+  //list d'enchere         
+  async function EncheresPlanifiees() {
     try {
-      const userApiUrl = `/encheresPlanifiees`;
+      const userApiUrl = `/encheresPlanifiees/${user}`;
       const res = await get(userApiUrl);
-      console.log("planifiees", res);
+      console.log("ec", encheres);
       setEncheres(res.data);
     } catch (error) {
       console.log(error);
@@ -30,22 +32,15 @@ const EncheresPlanifiees= () => {
     EncheresPlanifiees();
   }, [userInfo]);
 
-  function ParticipantsTerminees(enchereId) {
-    navigate(`/participantsTerminees/${enchereId}`, {
+  function ListeParticipants(userId,enchereId) {
+    navigate(`/listeParticipants/${userId}/${enchereId}`, {
       state: {
         id: enchereId,
+        id: userId,
       },
     });
   }
-  async function Rejoindre(e)
-   {
-      const userApiUrl = `/rejoindre/${res.data.id}`;
-      const res = await post(userApiUrl,rejoindre);
-          console.log("ggg",res);
-          setRejoindre(enchere);
-        navigate(`/ListeParticipants/${enchere}`)
-    }
-   
+ 
   const pathImg = "http://localhost/pfe_backend/public/uploads/";
 
     return (
@@ -149,8 +144,9 @@ const EncheresPlanifiees= () => {
                        
                           <a
                           class="btn btn-secondary"
-                        
-                        >
+                          onClick={() => {
+                            ListeParticipants(user,enchere.id);
+                          }}>
                           Liste des Participants
                         </a>
                         

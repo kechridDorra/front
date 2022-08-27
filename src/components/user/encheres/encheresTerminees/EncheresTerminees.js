@@ -12,39 +12,35 @@ import { post } from "../../../../services/http";
 import NavbarUser from "../../navbarUser/NavbarUser";
 const EncheresTerminees= () => {
   const { enchere } = useParams();
+  const { user } = useParams();
   const userInfo = localStorage.getItem("user-info");
   const [encheres, setEncheres] = useState({});
-  const [rejoindre, setRejoindre] = useState({});
   const navigate = useNavigate();
-  async function  EncheresTerminees() {
+  //list d'enchere         
+  async function EncheresEnCours() {
     try {
-      const userApiUrl = `/encheresTerminees`;
+      const userApiUrl = `/encheresTerminees/${user}`;
       const res = await get(userApiUrl);
-      console.log("terminees", res);
+      console.log("ec", encheres);
       setEncheres(res.data);
     } catch (error) {
       console.log(error);
     }
   }
   useEffect(() => {
-    EncheresTerminees();
+    EncheresEnCours();
   }, [userInfo]);
 
-  function ParticipantsTerminees(enchereId) {
-    navigate(`/participantsTerminees/${enchereId}`, {
+  //boutton participations
+  function ListeParticipants(userId,enchereId) {
+    navigate(`/listeParticipants/${userId}/${enchereId}`, {
       state: {
         id: enchereId,
+        id: userId,
       },
     });
   }
-  async function Rejoindre(e)
-   {
-      const userApiUrl = `/rejoindre/${res.data.id}`;
-      const res = await post(userApiUrl,rejoindre);
-          console.log("ggg",res);
-          setRejoindre(enchere);
-        navigate(`/ListeParticipants/${enchere}`)
-    }
+ 
    
   const pathImg = "http://localhost/pfe_backend/public/uploads/";
 
@@ -53,22 +49,7 @@ const EncheresTerminees= () => {
         <NavbarUser />
         <section class="bg-light">
         <div class="container py-5" enctype="multipart/form-data">
-          <nav aria-label="breadcrumb">
-            <ol class="breadcrumb bg-transparent pl-0 mb-0">
-              <li class="breadcrumb-item">
-                <a href="/">
-                  {" "}
-                  <strong>TunEnchere </strong>
-                </a>
-              </li>
-              <li class="breadcrumb-item">
-                <a href="/encheres">
-                  <strong>Les encheres Terminées </strong>
-                </a>
-              </li>
-            </ol>
-          </nav>
-          <br></br>
+          
           <div class="col-lg-6 m-auto"></div>
           {encheres && encheres.length > 0 ?  (
             <div class={"row"}>
@@ -143,14 +124,16 @@ const EncheresTerminees= () => {
                           <strong>{enchere.date_fin.substring(11, 19)} </strong>
                         </p>
                         <p class="text-center">
-                        <a class="btn btn-success"
                        
-                        >Rejoindre </a>{" "}
                        
+                        Le gagnat est{" "}
+                       <br></br>
                           <a
                           class="btn btn-secondary"
+                          onClick={() => {
+                            ListeParticipants(user,enchere.id);
+                          }}>
                         
-                        >
                           Liste des Participants
                         </a>
                         

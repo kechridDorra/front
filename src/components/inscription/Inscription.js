@@ -1,13 +1,15 @@
-import React, {  useState } from "react";
+import React from "react";
 import './Inscription.css';
 import bootstrap from "bootstrap";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Navbar from "../Navbar";
 import Footer from "../Footer";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { Form } from "react-bootstrap";
 import Api from "../../services/Api";
+import { ToastContainer, toast } from 'react-toastify';
 const Inscription = () => {
   const [state1, setstate1] = useState({
     nom: "",
@@ -24,6 +26,7 @@ const Inscription = () => {
     anneeExp:"",
   });
   const navigate = useNavigate();
+  const notify = () => toast("Wow so easy!");
   function handleForm(e)
   {
     e.preventDefault();
@@ -40,6 +43,8 @@ const Inscription = () => {
     setstate1(newdata1);
     console.log(newdata1);
   }
+ 
+
         return (<>
         <Navbar/>
     
@@ -164,7 +169,7 @@ const Inscription = () => {
           <div class="row">
             <center>
               <div class="col-12 col-md-4 mb-3">
-              <button  className="btn btn-dark btn-lg btn-block">Enregistrer </button>
+              <button  className="btn btn-dark btn-lg btn-block" onClick={notify}>Enregistrer </button>
               <p>déja inscrit <a href="/login">Connectez</a> </p>
               </div>
             </center>

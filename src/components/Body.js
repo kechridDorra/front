@@ -170,46 +170,56 @@ class Body extends Component {
           <section class="container py-5">
             <div class="row text-center pt-3">
               <div class="col-lg-6 m-auto">
-                <h1 class="h1">Categories de la semaine</h1>
+                <h1 class="h1">Catégorie des enchères</h1>
               </div>
             </div>
             <div class="row">
+            
               <div class="col-12 col-md-4 p-5 mt-3">
                 <a href="#">
                   <img
                     className="rounded-circle img-fluid border"
-                    src="/accueil/deco.jpg"
+                    src="/categories/deco.jpg"
                   ></img>
                 </a>
                 <h5 class="text-center mt-3 mb-3">Arts et decoration</h5>
                 <p class="text-center">
-                  <a class="btn btn-success">Go Shop</a>
+                <a href="/categorie1">
+                    <button class="btn btn-success">Consulter</button>
+                  </a>
                 </p>
               </div>
               <div class="col-12 col-md-4 p-5 mt-3">
                 <a href="#">
                   <img
                     className="rounded-circle img-fluid border"
-                    src="/accueil/electro.jpg"
+                    src="/categories/horlogerie.jpg"
                   ></img>
                 </a>
-                <h2 class="h5 text-center mt-3 mb-3">Électroménager </h2>
+                <h2 class="h5 text-center mt-3 mb-3">Horlogerie</h2>
                 <p class="text-center">
-                  <a class="btn btn-success">Go Shop</a>
+                <a href="/categorie5">
+                    <button class="btn btn-success">Consulter</button>
+                  </a>
                 </p>
               </div>
               <div class="col-12 col-md-4 p-5 mt-3">
                 <a href="#">
                   <img
                     className="rounded-circle img-fluid border"
-                    src="/accueil/accessoire.jpg"
+                    src="/categories/electro.jpg"
                   ></img>
                 </a>
-                <h2 class="h5 text-center mt-3 mb-3">Accessories</h2>
+                <h2 class="h5 text-center mt-3 mb-3">Electromenager</h2>
                 <p class="text-center">
-                  <a class="btn btn-success">Go Shop</a>
+                <a href="/categorie6">
+                    <button class="btn btn-success">Consulter</button>
+                  </a>
                 </p>
               </div>
+              <a href="/listCategories">
+                  <strong> Afficher plus de catégories </strong>
+                </a>
             </div>
           </section>
           <section class="bg-light">
@@ -218,6 +228,7 @@ class Body extends Component {
                 <h1 class="h1">Les dernieres enchéres terminées</h1>
               </div>
               <br></br>
+             
               {loading ? (
                 <div class="row text-center py-3"></div>
               ) : (
@@ -282,15 +293,17 @@ class Body extends Component {
                             </strong>
                           </p>
                         </div>
+                       
                       </div>
+                    
                     </div>
                   ))}
                 </div>
               )}{" "}
               <div>
-              <a href="/encheresT">
-                     <strong> Afficher plus</strong>
-                  </a>
+                <a href="/encheresT">
+                  <strong> Afficher plus d'enchères </strong>
+                </a>
               </div>
             </div>
           </section>

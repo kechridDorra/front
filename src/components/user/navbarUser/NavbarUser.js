@@ -6,6 +6,7 @@ import axios from 'axios'
 import { Navbar, Nav, NavDropdown } from 'react-bootstrap';
 import { useNavigate } from "react-router-dom";
 import { get } from "../../../services/http";
+import EncheresPlanifiees from '../encheres/encheresPlanifiees/EncheresPlanifiees';
 function NavbarUser(props)
 {
     const navigate = useNavigate();
@@ -16,6 +17,7 @@ function NavbarUser(props)
  
     }
     const [vendeur,setVendeur] = useState();
+    const [userId,setUserId] = useState();
     const userInfo = localStorage.getItem("user-info");
 
     async function getUserDetails() {
@@ -25,6 +27,7 @@ function NavbarUser(props)
         const res = await get(userApiUrl);
         console.log("user",res);
         setVendeur(res.data[0].profil_vendeur);
+        setUserId(res.data[0]);
       } catch (error) {
         console.log(error);
       }
@@ -33,9 +36,36 @@ function NavbarUser(props)
     useEffect(() => {
       getUserDetails();
     }, [userInfo]);
-
-    function vendeurId(profil_vendeur) {
+    function encheresEnCours(user) {
+      navigate(`/encheresEncours/${user}`, {
+        state: {
+          id: user,
+        },
+      });
+    }
+    function encheresTerminees(user) {
+      navigate(`/encheresTerminees/${user}`, {
+        state: {
+          id: user,
+        },
+      });
+    }
+    function encheresPlanifiees(user) {
+      navigate(`/encheresPlanifiees/${user}`, {
+        state: {
+          id: user,
+        },
+      });
+    }
+    function creerEnchere(profil_vendeur) {
         navigate(`/creerEnchere/${profil_vendeur}`, {
+          state: {
+            id: profil_vendeur,
+          },
+        });
+      }
+      function reponseVendeur(profil_vendeur) {
+        navigate(`/reponseVendeur/${profil_vendeur}`, {
           state: {
             id: profil_vendeur,
           },
@@ -68,7 +98,7 @@ function NavbarUser(props)
           <div class="container d-flex justify-content-between align-items-center">
 
               <a class="navbar-brand text-success logo h1 align-self-center" href="/">
-                  TunEnchere
+                  TunEnchère
               </a>
 
               <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#templatemo_main_nav" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -82,10 +112,16 @@ function NavbarUser(props)
                           <a class="nav-link" href="/accueil">Accueil</a>
                           </li>
                           <li class="nav-item">
-                          <NavDropdown title="Encheres" >
-                                    <NavDropdown.Item href='/encheresEnCours'> Enchere en cours</NavDropdown.Item>
-                                    <NavDropdown.Item href='/encheresPlanifiees'>Enchere planifiées</NavDropdown.Item>
-                                    <NavDropdown.Item href='/encheresTerminees'>Enchere terminées</NavDropdown.Item>  
+                          <NavDropdown title="Enchères" >
+                                    <NavDropdown.Item onClick={() => {
+                      encheresEnCours(userId.id);
+                    }}> Enchère en cours </NavDropdown.Item>
+                                    <NavDropdown.Item onClick={() => {
+                      encheresPlanifiees(userId.id);
+                    }}>Enchère planifiées</NavDropdown.Item>
+                                    <NavDropdown.Item onClick={() => {
+                      encheresTerminees(userId.id);
+                    }}>Enchère terminées</NavDropdown.Item>  
                                     
                                 </NavDropdown>
                            </li>
@@ -94,17 +130,19 @@ function NavbarUser(props)
                               <NavDropdown title="Espace Vendeur" >
                                     <NavDropdown.Item href='/InscriVendeur'>Inscription vendeur</NavDropdown.Item>
                                     <NavDropdown.Item  onClick={() => {
-                      vendeurId(vendeur.id);
+                      creerEnchere(vendeur.id);
                     }}>Creation Enchére</NavDropdown.Item>
                                     <NavDropdown.Item href='/mesEncheres'>Mes Enchères</NavDropdown.Item>  
-                                    <NavDropdown.Item href='/reponseAppel'>Répondre aux appels Offres</NavDropdown.Item>  
+                                    <NavDropdown.Item   onClick={() => {
+                      reponseVendeur(vendeur.id);
+                    }}>Répondre aux appels Offres</NavDropdown.Item>  
                                     
                                 </NavDropdown>
                           </li>
                           <li class="nav-item">
                           <NavDropdown title="Appel Offre" >
                                   
-                                    <NavDropdown.Item href='/appelOffres'>Appels d'offre </NavDropdown.Item> 
+                                 
                                     <NavDropdown.Item href='/ajoutAppelOffre'>Ajout Appel offre</NavDropdown.Item>
                                     <NavDropdown.Item href='/mesAppelOffres'>Mes Appels d'offre</NavDropdown.Item>
                                     
