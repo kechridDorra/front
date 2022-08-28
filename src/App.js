@@ -1,7 +1,5 @@
 import React, { useEffect } from 'react';
 import Users from './components/user/list/Users';
-import Article from './components/article/Article';
-
 import Encheres from './components/visiteur/encheres/Encheres'
 //Bootstrap
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -97,7 +95,7 @@ export default function App() {
         <Route path="/encheresEnCours/:user" element={<EncheresEnCours/>} />
         <Route path="/listeParticipants/:user/:enchere" element={<ListeParticipants/>} />
         <Route path="/mesAppelOffres" element={<MesAppelOffres/>}/>
-        <Route path="/ajoutAppelOffre" element={<AjoutAppelOffre/>}/>
+        <Route path="/ajoutAppelOffre/:user" element={<AjoutAppelOffre/>}/>
         <Route path="/rejointEnchereEC/:enchere" element={<RejointEnchereEC/>}/>
         <Route path="/cat1" element={<Cat1/>}/>
        <Route path="/cat2" element={<Cat2/>}/>
@@ -113,8 +111,7 @@ export default function App() {
        
         //vendeur
         <Route path="/inscriVendeur" element={<InscriVendeur/>} />
-        <Route path="/creerEnchere/:profil_vendeur" element={<CreerEnchere/>} />
-        <Route path="/ajoutArticle" element={<AjoutArticle/>} />
+        <Route path="/creerEnchere/:profil_vendeur" element={<CreerEnchere/>} />       
         <Route path="/reponseVendeur/:profilVendeur" element={<ReponseVendeur/>} />
         <Route path="/saisieProposition/:profilVendeur/:appelOffre" element={<SaisieProposition/>} />
         <Route path="/mesEncheres" element={<MesEncheres/>} />

@@ -36,6 +36,13 @@ function NavbarUser(props)
     useEffect(() => {
       getUserDetails();
     }, [userInfo]);
+    function ajoutAppelOffre(user) {
+      navigate(`/ajoutAppelOffre/${user}`, {
+        state: {
+          id: user,
+        },
+      });
+    }
     function encheresEnCours(user) {
       navigate(`/encheresEncours/${user}`, {
         state: {
@@ -143,7 +150,9 @@ function NavbarUser(props)
                           <NavDropdown title="Appel Offre" >
                                   
                                  
-                                    <NavDropdown.Item href='/ajoutAppelOffre'>Ajout Appel offre</NavDropdown.Item>
+                                    <NavDropdown.Item onClick={() => {
+                      ajoutAppelOffre(userId.id);
+                    }}>Ajout Appel offre</NavDropdown.Item>
                                     <NavDropdown.Item href='/mesAppelOffres'>Mes Appels d'offre</NavDropdown.Item>
                                     
                                     

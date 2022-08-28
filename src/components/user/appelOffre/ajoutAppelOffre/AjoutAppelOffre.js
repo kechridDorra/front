@@ -8,31 +8,46 @@ import NavbarUser from "../../navbarUser/NavbarUser";
 import Footer from "../../../Footer";
 import { useNavigate, useParams } from "react-router-dom";
 import { Form } from "react-bootstrap";
+import swal from "sweetalert";
 const AjoutAppelOffre = () => {
   const userInfo = localStorage.getItem("user-info");
   const navigate = useNavigate();
   const { user} = useParams();
-  const [state1, setstate1] = useState({
+  const [offre, setOffre] = useState({
     titre: "",
     description: "",
     prix: "",
-    image: null,
   });
-  async function handleForm(e) {
-    e.preventDefault();
-    console.log("form", state1);
-    const userApiUrl = `appelOffre/${user}`;
-    const res = await post(userApiUrl, state1);
-
-    console.log(res);
-    navigate("/appelOffres");
-  }
+  const [picture, setPicture] = useState([]);
+  const [errorlist, setError] = useState([]);
   function handleInput(e) {
-    const newdata1 = { ...state1 };
-    newdata1[e.target.id] = e.target.value;
-    setstate1(newdata1);
-    console.log(newdata1);
+    e.persist();
+    setOffre({...offre,[e.target.id]:e.target.value});
+   }
+   function handleImage(e) {
+    e.persist();
+    setPicture({ image :e.target.files[0]});
+   }
+ async function handleForm(e) {
+    e.preventDefault();
+    const formData = new FormData();
+    formData.append('image',picture.image);
+    formData.append('titre',offre.titre);
+    formData.append('description',offre.description);
+    formData.append('prix',offre.prix);
+    const userApiUrl = `appelOffre/${user}`;
+    const res = await post(userApiUrl, formData);
+    if (res.data.status === 200) {
+      swal("offre bien crée", res.data.message, "succées");
+      setError([]);
+    } else if (res.data.status === 422) {
+      swal("erreur");
+      setError(res.data.errors);
+    }
+    console.log(res);
+    navigate("/mesAppelOffres");
   }
+
   async function getUserDetails() {
     try {
       const parsedUser = JSON.parse(userInfo);
@@ -78,7 +93,7 @@ const AjoutAppelOffre = () => {
                     id="titre"
                     class="form-control "
                     placeholder="Entrer un titre de l'appel d'offre"
-                    onChange={(e) => handleInput(e)}
+                    onChange={(e) => handleInput(e)} 
                   />
                 </div>
 
@@ -112,8 +127,8 @@ const AjoutAppelOffre = () => {
                     <input
                       type="file"
                       id="image"
-                      onChange={(e) => handleInput(e)}
-                      required
+                      onChange={handleImage}  
+                      required 
                       
                     />
                   </div>
