@@ -124,10 +124,7 @@ const EncheresTerminees= () => {
                           <strong>{enchere.date_fin.substring(11, 19)} </strong>
                         </p>
                         <p class="text-center">
-                       
-                       
-                        Le gagnat est{" "}
-                       <br></br>
+              
                           <a
                           class="btn btn-secondary"
                           onClick={() => {

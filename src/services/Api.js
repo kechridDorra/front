@@ -15,7 +15,7 @@ let Api = () => {
     { const token = await Api.localStorage.getItem('token').session.token; 
     if (token) {
       config.headers.Authorization = 'Bearer  ' + token;
-    }; return config; });
+      }; return config; });
 
 /*  Source: https://prograide.com/pregunta/42959/Attacher-len-tete-dautorisation-pour-toutes-les-demandes-axios
   /*api.interceptors.request.use(

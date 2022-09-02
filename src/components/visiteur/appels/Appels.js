@@ -89,9 +89,11 @@ class Appels extends Component {
                               <strong> Descirption: </strong>
                               {appel.description}{" "}
                             </p>
-                            <p class="mb-0">
-                              <strong> Prix: </strong>
-                              {appel.prix}{" "}
+                            <p class="mb-0">                    
+                                  <strong>Prix: </strong>
+                                  {appel.prix ? `${appel.prix}` : "0"} <sup>DT</sup>
+                                  
+                                
                             </p>
                           </div>
                         </div>

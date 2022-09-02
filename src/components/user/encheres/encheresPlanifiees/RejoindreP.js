@@ -3,29 +3,29 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import React, { Component } from "react";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
-import { get } from "../../../services/http";
-import Footer from "../../Footer";
+import { post } from "../../../../services/http";
+import Footer from "../../../Footer";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useState, useEffect } from "react";
-import NavbarUser from "../navbarUser/NavbarUser";
-const ListeParticipants = () => {
+import NavbarUser from "../../navbarUser/NavbarUser";
+const RejoindreP = () => {
   const userInfo = localStorage.getItem("user-info");
   const [list, setList] = useState({});
   const { enchere } = useParams();
   const { user } = useParams();
   const navigate = useNavigate();
-  async function ListeParticipants() {
+  async function Rejoindre() {
     try {
-      const userApiUrl = `/listeParticipants/${user}/${enchere}`;
-      const res = await get(userApiUrl);
-      console.log("participants", list);
-      setList(res.data);
+      const userApiUrl = `/rejoindre/${user}/${enchere}`;
+      const res = await post(userApiUrl);
+      console.log("part", list);
+      setList(res.data.participations);
     } catch (error) {
       console.log(error);
     }
   }
   useEffect(() => {
-    ListeParticipants();
+    Rejoindre();
   }, [userInfo]);
 
   /* function AugmenterEnchere(participationId) {
@@ -101,4 +101,4 @@ const ListeParticipants = () => {
     </>
   );
 };
-export default ListeParticipants;
+export default RejoindreP;

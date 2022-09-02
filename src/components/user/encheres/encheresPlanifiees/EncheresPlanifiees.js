@@ -15,7 +15,7 @@ const EncheresPlanifiees= () => {
   const { user } = useParams();
   const userInfo = localStorage.getItem("user-info");
   const [encheres, setEncheres] = useState({});
-  const [proposition, setProposition] = useState({});
+  const [rej, setRej] = useState({});
   const navigate = useNavigate();
   //list d'enchere         
   async function EncheresPlanifiees() {
@@ -34,6 +34,22 @@ const EncheresPlanifiees= () => {
 
   function ListeParticipants(userId,enchereId) {
     navigate(`/listeParticipants/${userId}/${enchereId}`, {
+      state: {
+        id: enchereId,
+        id: userId,
+      },
+    });
+  }
+  async function handleForm(e) {
+    e.preventDefault();
+    console.log("form", rej);
+    const userApiUrl = `/rejoindre/${user}/${enchere}`;
+    const res = await post(userApiUrl, rej);
+    console.log("ggg", res);
+    navigate(`/rejoindreP/${user}/${enchere}`);
+  }
+ function RejoindreP(userId,enchereId) {
+    navigate(`/rejoindreP/${userId}/${enchereId}`, {
       state: {
         id: enchereId,
         id: userId,
@@ -138,18 +154,26 @@ const EncheresPlanifiees= () => {
                           <strong>{enchere.date_fin.substring(11, 19)} </strong>
                         </p>
                         <p class="text-center">
-                        <a class="btn btn-success"
-                       
-                        >Rejoindre </a>{" "}
-                       
+                        <form
+                          class="form-horizontal"
+                          method="post"
+                          action="#"
+                          onSubmit={() => handleForm()}
+                        >
+                          <a class="btn btn-success" onClick={() => {
+                            RejoindreP(user, enchere.id);
+                          }}>
+                            Rejoindre
+                          </a>
+                        
                           <a
                           class="btn btn-secondary"
                           onClick={() => {
                             ListeParticipants(user,enchere.id);
                           }}>
-                          Liste des Participants
+                          Liste Participants
                         </a>
-                        
+                        </form>
                       </p>
                       </div>
                   </div>

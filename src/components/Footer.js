@@ -48,10 +48,9 @@ function Footer()
                     <h2 class="h2 text-light border-bottom pb-3 border-light">Info</h2>
                     <ul class="list-unstyled text-light footer-link-list">
                         <li><a class="text-decoration-none" href="/">Accueil</a></li>
-                        <li><a class="text-decoration-none" href="#">Comment ça marche ?</a></li>
+                        <li><a class="text-decoration-none" href="info">Comment ça marche ?</a></li>
                         <li><a class="text-decoration-none" href="/encheres">Les enchères</a></li>
-                        <li><a class="text-decoration-none" href="appelOffres">Les appels d'offres</a></li>
-                        <li><a class="text-decoration-none" href="#">Contact</a></li>
+                        <li><a class="text-decoration-none" href="appelOffres">Les appels d'offres</a></li>                
                     </ul>
                 </div>
 

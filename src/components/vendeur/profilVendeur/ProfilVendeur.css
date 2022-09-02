@@ -250,19 +250,15 @@ a:hover {
 .option input[type="radio"]:checked~.checkmark:after {
     transform: translate(-50%, -50%) scale(1)
 }
-.btn.btn-block1 {
-    border-radius: 20px;
-    background-color: #efefef;
-    color: #065731
+.btn btn-warning btn-lg btn-block{
+    color: #c6dd43
 }
 .btn.btn-block {
     border-radius: 20px;
     background-color: #065731;
     color: #fff
 }
-.suivant{
-    background-color: #7c7d7d
-}
+
 .btn.btn-block:hover {
     background-color: #065731
 }

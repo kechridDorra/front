@@ -103,7 +103,7 @@ const Login = () => {
             <div class="ml-auto">
               {" "}
               <a href="#" id="forgot">
-                Mot de passe oublié
+       
               </a>{" "}
             </div>
           </div>{" "}

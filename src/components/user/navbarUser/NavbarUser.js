@@ -27,12 +27,19 @@ function NavbarUser(props)
         const res = await get(userApiUrl);
         console.log("user",res);
         setVendeur(res.data[0].profil_vendeur);
+       // console.log("vv",res.data[0].profil_vendeur);
         setUserId(res.data[0]);
       } catch (error) {
         console.log(error);
       }
     }
-
+    function creerEnchere(profil_vendeur) {
+      navigate(`/creerEnchere/${profil_vendeur}`, {
+        state: {
+          id: vendeur.id,
+        },
+      });
+    }
     useEffect(() => {
       getUserDetails();
     }, [userInfo]);
@@ -75,6 +82,13 @@ function NavbarUser(props)
         navigate(`/reponseVendeur/${profil_vendeur}`, {
           state: {
             id: profil_vendeur,
+          },
+        });
+      }
+      function getProfil(user) {
+        navigate(`/profilVendeur/${user}`, {
+          state: {
+            id: user,
           },
         });
       }
@@ -135,6 +149,9 @@ function NavbarUser(props)
                            <li class="nav-item">
                               
                               <NavDropdown title="Espace Vendeur" >
+                            <NavDropdown.Item  onClick={() => {
+                      getProfil(vendeur.id);
+                    }}>Profil Vendeur</NavDropdown.Item>
                                     <NavDropdown.Item href='/InscriVendeur'>Inscription vendeur</NavDropdown.Item>
                                     <NavDropdown.Item  onClick={() => {
                       creerEnchere(vendeur.id);

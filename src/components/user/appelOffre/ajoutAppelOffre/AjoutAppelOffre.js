@@ -103,7 +103,7 @@ const AjoutAppelOffre = () => {
                   </label>
                   <textarea
                     required
-                    id="contexte"
+                    id="description"
                     class="form-control "
                     placeholder="Entrer une description de l'appel d'offre"
                     onChange={(e) => handleInput(e)}

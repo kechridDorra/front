@@ -1,3 +1,4 @@
+
 import "./ListeParticipants.css";
 import bootstrap from "bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -18,7 +19,7 @@ const ListeParticipants = () => {
     try {
       const userApiUrl = `/listeParticipants/${enchere}`;
       const res = await get(userApiUrl);
-      console.log("list", res);
+      console.log("list", list);
       setList(res.data);
     } catch (error) {
       console.log(error);

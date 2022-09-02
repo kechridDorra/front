@@ -46,7 +46,7 @@ const MesAppelOffres = () => {
               </li>
               <li class="breadcrumb-item">
                 <a href="/appelOffres">
-                  <strong>Appels d'offres </strong>
+                  <strong> Mes appels d'offres </strong>
                 </a>
               </li>
             </ol>

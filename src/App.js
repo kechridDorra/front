@@ -47,15 +47,16 @@ import Cat9 from './components/user/categorie/Cat9';
 import ListeParticipants from './components/user/encheres/ListeParticipants';
 //vendeur
 import InscriVendeur from './components/vendeur/inscriVendeur/InscriVendeur';
-import AjoutArticle from './components/vendeur/ajoutArticle/AjoutArticle';
 import ReponseVendeur from './components/vendeur/reponseAppel/ReponseVendeur';
 import CreerEnchere from './components/vendeur/creerEnchere/CreerEnchere';
 import MesEncheres from './components/vendeur/mesEncheres/MesEncheres';
 import MesParticipants from './components/vendeur/mesEncheres/mesParticipants/MesParticipants';
 import SaisieProposition from './components/vendeur/reponseAppel/sasieResponse/SaisieProposition';
-
-
-
+import Info from './components/visiteur/info/Info';
+import RejoindreEC from './components/user/encheres/encheresEnCours/RejoindreEc';
+import RejoindreP from './components/user/encheres/encheresPlanifiees/RejoindreP';
+import Participation from './components/user/encheres/encheresEnCours/Participation';
+import ProfilVendeur from './components/vendeur/profilVendeur/ProfilVendeur';
 
 
 
@@ -85,6 +86,7 @@ export default function App() {
         <Route path="/appels" element={<Appels/>}/>
         <Route path= "/detailEnch/:enchere" element={<DetailEnch/>}/>
         <Route path= "/listCategories" element={<ListCategories/>}  />    
+        <Route path= "/info" element={<Info/>}  />  
   
         //user
         <Route exact path="/accueil" element={<AccueilUser/>} />
@@ -106,9 +108,10 @@ export default function App() {
         <Route path="/cat7" element={<Cat7/>}/>
         <Route path="/cat8" element={<Cat8/>}/>
         <Route path="/cat9" element={<Cat9/>}/>
+        <Route path="/rejoindreEc/:user/:enchere" element={<RejoindreEC/>}/>
+        <Route path="/rejoindreP/:user/:enchere" element={<RejoindreP/>}/>
+        <Route path="/getParticipation/:user/:enchere" element={<Participation/>}/>
 
-
-       
         //vendeur
         <Route path="/inscriVendeur" element={<InscriVendeur/>} />
         <Route path="/creerEnchere/:profil_vendeur" element={<CreerEnchere/>} />       
@@ -116,8 +119,8 @@ export default function App() {
         <Route path="/saisieProposition/:profilVendeur/:appelOffre" element={<SaisieProposition/>} />
         <Route path="/mesEncheres" element={<MesEncheres/>} />
         <Route path="/MesParticipants/:enchere" element={<MesParticipants/>} />
-        //visiteur
-        
+        <Route path="/profilVendeur/:user" element={<ProfilVendeur/>} />
+        //visiteur        
       </Routes>
    </BrowserRouter>
 

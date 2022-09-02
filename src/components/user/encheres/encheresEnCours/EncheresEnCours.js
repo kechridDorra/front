@@ -9,15 +9,16 @@ import { useState, useEffect } from "react";
 import { get } from "../../../../services/http";
 import { post } from "../../../../services/http";
 import NavbarUser from "../../navbarUser/NavbarUser";
-import {toast} from 'react-toastify';
+import Rejoindre from "./RejoindreEc";
+
 const EncheresEnCours = () => {
   const { enchere } = useParams();
   const { user } = useParams();
   const userInfo = localStorage.getItem("user-info");
   const [encheres, setEncheres] = useState({});
-  const [proposition, setProposition] = useState({});
+  const [rej, setRej] = useState({});
   const navigate = useNavigate();
-  //list d'enchere         
+  //list d'enchere
   async function EncheresEnCours() {
     try {
       const userApiUrl = `/encheresEnCours/${user}`;
@@ -32,7 +33,7 @@ const EncheresEnCours = () => {
     EncheresEnCours();
   }, [userInfo]);
   //boutton participations
-  function ListeParticipants(userId,enchereId) {
+  function ListeParticipants(userId, enchereId) {
     navigate(`/listeParticipants/${userId}/${enchereId}`, {
       state: {
         id: enchereId,
@@ -40,15 +41,30 @@ const EncheresEnCours = () => {
       },
     });
   }
-  /*boutton rejoindre 
-  async function rejoindre() {
+
+  async function handleForm(e) {
+    e.preventDefault();
+    console.log("form", rej);
     const userApiUrl = `/rejoindre/${user}/${enchere}`;
-    const res = await post(userApiUrl, rejoindre);
+    const res = await post(userApiUrl, rej);
     console.log("ggg", res);
-    navigate(`/participationsEncCours/${enchere}`);
-  }*/
-
-
+    navigate(`/rejoindreEc/${user}/${enchere}`);
+  }
+ function RejoindreEC(userId,enchereId) {
+    navigate(`/rejoindreEc/${userId}/${enchereId}`, {
+      state: {
+        id: enchereId,
+        id: userId,
+      },
+    });
+  }function getParticpation(userId,enchereId) {
+    navigate(`/getparticipation/${userId}/${enchereId}`, {
+      state: {
+        id: enchereId,
+        id: userId,
+      },
+    });
+  }
 
   const pathImg = "http://localhost/pfe_backend/public/uploads/";
 
@@ -57,13 +73,12 @@ const EncheresEnCours = () => {
       <NavbarUser />
       <section class="bg-light">
         <div class="container py-5" enctype="multipart/form-data">
-         
           <div class="col-lg-6 m-auto"></div>
           {encheres && encheres.length > 0 ? (
             <div class={"row"}>
               {encheres.map((enchere) => (
                 <div class="col-10 col-md-4 mb-4" key={enchere.id}>
-                  <div class="card h-100">
+                  <div class="card h-80">
                     <a href="/login">
                       {/*{"/detailEnch/" + `${enchere.id}`}*/}
                       <center></center>
@@ -121,19 +136,33 @@ const EncheresEnCours = () => {
                           class="form-horizontal"
                           method="post"
                           action="#"
-                         
+                          onSubmit={() => handleForm()}
                         >
-                           <button className="btn btn-dark btn-lg btn-block">Rejoindre </button>{" "}
-                        </form>
+                          <a className="btn btn-success " onClick={() => {
+                            RejoindreEC(user, enchere.id);
+                          }}>
+                            Rejoindre
+                          </a>
+                      
+                       
                         <a
                           class="btn btn-secondary"
                           onClick={() => {
-                            ListeParticipants(user,enchere.id);
+                            ListeParticipants(user, enchere.id);
                           }}
                         >
-                          Liste des Participants
+                          Liste Participants
+                        </a>  </form>
+                        <a
+                          class="btn btn-warning"
+                          onClick={() => {
+                            getParticpation(user, enchere.id);
+                          }}
+                        >
+                         Augmenter Prix
                         </a>
                       </p>
+                      
                     </div>
                   </div>
                 </div>

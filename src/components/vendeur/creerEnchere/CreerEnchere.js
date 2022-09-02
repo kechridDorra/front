@@ -1,27 +1,110 @@
 import "./CreerEnchere.css";
-import axios from "axios";
+import Api from "../../../services/Api";
 import React, { Component } from "react";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { post } from "../../../services/http";
+import { get } from "../../../services/http";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.min.js";
 import NavbarUser from "../../user/navbarUser/NavbarUser";
 import Footer from "../../Footer";
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
+import axios from "axios";
 const CreerEnchere = () => {
   const userInfo = localStorage.getItem("user-info");
   const navigate = useNavigate();
-  const { profil_vendeur } = useParams();
+  const { profilVendeur } = useParams();
+  const [enchere, setEnchere] = useState({
+    description_ench: "",
+    date_debut: "",
+    date_fin: "",
+    nom_article: "",
+    prix_depart: "",
+    description_article: "",
+    categorie: "",
+  });
+  const [categories, setCategories] = useState([]);
 
+  const [test, setTest] = useState();
 
-
-  /*   function AjoutArticle(enchereId) {
-      navigate(`/ajoutArticle/${enchereId}`, {
-        state: {
-          id: enchereId,
+  async function getCategories() {
+    try {
+      await Api.get("/categories").then(
+        (response) => {
+          setCategories([...response.data]);
+          console.log("reeeesponse", response);
+          console.log("caaaat", categories);
         },
-      });*/
+        (error) => {
+          console.log("errrrrorr", error);
+        }
+      );
+
+      // const users =await   axios.get(`https://127.0.0.1:8000/users`)
+      //setCategories(cat.data);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  useEffect(() => {
+    getCategories();
+  }, [categories]);
+  const [vendeur,setVendeur] = useState();
+  const [userId,setUserId] = useState();
+  const [picture, setPicture] = useState([]);
+  const [errorlist, setError] = useState([]);
+  function handleInput(e) {
+    e.persist();
+    setEnchere({ ...enchere, [e.target.id]: e.target.value });
+  }
+  function handleImage(e) {
+    e.persist();
+    setPicture({ image: e.target.files[0] });
+  }
+  async function handleForm(e) {
+    e.preventDefault();
+    const formData = new FormData();
+    formData.append("image", picture.image);
+    formData.append("description_ench", enchere.description_ench);
+    formData.append("date_debut", enchere.date_debut);
+    formData.append("date_fin", enchere.date_fin);
+    formData.append("nom_article", enchere.nom_article);
+    formData.append("prix_depart", enchere.prix_depart);
+    formData.append("description_article", enchere.description_article);
+    formData.append("categorie", categories.categorie);
+    const userApiUrl = `enchere/${vendeur.id}`;
+    const res = await post(userApiUrl, formData);
+    console.log("gg",userApiUrl);
+    if (res.data.status === 201) {
+      Swal("enchere bien crée", res.data.message, "succées");
+      setError([]);
+    } else if (res.data.status === 422) {
+      Swal("erreur");
+      setError(res.data.errors);
+    }
+    console.log(res);
+    navigate("/accueil");
+  }
+
+  async function getUserDetails() {
+    try {
+      const parsedUser = JSON.parse(userInfo);
+      const userApiUrl = `user/mail/${parsedUser.email}`;
+      const res = await get(userApiUrl);
+      console.log("user",res);
+        setVendeur(res.data[0].profil_vendeur);
+        console.log("vv",res.data[0].profil_vendeur);
+        setUserId(res.data[0]);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  useEffect(() => {
+    getUserDetails();
+  }, [userInfo]);
 
   return (
     <>
@@ -30,67 +113,65 @@ const CreerEnchere = () => {
         class="form-horizontal"
         method="post"
         action="#"
-     
+        onSubmit={(e) => handleForm(e)}
       >
-   
         <div class="wrapper bg-white">
           <div class="h2 text-center">Création Enchère</div>
           <div class="col-md-12 mb-2">
+            <div class="row ">
+              <div class="col-md-12 mb-1">
+                <label class="form-label" for="typeText">
+                  Description l'enchère
+                </label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="description_ench"
+                  rows="4"
+                  onChange={(e) => handleInput(e)}
+                  required
+                  placeholder="Entrer une description de l'enchère "
+                ></input>
+              </div>
+            </div>
+            <div class="row ">
+              <div class="col-md-6 mb-1">
+                <label class="form-label" for="typeText">
+                  Date debut enchère{" "}
+                </label>
+                <input
+                  type="datetime-local"
+                  id="date_debut"
+                  class="form-control"
+                  onChange={(e) => handleInput(e)}
+                  required
+                />
+              </div>
+              <div class="col-md-6 mb-1">
+                <label class="form-label" for="typeText">
+                  Date fin enchère{" "}
+                </label>
+                <input
+                  type="datetime-local"
+                  id="date_fin"
+                  class="form-control"
+                  onChange={(e) => handleInput(e)}
+                  required
+                />
+              </div>
+            </div>
+          </div>
+
           <div class="row ">
-            <div class="col-md-12 mb-1">
+            <div class="col-md-6 mb-1">
               <label class="form-label" for="typeText">
-                Description l'enchère
+                Nom Article{" "}
               </label>
-              <textarea
+              <input
                 type="text"
-                class="form-control"
-                id="description_ench"
-                rows="4"
-               
-                required
-                placeholder="Entrer une description de l'enchère "
-              ></textarea>
-            </div>
-          </div>
-          <div class="row ">
-            <div class="col-md-6 mb-1">
-              <label class="form-label" for="typeText">
-                Date debut enchère{" "}
-              </label>
-              <input
-                type="datetime-local"
-                id="date_debut"
-                class="form-control"
-               
-                required
-              />
-            </div>
-            <div class="col-md-6 mb-1">
-              <label class="form-label" for="typeText">
-                Date fin enchère{" "}
-              </label>
-              <input
-                type="datetime-local"
-                id="date_fin"
-                class="form-control"
-             
-                
-                required
-              />
-            </div>
-          </div>
-          </div>
-          
-          <div class="row ">
-            <div class="col-md-6 mb-1">
-              <label class="form-label" for="typeText">
-               Nom Article{" "}
-              </label>
-              <input
-                type="textg"
                 id="nom_article"
                 class="form-control"
-                
+                onChange={(e) => handleInput(e)}
                 required
                 placeholder="Entrer le nom de l'article"
               />
@@ -103,8 +184,8 @@ const CreerEnchere = () => {
                 type="number"
                 id="prix_depart"
                 class="form-control"
-                placeholder= "Entrer le prix de l'article en dinars"
-                
+                placeholder="Entrer le prix de l'article en dinars"
+                onChange={(e) => handleInput(e)}
                 required
               />
             </div>
@@ -114,47 +195,47 @@ const CreerEnchere = () => {
               <label class="form-label" for="typeText">
                 Description article
               </label>
-              <textarea
+              <input
                 class="form-control"
                 id="description_article"
                 rows="4"
-                
+                onChange={(e) => handleInput(e)}
                 required
                 placeholder="Entrer une description de l'article "
-              ></textarea>
+              ></input>
             </div>
           </div>
           <div class="row ">
             <label class="form-label" for="typeText">
               Catégorie
             </label>
-
-            <div class="input-group mb-3">
+            <div class="form-group mb3">
               <select
-                class="form-select"
+                className="form-select"
                 required
                 id="categorie"
-
+                onChange={(e) => handleInput(e)}
               >
                 <option selected disabled>
                   Choisir la catégorie de l'article{" "}
                 </option>
-                <option value="1">Arts et Décoration</option>
-                <option value="2">Mode et Bijoux</option>
-                <option value="3">Informatique et Téléphones</option>
-                <option value="4">Véhicules</option>
-                <option value="5">Horlogerie</option>
-                <option value="6">Eléctromenager</option>
-                <option value="7">Ameublement</option>
-                <option value="8">Immeubles et Maisons</option>
-                <option value="9"> Autres</option>
+                {categories.map((item) => (
+                  <option value={item.id} key={item.id}>
+                    {item.nom}
+                  </option>
+                ))}
               </select>
             </div>
-            <div class="row ">           
-              <input type="file" id="image" 
-              accept="image/png, image/jpeg"
-             required/>
-              </div>
+            <br></br>
+            <div class="row ">
+              <input
+                type="file"
+                id="image"
+                accept="image/png, image/jpeg"
+                onChange={handleImage}
+                required
+              />
+            </div>
           </div>
           <br></br>
           <div class="row">
