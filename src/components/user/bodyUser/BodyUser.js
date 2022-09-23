@@ -112,13 +112,7 @@ function Body() {
                   <div class="text-align-left">
                     <h1 class="h1">Lorem Ipsum</h1>
                     <h3 class="h2">Lorem Ipsum Lorem Ipsum</h3>
-                    <p>
-                      Lorem Ipsum is simply dummy text of the printing and
-                      typesetting industry. Lorem Ipsum has been the industry's
-                      standard dummy text ever since the 1500s, when an unknown
-                      printer took a galley of type and scrambled it to make a
-                      type specimen book.
-                    </p>
+                    <p>Le site n°1 des ventes des enchères et des enchères inversées en Tunis</p>
                   </div>
                 </div>
               </div>
@@ -134,13 +128,7 @@ function Body() {
                   <div class="text-align-left">
                     <h1 class="h1">Lorem Ipsum</h1>
                     <h3 class="h2">Lorem Ipsum Lorem Ipsum </h3>
-                    <p>
-                      Lorem Ipsum is simply dummy text of the printing and
-                      typesetting industry. Lorem Ipsum has been the industry's
-                      standard dummy text ever since the 1500s, when an unknown
-                      printer took a galley of type and scrambled it to make a
-                      type specimen book.
-                    </p>
+                    <p>Le site n°1 des ventes des enchères et des enchères inversées en Tunis</p>
                   </div>
                 </div>
               </div>
@@ -181,7 +169,7 @@ function Body() {
             </a>
             <h5 class="text-center mt-3 mb-3">Arts et decoration</h5>
             <p class="text-center">
-              <a href="/categorie1">
+              <a href="/cat1">
                 <button class="btn btn-success">Consulter</button>
               </a>
             </p>
@@ -195,7 +183,7 @@ function Body() {
             </a>
             <h2 class="h5 text-center mt-3 mb-3">Horlogerie</h2>
             <p class="text-center">
-              <a href="/categorie5">
+              <a href="/cat5">
                 <button class="btn btn-success">Consulter</button>
               </a>
             </p>
@@ -209,7 +197,7 @@ function Body() {
             </a>
             <h2 class="h5 text-center mt-3 mb-3">Electromenager</h2>
             <p class="text-center">
-              <a href="/categorie6">
+              <a href="/cat6">
                 <button class="btn btn-success">Consulter</button>
               </a>
             </p>
@@ -223,12 +211,12 @@ function Body() {
             </a>
             <h2 class="h5 text-center mt-3 mb-3">Ameublment</h2>
             <p class="text-center">
-              <a href="/categorie7">
+              <a href="/cat7">
                 <button class="btn btn-success">Consulter</button>
               </a>
             </p>
           </div>
-          <a href="/listCategories">
+          <a href="/categories">
             <strong> Afficher plus de catégories </strong>
           </a>
         </div>
@@ -301,15 +289,16 @@ function Body() {
                       </p>
                     </div>
                   </div>
-                  <a href="/encheresT">
-                    <strong> Afficher plus des enchères terminées </strong>
-                  </a>
+                 
                 </div>
+                
               ))}
             </div>
           ) : (
             <></>
-          )}
+          )} <a href="/encheresT">
+          <strong> Afficher plus des enchères terminées </strong>
+        </a>
         </div>
       </section>
     </>

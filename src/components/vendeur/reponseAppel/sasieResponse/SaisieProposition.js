@@ -8,7 +8,7 @@ import Footer from "../../../Footer";
 import { useParams } from "react-router-dom";
 import { get } from "../../../../services/http";
 import { post } from "../../../../services/http";
-
+import { toast } from "react-toastify";
 const SaisieProposition = () => {
   const userInfo = localStorage.getItem("user-info");
   const navigate = useNavigate();
@@ -30,6 +30,8 @@ const SaisieProposition = () => {
       console.log(error);
     }
   }
+  
+ 
   async function handleForm(e) {
     e.preventDefault();
     console.log("form", proposition);
@@ -37,6 +39,7 @@ const SaisieProposition = () => {
     const res = await post(userApiUrl, proposition);
     console.log("ggg", res);
     navigate(`/reponseVendeur/${profilVendeur}`);
+    toast.success("proposition bien saisie ");
   }
   function handleInput(e) {
     const newdata1 = { ...proposition };
@@ -58,15 +61,15 @@ const SaisieProposition = () => {
           <div class="row">
             <div class="col-md-6 position-relative mb-3 mb-md-0">
               <a
-                href={pathImg + `${appel.image}`}
+               
                 data-effect="mfp-zoom-in"
                 title=""
               >
-                <img src={pathImg + `${appel.image}`} class="img-fluid" />
+               
               </a>
             </div>
 
-            <div class="col-md-6">
+            
               <div class="d-flex justify-content-between">
                 <nav aria-label="breadcrumb">
                   <ol class="breadcrumb bg-transparent pl-0 mb-0">
@@ -91,20 +94,9 @@ const SaisieProposition = () => {
                 </nav>
               </div>
 
-              <h1> {appel.titre} </h1>
-              <p>
-                {" "}
-                <strong> Description : </strong>
-                {appel.description}
-              </p>
-              <p>
-                {" "}
-                <strong> Prix demandé : </strong>
-                {appel.prix}
-                
-              </p>
+             <h1> Repondre a l'appel d'offre</h1>
               <form class="form-horizontal" method="post" action="#"   onSubmit={(e) => handleForm(e)}>
-                <div class="col-md-12 mb-1">
+                <div class="col-md-6 mb-1">
                   <label class="form-label" for="typeText">
                     <strong> Réponse :</strong> 
                   </label>
@@ -112,7 +104,7 @@ const SaisieProposition = () => {
                     type="text"
                     class="form-control"
                     id="reponse"
-                    rows="4"
+                   
                     onChange={(e) => handleInput(e)}
                     required
                     placeholder="Rédiger une réponse pour cette appel d'offre "
@@ -131,16 +123,17 @@ const SaisieProposition = () => {
                     onChange={(e) => handleInput(e)}
                   />
                 </div><br></br>
-                <div class="row">
-            <center>
-              {" "}
-              <button className="btn btn-dark btn-lg btn-block">
+            
+                <button className="btn btn-dark btn-lg btn-block">
                 Enregistrer
               </button>
+            <center>
+              {" "}
+            
             </center>
-          </div>
+       
               </form>
-            </div>
+            
           </div>
         </div>
       </section>

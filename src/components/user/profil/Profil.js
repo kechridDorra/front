@@ -109,13 +109,7 @@ const Profil = () =>  {
             </div>
           </div>
           <div className="row">
-            <center>
-              <div className="col-12 col-md-4 mb-3">
-              <button type="submit" className="btn btn-dark btn-lg btn-block"  onClick={() => {
-                      modifProfil(profil.id);}}> Modifier</button>
-              <a href="#">Supprimer mon compte</a>
-              </div>
-            </center>
+            
           </div> 
         </div>
       </div>

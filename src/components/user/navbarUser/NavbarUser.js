@@ -152,11 +152,11 @@ function NavbarUser(props)
                             <NavDropdown.Item  onClick={() => {
                       getProfil(vendeur.id);
                     }}>Profil Vendeur</NavDropdown.Item>
-                                    <NavDropdown.Item href='/InscriVendeur'>Inscription vendeur</NavDropdown.Item>
+                                    
                                     <NavDropdown.Item  onClick={() => {
                       creerEnchere(vendeur.id);
                     }}>Creation Enchére</NavDropdown.Item>
-                                    <NavDropdown.Item href='/mesEncheres'>Mes Enchères</NavDropdown.Item>  
+                                  
                                     <NavDropdown.Item   onClick={() => {
                       reponseVendeur(vendeur.id);
                     }}>Répondre aux appels Offres</NavDropdown.Item>  
@@ -181,7 +181,8 @@ function NavbarUser(props)
                         
                               {localStorage.getItem('user-info')?
                                  <NavDropdown title={user.email}>
-    <NavDropdown.Item href="/profil">Profil</NavDropdown.Item>
+    <NavDropdown.Item href="/profil">Profil </NavDropdown.Item>
+    <NavDropdown.Item href='/InscriVendeur'>Creer Profil vendeur</NavDropdown.Item>
     <NavDropdown.Item onClick={logOut}>Déconnexion</NavDropdown.Item>
 
                                 </NavDropdown>

@@ -9,7 +9,9 @@ import Footer from "../../../Footer";
 import { useNavigate, useParams } from "react-router-dom";
 import { Form } from "react-bootstrap";
 import swal from "sweetalert";
+import { toast } from "react-toastify";
 const AjoutAppelOffre = () => {
+  const notify = () => toast("Loading!");
   const userInfo = localStorage.getItem("user-info");
   const navigate = useNavigate();
   const { user} = useParams();
@@ -46,6 +48,7 @@ const AjoutAppelOffre = () => {
     }
     console.log(res);
     navigate("/mesAppelOffres");
+    toast.success("Appel d'offre bien crée ");
   }
 
   async function getUserDetails() {

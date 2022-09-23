@@ -55,6 +55,7 @@ const ListeParticipants = () => {
                         <td>{li.user.prenom}</td>
                         <td>{li.user.telephone}</td>
                         <td>{li.user.email}</td>
+                        
                       </tr>
                     ))}{" "}
                   </tbody>

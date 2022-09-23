@@ -1,5 +1,6 @@
 import "./CreerEnchere.css";
 import Api from "../../../services/Api";
+import { toast } from "react-toastify";
 import React, { Component } from "react";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
@@ -55,6 +56,7 @@ const CreerEnchere = () => {
   const [userId,setUserId] = useState();
   const [picture, setPicture] = useState([]);
   const [errorlist, setError] = useState([]);
+  const notify = () => toast("Loading!");
   function handleInput(e) {
     e.persist();
     setEnchere({ ...enchere, [e.target.id]: e.target.value });
@@ -63,6 +65,7 @@ const CreerEnchere = () => {
     e.persist();
     setPicture({ image: e.target.files[0] });
   }
+
   async function handleForm(e) {
     e.preventDefault();
     const formData = new FormData();
@@ -86,6 +89,7 @@ const CreerEnchere = () => {
     }
     console.log(res);
     navigate("/accueil");
+    toast.success("Enchère bien crée ");
   }
 
   async function getUserDetails() {

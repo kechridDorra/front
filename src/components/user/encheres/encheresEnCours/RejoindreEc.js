@@ -8,7 +8,10 @@ import Footer from "../../../Footer";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useState, useEffect } from "react";
 import NavbarUser from "../../navbarUser/NavbarUser";
+
 const RejoindreEC = () => {
+    
+  const notify = () => toast("Loading!");
   const userInfo = localStorage.getItem("user-info");
   const [list, setList] = useState({});
   const { enchere } = useParams();
@@ -20,6 +23,7 @@ const RejoindreEC = () => {
       const res = await post(userApiUrl);
       console.log("part", list);
       setList(res.data.participations);
+      
     } catch (error) {
       console.log(error);
     }

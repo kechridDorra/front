@@ -9,7 +9,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { Form } from "react-bootstrap";
 import Api from "../../services/Api";
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from "react-toastify";
 const Inscription = () => {
   const [state1, setstate1] = useState({
     nom: "",
@@ -20,13 +20,10 @@ const Inscription = () => {
     adresse:"",
     ville:"",
     codePostal:"",
-    numeroCarte:"",
-    codeSecurite:"",
-    moisExp:"",
-    anneeExp:"",
+  
   });
   const navigate = useNavigate();
-  const notify = () => toast("Wow so easy!");
+  const notify = () => toast("Loading!");
   function handleForm(e)
   {
     e.preventDefault();
@@ -35,6 +32,7 @@ const Inscription = () => {
       .then((res) => {
         console.log(res);
         navigate('/login')
+        toast.success("Inscription avec succès");
       })
   }
   function handleInput(e) {

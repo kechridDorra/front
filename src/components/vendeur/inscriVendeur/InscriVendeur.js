@@ -7,6 +7,7 @@ import React from "react";
 import NavbarUser from '../../user/navbarUser/NavbarUser';
 import Footer from '../../Footer';
 import { useNavigate, useParams } from "react-router-dom";
+import { toast } from "react-toastify";
 const InscriVendeur = () => {
   const userInfo = localStorage.getItem("user-info");
   const navigate=useNavigate();
@@ -14,6 +15,7 @@ const InscriVendeur = () => {
   const [state1, setstate1] = useState({
     activite: "",
     nomEntreprise: ""})
+    const notify = () => toast("Loading!");
     async function handleForm(e)
     {
       e.preventDefault();
@@ -22,7 +24,7 @@ const InscriVendeur = () => {
       const res = await post(userApiUrl,state1);
           console.log(res);
           navigate(`/accueil`);
-       
+          toast.success("Vendeur bien crée ");
     }
     function handleInput(e) {
       const newdata1 = { ...state1 };

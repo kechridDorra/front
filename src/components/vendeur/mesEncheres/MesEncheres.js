@@ -11,49 +11,43 @@ import { get } from "../../../services/http";
 import {remove} from "../../../services/http";
 import NavbarUser from "../../user/navbarUser/NavbarUser";
 const MesEncheres= () => {
-  const userInfo = localStorage.getItem("user-info");
-  const [enchere, setEnchere] = useState({});
   const navigate = useNavigate();
-  async function MesEncheres() {
-    try {
-      const userApiUrl = `/mesEncheres`;
-      const res = await get(userApiUrl);
-      console.log("mesEncheres", res);
-      setEnchere(res.data);
-    } catch (error) {
-      console.log(error);
+    let user = JSON.parse(localStorage.getItem('user-info'))
+    function logOut() {
+        localStorage.clear();
+        navigate('/login');
+ 
     }
-  }
+    const [vendeur,setVendeur] = useState();
+    const [userId,setUserId] = useState();
+    const userInfo = localStorage.getItem("user-info");
 
-  const removeEnchere = async (enchere) => {
-    try {
-        const encheredelete =(`/enchere/${enchere}`)
-      const res = await remove (encheredelete);
-      console.log('Item successfully deleted.')
-    } catch (error) {
-      alert(error)
+    async function getUserDetails() {
+      try {
+        const parsedUser = JSON.parse(userInfo);
+        const userApiUrl = `user/mail/${parsedUser.email}`;
+        const res = await get(userApiUrl);
+        console.log("user",res);
+        setVendeur(res.data[0].profil_vendeur.encheres);
+       // console.log("vv",res.data[0].profil_vendeur);
+     //   setUserId(res.data[0]);
+        console.log("hhggh",vendeur)
+      } catch (error) {
+        console.log(error);
+      }
     }
-  }
-  useEffect(() => {
-    MesEncheres();
-  }, [userInfo]);
+    useEffect(() => {
+      getUserDetails();
+    }, [userInfo]);
 
-  function MesParticipants(enchereId) {
-    navigate(`/mesParticipants/${enchereId}`, {
-      state: {
-        id: enchereId,
-      },
-    });
-  }
 
-  
   const pathImg = "http://localhost/pfe_backend/public/uploads/";
 
     return (
       <>
         <NavbarUser />
         <section class="bg-light">
-        <div class="container py-5" enctype="multipart/form-data">
+       *<div class="container py-5" enctype="multipart/form-data">
           <nav aria-label="breadcrumb">
             <ol class="breadcrumb bg-transparent pl-0 mb-0">
               <li class="breadcrumb-item">
@@ -70,10 +64,10 @@ const MesEncheres= () => {
             </ol>
           </nav>
           <br></br>
-          <div class="col-lg-6 m-auto"></div>
-          {enchere && enchere.length > 0 ?  (
+           <div class="col-lg-6 m-auto"></div>
+          {vendeur && vendeur.length > 0 ?  (
             <div class={"row"}>
-              {enchere.map((ench) => (
+              {vendeur.map((ench) => (
                 <div class="col-10 col-md-4 mb-4" key={ench.id}>
                   <div class="card h-100">
                     <center></center>
@@ -127,33 +121,8 @@ const MesEncheres= () => {
                           &nbsp;à&nbsp;
                           <strong>{ench.date_fin.substring(11, 19)} </strong>
                         </p>
-                        <p class="text-center">
-                        <p className="gagnant ">
-                          
-                           Le gagnant est: 
-
-                          <strong> dorra </strong>
-                        </p>
-                          <div class="text-center pt-3 text-muted">
-                          <a
-                          class="btn btn-secondary"
-                          onClick={() => {
-                            MesParticipants(ench.id);
-                          }}
-                        >
-                          Liste des Participants
-                        </a>
-                          </div>
-                        </p>
-                       <center>
-                            <p> 
-                            <button type="button" class="btn btn-warning">Modifier</button>
-                            {" "}
-                            <button type="button" class="btn btn-danger"
-                            onClick={() => removeEnchere(ench.id)}>
-                            Supprimer</button>
-                             </p>
-                      </center>
+                        
+                      
                       </div>
                   </div>
                 </div>
@@ -161,8 +130,8 @@ const MesEncheres= () => {
               }
             </div>
           ):<></>}
-        </div>
-      </section>
+            </div> 
+      </section> 
       <Footer />
     </>
   );

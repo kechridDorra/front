@@ -4,13 +4,13 @@ import Encheres from './components/visiteur/encheres/Encheres'
 //Bootstrap
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.min.js';
+import 'react-toastify/dist/ReactToastify.css';
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 //visituer
 import Inscription from './components/inscription/Inscription';
 import Login from './components/login/Login';
 import AccueilUser from './components/user/accueilUser/AccueilUser';
 import ListCategories from './components/visiteur/categorie/listCategories/ListCategories';
-
 import Categorie1 from './components/visiteur/categorie/Categorie1';
 import Categorie2 from './components/visiteur/categorie/Categorie2';
 import Categorie3 from './components/visiteur/categorie/Categorie3';
@@ -24,7 +24,6 @@ import Appels from './components/visiteur/appels/Appels';
 import DetailEnch from './components/visiteur/detail/DetailEnch';
 //user
 import Profil from './components/user/profil/Profil';
-import ModifierProfil from './components/user/profil/modifierProfil/ModifierProfil';
 import Accueil from './components/Accueil';
 import EncheresPlanifiees from './components/user/encheres/encheresPlanifiees/EncheresPlanifiees';
 import EncheresEnCours from './components/user/encheres/encheresEnCours/EncheresEnCours';
@@ -57,14 +56,13 @@ import RejoindreEC from './components/user/encheres/encheresEnCours/RejoindreEc'
 import RejoindreP from './components/user/encheres/encheresPlanifiees/RejoindreP';
 import Participation from './components/user/encheres/encheresEnCours/Participation';
 import ProfilVendeur from './components/vendeur/profilVendeur/ProfilVendeur';
-
-
-
+import { ToastContainer } from 'react-toastify';
 export default function App() {
   return (
   <>  
    
    <BrowserRouter>
+   <ToastContainer position="bottom-right" />
       <Routes>
         //visiteur
         <Route path="/login" element={<Login/>} />
@@ -91,7 +89,6 @@ export default function App() {
         //user
         <Route exact path="/accueil" element={<AccueilUser/>} />
         <Route path="/profil" element={<Profil/>} />
-        <Route path="/modifierProfil/:id" element={<ModifierProfil/>} />
         <Route path="/encheresPlanifiees/:user" element={<EncheresPlanifiees/>} />
         <Route path="/encheresTerminees/:user" element={<EncheresTerminees/>} />
         <Route path="/encheresEnCours/:user" element={<EncheresEnCours/>} />

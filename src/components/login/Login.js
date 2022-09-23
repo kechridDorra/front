@@ -7,7 +7,7 @@ import Api from "../../services/Api";
 import jwtDecode from "jwt-decode";
 import Navbar from "../Navbar";
 import Footer from "../Footer";
-
+import { toast } from "react-toastify";
 //Bootstrap
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.min.js";
@@ -18,12 +18,7 @@ const Login = () => {
     login: false,
     store: null,
   });
-
-  
-
   const navigate = useNavigate();
-
-
   function handleForm(e) {
     e.preventDefault();
     console.log("form", state1);
@@ -40,9 +35,11 @@ const Login = () => {
           })
         );
         navigate("/accueil");
+        toast.success("connexion avec succès");
+       
       })
-      .catch(console.log("ERREUR"));
-  }
+      .catch(console.log("ERREUR"));}
+  
   
   function handleInput(e) {
     const newdata1 = { ...state1 };

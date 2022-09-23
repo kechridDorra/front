@@ -10,8 +10,9 @@ import { get } from "../../../../services/http";
 import { post } from "../../../../services/http";
 import NavbarUser from "../../navbarUser/NavbarUser";
 import Rejoindre from "./RejoindreEc";
-
+import { toast } from "react-toastify";
 const EncheresEnCours = () => {
+  const notify = () => toast("Loading!");
   const { enchere } = useParams();
   const { user } = useParams();
   const userInfo = localStorage.getItem("user-info");
@@ -49,6 +50,7 @@ const EncheresEnCours = () => {
     const res = await post(userApiUrl, rej);
     console.log("ggg", res);
     navigate(`/rejoindreEc/${user}/${enchere}`);
+    toast.success("Vous ave bien rejoint cette enchère ");
   }
  function RejoindreEC(userId,enchereId) {
     navigate(`/rejoindreEc/${userId}/${enchereId}`, {
@@ -57,6 +59,7 @@ const EncheresEnCours = () => {
         id: userId,
       },
     });
+   
   }function getParticpation(userId,enchereId) {
     navigate(`/getparticipation/${userId}/${enchereId}`, {
       state: {
